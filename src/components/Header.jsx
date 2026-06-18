@@ -177,14 +177,6 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             />
           </div>
 
-          {/* Center: Mini Status Badge */}
-          <div 
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-widest text-white/70 select-none"
-            style={{ borderColor: isMenuOpen ? 'rgba(111, 214, 42, 0.2)' : 'rgba(255, 255, 255, 0.1)' }}
-          >
-            <span className="h-1 w-1 rounded-full bg-jelly animate-pulse" />
-            <span>ACTIVE</span>
-          </div>
 
           {/* Right: Burger Toggle with Custom Morphing Lines */}
           <button
