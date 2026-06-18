@@ -26,3 +26,8 @@ dist-ssr
 # Cache directories
 node-compile-cache/
 
+# Temporary scripts
+check_permissions.cjs
+restore_images.cjs
+restore_images.js
+restore_workspace_images.cjs

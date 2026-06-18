@@ -165,8 +165,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           animate="visible"
         >
           <video
-            src="./hero.mp4"
-            poster="./hero_poster.avif"
+            src="/hero.mp4"
+            poster="/hero_poster.avif"
             autoPlay
             muted
             loop
@@ -327,7 +327,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             >
               <div className="relative group max-w-[320px] md:max-w-full">
               <img
-                  src="./jelly.avif"
+                  src="/jelly.avif"
                   alt="Jellycut Studios mascot — bold, creative, AI-powered"
                   className="max-h-[380px] md:max-h-[460px] object-contain opacity-95 transition-transform duration-700 group-hover:scale-105"
                 />

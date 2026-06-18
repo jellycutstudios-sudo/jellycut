@@ -42,6 +42,10 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  const handleNavigate = (path) => {
+    window.location.hash = path;
+  };
+
   // 3. Dynamic SEO Metadata Update
   useEffect(() => {
     let title = 'Jellycut Studios — AI Video Ads, Brand Identity & Web Apps | Kerala, India';
@@ -110,7 +114,7 @@ function App() {
         return <Contact />;
       case '#/':
       default:
-        return <Home setIsModalOpen={setIsModalOpen} setRoute={setRoute} isMobile={isMobile} />;
+        return <Home setIsModalOpen={setIsModalOpen} setRoute={handleNavigate} isMobile={isMobile} />;
     }
   };
 
@@ -120,7 +124,7 @@ function App() {
       {/* Dynamic Navigation Header */}
       <Header 
         currentRoute={route.split('?')[0]} 
-        setRoute={setRoute} 
+        setRoute={handleNavigate} 
         setIsModalOpen={setIsModalOpen} 
       />
 
