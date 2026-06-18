@@ -82,30 +82,18 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
 
   return (
     <>
-      {/* Main Header Container with improved mobile padding and safe areas */}
-      <header className={`${headerPositionClass} ${isMenuOpen ? 'z-50' : 'z-30'} w-full px-6 header-padding md:px-12 flex justify-between items-center transition-colors duration-300`}>
+      {/* Desktop Navigation Header */}
+      <header className={`${headerPositionClass} ${isMenuOpen ? 'z-50' : 'z-30'} w-full px-12 py-8 justify-between items-center transition-colors duration-300 hidden md:flex`}>
         
         {/* Left: status label (Desktop) */}
-        <div className={`hidden md:flex items-center gap-2 text-[11px] font-medium tracking-wider uppercase font-mono ${mutedColorClass}`}>
+        <div className={`flex items-center gap-2 text-[11px] font-medium tracking-wider uppercase font-mono ${mutedColorClass}`}>
           <span className="h-1.5 w-1.5 rounded-full bg-jelly animate-pulse" />
           <span>US &amp; UK Clients // Open</span>
         </div>
 
-        {/* Left: Mobile Logo */}
-        <div 
-          onClick={() => handleNavClick('#/')}
-          className="flex md:hidden items-center pl-1 cursor-pointer hover:opacity-85 transition-opacity"
-        >
-          <img
-            src="./logo.png"
-            alt="Jellycut Studios"
-            className="h-10 w-auto object-contain drop-shadow-sm"
-          />
-        </div>
-
         {/* Center: Desktop Glass Nav Pill */}
         <motion.nav
-          className="hidden md:flex glass-nav rounded-full px-2 py-1.5 items-center gap-1 md:gap-2 border mx-auto md:absolute md:left-1/2 md:-translate-x-1/2 md:top-6"
+          className="glass-nav rounded-full px-2 py-1.5 flex items-center gap-1 md:gap-2 border mx-auto md:absolute md:left-1/2 md:-translate-x-1/2 md:top-6"
           initial={{ y: -40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease }}
@@ -161,22 +149,49 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             Start a Project
           </button>
         </motion.nav>
+      </header>
 
-        {/* Right: Mobile Hamburger Button */}
-        <div className="flex items-center gap-3">
+      {/* Mobile Floating Glass Pill Header */}
+      <div className="md:hidden fixed top-4 left-4 right-4 z-50">
+        <motion.div 
+          className="w-full h-14 rounded-full border bg-white/10 dark:bg-black/30 backdrop-blur-lg px-4 flex justify-between items-center shadow-lg transition-all duration-300"
+          style={{ 
+            borderColor: isMenuOpen 
+              ? 'rgba(111, 214, 42, 0.25)' 
+              : (isMenuDark ? 'rgba(255, 255, 255, 0.18)' : 'rgba(15, 26, 13, 0.15)'),
+            boxShadow: isMenuOpen ? '0 4px 30px rgba(111, 214, 42, 0.08)' : '0 4px 24px rgba(0,0,0,0.06)'
+          }}
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease }}
+        >
+          {/* Left: Mobile Logo */}
+          <div 
+            onClick={() => handleNavClick('#/')}
+            className="flex items-center cursor-pointer hover:opacity-85 transition-opacity"
+          >
+            <img
+              src="./logo.png"
+              alt="Jellycut Studios"
+              className="h-8 w-auto object-contain drop-shadow-sm"
+            />
+          </div>
 
-          {/* Mobile Burger Toggle with Custom Morphing Lines */}
+          {/* Center: Mini Status Badge */}
+          <div 
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-widest text-white/70 select-none"
+            style={{ borderColor: isMenuOpen ? 'rgba(111, 214, 42, 0.2)' : 'rgba(255, 255, 255, 0.1)' }}
+          >
+            <span className="h-1 w-1 rounded-full bg-jelly animate-pulse" />
+            <span>ACTIVE</span>
+          </div>
+
+          {/* Right: Burger Toggle with Custom Morphing Lines */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-            className="flex md:hidden items-center justify-center w-10 h-10 rounded-full border bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all active:scale-90 cursor-pointer z-50 relative outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none hover:shadow-[0_0_12px_rgba(111,214,42,0.2)]"
-            style={{ 
-              borderColor: isMenuOpen 
-                ? 'rgba(111, 214, 42, 0.35)' 
-                : (isMenuDark ? 'rgba(255, 255, 255, 0.15)' : 'var(--line)'),
-              outline: 'none',
-              boxShadow: isMenuOpen ? '0 0 12px rgba(111,214,42,0.15)' : ''
-            }}
+            className="flex items-center justify-center w-9 h-9 rounded-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none transition-transform active:scale-90"
+            style={{ outline: 'none' }}
           >
             <svg width="18" height="18" viewBox="0 0 20 20" className={textColorClass}>
               <Path
@@ -205,8 +220,8 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
               />
             </svg>
           </button>
-        </div>
-      </header>
+        </motion.div>
+      </div>
 
       {/* Mobile Menu Drawer Overlay */}
       <AnimatePresence>
