@@ -163,24 +163,41 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
         </motion.nav>
 
         {/* Right: US ET Clock & Mobile Hamburger Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <motion.div
-            className={`flex items-center gap-2 text-xs font-mono tracking-widest text-right ${textColorClass}`}
             initial={{ y: -40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease }}
           >
-            <span className="hidden sm:inline opacity-60">US ET</span>
-            <Clock className="w-3.5 h-3.5 text-jelly" />
-            <span className="tabular-nums font-semibold opacity-95">{time || '12:00 PM'}</span>
+            {/* Mobile View: Sleek glass capsule badge */}
+            <div 
+              className={`flex md:hidden items-center gap-1.5 px-2.5 py-1 rounded-full border bg-white/5 backdrop-blur-md text-[10px] font-mono tracking-wider ${textColorClass}`}
+              style={{ borderColor: isMenuOpen ? 'rgba(111, 214, 42, 0.3)' : (isMenuDark ? 'rgba(255, 255, 255, 0.15)' : 'var(--line)') }}
+            >
+              <Clock className="w-3 h-3 text-jelly animate-pulse" />
+              <span className="tabular-nums font-semibold">{time || '12:00 PM'}</span>
+            </div>
+
+            {/* Desktop View: Standard Layout */}
+            <div className={`hidden md:flex items-center gap-2 text-xs font-mono tracking-widest text-right ${textColorClass}`}>
+              <span className="opacity-60">US ET</span>
+              <Clock className="w-3.5 h-3.5 text-jelly" />
+              <span className="tabular-nums font-semibold opacity-95">{time || '12:00 PM'}</span>
+            </div>
           </motion.div>
 
           {/* Mobile Burger Toggle with Custom Morphing Lines */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-            className="flex md:hidden items-center justify-center w-10 h-10 rounded-full border bg-white/10 backdrop-blur-md transition-all active:scale-95 cursor-pointer z-50 relative"
-            style={{ borderColor: isMenuDark ? 'rgba(255, 255, 255, 0.2)' : 'var(--line)' }}
+            className="flex md:hidden items-center justify-center w-10 h-10 rounded-full border bg-white/10 hover:bg-white/15 backdrop-blur-md transition-all active:scale-90 cursor-pointer z-50 relative outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none hover:shadow-[0_0_12px_rgba(111,214,42,0.2)]"
+            style={{ 
+              borderColor: isMenuOpen 
+                ? 'rgba(111, 214, 42, 0.35)' 
+                : (isMenuDark ? 'rgba(255, 255, 255, 0.15)' : 'var(--line)'),
+              outline: 'none',
+              boxShadow: isMenuOpen ? '0 0 12px rgba(111,214,42,0.15)' : ''
+            }}
           >
             <svg width="18" height="18" viewBox="0 0 20 20" className={textColorClass}>
               <Path

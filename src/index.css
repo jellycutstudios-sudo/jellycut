@@ -143,8 +143,17 @@ html {
   text-size-adjust: 100%;
 }
 
-/* Touch devices tap highlight reset */
+/* Touch devices tap highlight reset and focus ring overrides */
 * {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button:focus,
+button:active,
+a:focus,
+a:active,
+div:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
