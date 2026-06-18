@@ -3,7 +3,7 @@
 
   <!-- Homepage (main entry point — hash routing means all pages load from here) -->
   <url>
-    <loc>https://jellycutstudios.com/</loc>
+    <loc>https://www.jellycutstudio.com/</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
