@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Clock, MapPin, ChevronDown, CheckCircle, Sparkles, ArrowRight } from 'lucide-react';
+import { Mail, Clock, MapPin, ChevronDown, CheckCircle, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -40,6 +40,21 @@ export default function Contact() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email) {
+      const serviceLabels = {
+        'ai-video-ad': 'AI Video Ad',
+        'brand-identity': 'Brand Identity',
+        'vibe-coded-app': 'Vibe-Coded App',
+        'website': 'Website Design',
+        'not-sure': 'Not sure yet',
+      };
+      const serviceLabel = serviceLabels[formData.service] || formData.service || 'Not specified';
+      
+      const whatsappText = `Hello Jellycut Studios,\n\nI would like to discuss a project:\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Service:* ${serviceLabel}\n*Brief:* ${formData.brief}`;
+      const whatsappUrl = `https://wa.me/919400112833?text=${encodeURIComponent(whatsappText)}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+
       setFormSubmitted(true);
       setTimeout(() => {
         setFormSubmitted(false);
@@ -85,6 +100,21 @@ export default function Contact() {
                   <div>
                     <div className="text-[9px] font-semibold uppercase tracking-wider text-muted font-mono">Email Address</div>
                     <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">hello@jellycut.studio</div>
+                  </div>
+                </a>
+
+                <a 
+                  href="https://wa.me/919400112833"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-white border border-line rounded-2xl hover:border-jelly transition-colors group cursor-pointer"
+                >
+                  <div className="bg-cream text-jelly-deep p-2 rounded-xl group-hover:bg-jelly/10">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[9px] font-semibold uppercase tracking-wider text-muted font-mono">WhatsApp</div>
+                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">+91 9400112833</div>
                   </div>
                 </a>
 
@@ -254,9 +284,12 @@ export default function Contact() {
                       type="submit"
                       className="w-full flex items-center justify-center gap-2 bg-ink hover:bg-ink/90 text-white font-semibold py-4 rounded-xl text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer"
                     >
-                      <span>Submit Project Brief</span>
+                      <span>Submit &amp; Open WhatsApp</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
+                    <p className="text-[10px] text-muted text-center mt-2 font-mono">
+                      Note: Submitting will open WhatsApp to send your project details.
+                    </p>
                   </form>
                 </>
               ) : (
