@@ -48,13 +48,14 @@ function App() {
     let title = 'Jellycut Studios | Cinematic Creative AI Studio';
     let description = 'Creative AI studio from Kerala building scroll-stopping video ads, brand identities, and vibe-coded apps.';
     
-    if (route === '#/works') {
+    const mainRoute = route.split('?')[0];
+    if (mainRoute === '#/works') {
       title = 'Selected Portfolio | Jellycut Studios';
       description = 'Check out our cinematic video ads, brand identities, vibe-coded apps, and website designs.';
-    } else if (route === '#/about') {
+    } else if (mainRoute === '#/about') {
       title = 'About Us | Jellycut Studios';
       description = 'Disrupting agency models. We combine generative AI speed with meticulous human creative direction from Kerala.';
-    } else if (route === '#/contact') {
+    } else if (mainRoute === '#/contact') {
       title = 'Start a Project | Jellycut Studios';
       description = 'Submit your project brief online in 15 minutes. No scheduling required. First draft in 48-72 hours.';
     }
@@ -100,7 +101,8 @@ function App() {
   };
 
   const renderActivePage = () => {
-    switch (route) {
+    const mainRoute = route.split('?')[0];
+    switch (mainRoute) {
       case '#/works':
         return <Works setIsModalOpen={setIsModalOpen} />;
       case '#/about':
@@ -118,7 +120,7 @@ function App() {
       
       {/* Dynamic Navigation Header */}
       <Header 
-        currentRoute={route} 
+        currentRoute={route.split('?')[0]} 
         setRoute={setRoute} 
         setIsModalOpen={setIsModalOpen} 
         time={time} 
@@ -143,7 +145,6 @@ function App() {
       {/* Global Footer */}
       <Footer 
         setIsModalOpen={setIsModalOpen} 
-        hideCTA={route === '#/contact'} 
       />
 
 

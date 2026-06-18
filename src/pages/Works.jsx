@@ -1,10 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Video, Palette, Code, Globe, ArrowRight, X, ExternalLink, Calendar, CheckCircle } from 'lucide-react';
+import { Video, Palette, Code, Globe, ArrowRight, X, ExternalLink, Calendar, CheckCircle, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1];
 
-const projects = [
+export const projects = [
+  {
+    id: 'p11',
+    title: 'Filbey Premium Website',
+    category: 'Websites',
+    icon: Globe,
+    description: 'A butter-smooth, ultra-fast, clean premium brand website built using advanced AI-assisted coding and design systems.',
+    longDescription: 'We designed and developed a high-end website showcase for Filbey. The project prioritizes premium aesthetics, ultra-fast performance, and a completely responsive mobile-first experience. By utilizing cutting-edge AI website design systems and clean React architectures, the final build features butter-smooth interactive animations, sub-second initial load speeds, and a design that feels entirely distinct from conventional website templates.',
+    timeline: '3 Days',
+    deliverables: [
+      'Butter-Smooth Interactive Frontend',
+      'Performance Optimization (Lighthouse 100/100)',
+      'Clean Mobile-Responsive Layouts',
+      'Dynamic Brand Media Integration'
+    ],
+    results: 'Shipped a premium showcase in 3 days with sub-second page rendering and clean, native responsiveness across all device sizes.',
+    image: '/filbey_home.jpeg',
+    images: [
+      '/filbey_home.jpeg',
+      '/filbey_detail.png'
+    ],
+    projectUrl: 'https://www.filbey.in/',
+    color: 'from-[#1C1C1C]/40 to-jelly/10'
+  },
+  {
+    id: 'p12',
+    title: 'Dr Pepper Concept Ad',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A cinematic conceptual commercial campaign showcasing high-fidelity liquid splashes and dynamic carbonation for Dr Pepper.',
+    longDescription: 'We produced a conceptual cinematic commercial campaign for Dr Pepper. Leveraging advanced generative video models, we synthesized high-fidelity animations of liquid splashes, carbonation fizz, and slow-motion product interactions. The entire sequence was post-processed with professional color grading to emphasize the iconic cherry-red branding and polished with custom Foley sound design in under 24 hours.',
+    timeline: '24 Hours',
+    deliverables: [
+      '1x 30s Master Concept Commercial',
+      'Dynamic Carbonation & Liquid Splash Assets',
+      'Dr Pepper Red Color Grading Presets',
+      'Immersive Foley Sound Design'
+    ],
+    results: 'Delivered a broadcast-ready concept commercial in 24 hours with zero physical production costs or gear requirements.',
+    image: 'https://img.youtube.com/vi/9jdw_X2ADJw/maxresdefault.jpg',
+    youtubeId: '9jdw_X2ADJw',
+    color: 'from-[#711F2E]/30 to-jelly/10'
+  },
+  {
+    id: 'p13',
+    title: 'e.l.f. Skin Concept Ad',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A cinematic conceptual commercial campaign showcasing hyper-realistic texture detail and slow-motion product physics for e.l.f. Skin.',
+    longDescription: 'We produced a conceptual cinematic commercial campaign for e.l.f. Skin. Utilizing advanced AI video synthesis pipelines, we rendered hyper-detailed product shots highlighting smooth cream textures, hydrating liquid droplets, and elegant product container physics in slow motion. The sequences were color-graded to emphasize skin-health tones and completed with custom Foley sound design in under 24 hours, demonstrating how cosmetic brands can visualize premium product campaigns.',
+    timeline: '24 Hours',
+    deliverables: [
+      '1x 30s Master Concept Commercial',
+      'High-fidelity Product Texture Syntheses',
+      'Cosmetic Brand Color Grading Presets',
+      'Immersive Foley Sound Design'
+    ],
+    results: 'Produced a broadcast-quality cosmetics commercial in 24 hours with zero physical studio gear, saving over 95% in typical production budgets.',
+    image: 'https://img.youtube.com/vi/i7f8MPgUqfQ/maxresdefault.jpg',
+    youtubeId: 'i7f8MPgUqfQ',
+    color: 'from-[#EAE0D5]/40 to-jelly/10'
+  },
+  {
+    id: 'p9',
+    title: 'FeeSync Explainer Campaign',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A cinematic explainer campaign showcasing how business owners can automate weekly and monthly fee collections.',
+    longDescription: 'We partnered with FeeSync to design and produce a premium product promo campaign. The video demonstrates how business owners can effortlessly add customer information to FeeSync to automate recurring billing. It clearly visualizes the process where the app automatically sends payment collection requests to clients on a weekly or monthly schedule, eliminating manual invoicing and chasing payments.',
+    timeline: '48 Hours',
+    deliverables: [
+      '1x 60s Product Explainer Ad',
+      '2x 15s Direct-Response Ad Variations',
+      'Automated Billing Flow Animation'
+    ],
+    results: 'Successfully translated a complex automated collection flow into a clear, 60-second visual hook that accelerates client onboarding.',
+    image: 'https://img.youtube.com/vi/tB6UQac9DB4/maxresdefault.jpg',
+    youtubeId: 'tB6UQac9DB4',
+    projectUrl: 'https://feesync.com/',
+    color: 'from-[#0B1E36]/40 to-jelly/10'
+  },
+  {
+    id: 'p10',
+    title: 'Froot Concept Commercial',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A vibrant conceptual AI commercial showcasing ultra-realistic liquid simulations and dynamic fruit splashes for Froot.',
+    longDescription: 'We produced a conceptual cinematic commercial campaign for Froot. By leveraging custom-trained diffusion models optimized for fluid dynamics, we generated hyper-detailed fruit slices plunging into liquid waves, slow-motion splash patterns, and pristine bottle condensation runs. The sequences were color-graded with warm, summery orange tones and completed with rich Foley sound design, showing how consumer packaged goods can be visualized dramatically in 24 hours.',
+    timeline: '24 Hours',
+    deliverables: [
+      '1x 30s Master Concept Commercial',
+      'Dynamic Fluid Simulation Assets',
+      'Summer-themed Color Grading Presets',
+      'Immersive Foley Sound Design'
+    ],
+    results: 'Created a broadcast-quality beverage commercial in 24 hours with zero camera equipment or production set, saving over 95% in typical production budgets.',
+    image: 'https://img.youtube.com/vi/GZmORUV77wI/maxresdefault.jpg',
+    youtubeId: 'GZmORUV77wI',
+    color: 'from-[#D9381E]/30 to-jelly/10'
+  },
   {
     id: 'p7',
     title: 'Starbucks Summer AI Ad',
@@ -34,95 +133,65 @@ const projects = [
       'WhatsApp Daily Sales Engine'
     ],
     results: 'Trusted by 100+ textile shops. Bill in seconds, prevent staff leakage, and monitor inventory live.',
-    image: 'https://rupos.in/og-image.png',
+    image: '/rupos_checkout.jpeg',
+    images: [
+      '/rupos_checkout.jpeg',
+      '/rupos_tablet.jpeg',
+      '/rupos_lifestyle.jpeg'
+    ],
     projectUrl: 'https://rupos.in/',
     color: 'from-[#0A120E]/40 to-jelly/10'
-  },
-  {
-    id: 'p1',
-    title: 'Aeroflow Athletics',
-    category: 'AI Video Ads',
-    icon: Video,
-    description: 'High-energy cinematic ad campaign for a performance sportswear brand. Designed with dynamic AI motion synthesis.',
-    longDescription: 'Aeroflow wanted to launch their new eco-fiber activewear with a commercial that felt futuristic and hyper-kinetic. We synthesized cinematic athlete clips and animated clothing micro-textures using generative AI, then composited, color-graded, and sound-designed the final video sequence in 48 hours.',
-    timeline: '48 Hours',
-    deliverables: ['1x 30s Master Ad', '3x 15s Story Hooks', 'Custom Sound Design'],
-    results: '2.4x increase in CTR on Meta Ads vs previous agency baseline.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-painted-city-hero.webp', // We can use placeholder backgrounds with beautiful style
-    color: 'from-jelly-deep/20 to-jelly/10'
-  },
-  {
-    id: 'p2',
-    title: 'Synapse Labs',
-    category: 'Brand Identity',
-    icon: Palette,
-    description: 'A clean, digital-first brand identity and design system for a pioneering artificial intelligence research lab.',
-    longDescription: 'Synapse Labs needed a visual language that felt academically rigorous yet digitally native. We developed a custom dynamic logo generator, curated a botanical color system, and provided a Figma design library with extensive brand guidelines spanning typography, print layouts, and digital UI states.',
-    timeline: '5 Days',
-    deliverables: ['Custom SVG Logo Mark', 'Design System System UI', 'Figma Guidelines', 'Brand Book PDF'],
-    results: 'Successfully raised $4.2M seed round with a highly polished visual pitch.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-pixel-flower.webp',
-    color: 'from-cream to-line/30'
-  },
-  {
-    id: 'p3',
-    title: 'Vesper Social',
-    category: 'Vibe-Coded Apps',
-    icon: Code,
-    description: 'A web platform for community curators, featuring interactive maps and rich profile styling. Shipped in 3 weeks.',
-    longDescription: 'Vesper is a niche network for curating architectural guides. Leveraging AI-assisted coding, we built a responsive React frontend coupled with a lightweight Supabase backend. The site features interactive maps, dynamic canvas rendering for custom guide sharing, and ultra-smooth fluid UI transitions.',
-    timeline: '3 Weeks',
-    deliverables: ['React App Codebase', 'Supabase Database Integration', 'Mapbox Custom Layouts'],
-    results: 'Acquired 12,000 active beta users within the first month of launch.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-painted-city-hero.webp',
-    color: 'from-jelly/10 to-cream'
-  },
-  {
-    id: 'p4',
-    title: 'Nova Cafe',
-    category: 'Websites',
-    icon: Globe,
-    description: 'A cinematic, immersive product landing page with high-end typography and custom interactive menus.',
-    longDescription: 'Nova is a premium specialty roastery. We built a visual experience using Framer Motion that mimics the physical act of pouring coffee through progressive color changes and subtle viewport scroll scaling. Complete with an interactive beans selector, flavor profiles drawer, and shop integrations.',
-    timeline: '4 Days',
-    deliverables: ['Cinematic Landing Page', 'Custom Menu Interactions', 'E-commerce Checkout Integration'],
-    results: '40% increase in checkout conversions compared to standard Shopify templates.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-pixel-flower.webp',
-    color: 'from-line/20 to-paper'
-  },
-  {
-    id: 'p5',
-    title: 'Modus Wear',
-    category: 'AI Video Ads',
-    icon: Video,
-    description: 'Scroll-stopping product reveal loop with custom sound design and futuristic neon color grading.',
-    longDescription: 'Modus needed a striking video hook for Meta and TikTok to showcase their winter capsule. We trained an AI model on their product photography to generate high-fidelity cloth simulations flowing through abstract environments. Rendered in 4K with deep green-lime tones.',
-    timeline: '72 Hours',
-    deliverables: ['3x Video Loop variations', 'Optimized vertical assets for TikTok'],
-    results: '4.8s average watch time, beating platform benchmark by 35%.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-painted-city-hero.webp',
-    color: 'from-jelly-mid/10 to-ink/10'
-  },
-  {
-    id: 'p6',
-    title: 'Ember CMS',
-    category: 'Websites',
-    icon: Globe,
-    description: 'A sleek, conversion-driven landing page for a developer tool. Focus on micro-animations and data layouts.',
-    longDescription: 'Ember is a headless CMS for developer teams. We designed a premium SaaS landing page containing live playground simulators, clean copy highlighting the API capabilities, and customized SVG illustrations explaining the cache layers.',
-    timeline: '5 Days',
-    deliverables: ['Tailwind-optimized Page Code', 'Interactions & Mockups', 'Light/Dark Theme Styles'],
-    results: 'Reduced bounce rate from 62% to 31% within 2 weeks of redesign.',
-    image: 'https://playground.bravebrand.com/assets/backgrounds/signal-foundry-pixel-flower.webp',
-    color: 'from-cream to-line/40'
   }
 ];
 
-const categories = ['All', 'AI Video Ads', 'Brand Identity', 'Websites', 'Vibe-Coded Apps'];
+const categories = ['All', 'AI Video Ads', 'Websites', 'Vibe-Coded Apps'];
 
 export default function Works({ setIsModalOpen }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeProject, setActiveProject] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
+
+  // Parse query parameter to open project modal directly
+  useEffect(() => {
+    const handleHashCheck = () => {
+      const hash = window.location.hash;
+      if (hash.includes('?project=')) {
+        const projectId = hash.split('?project=')[1];
+        const project = projects.find(p => p.id === projectId);
+        if (project) {
+          setActiveProject(project);
+          setActiveImageIndex(0);
+        }
+      } else {
+        setActiveProject(null);
+      }
+    };
+    handleHashCheck();
+    window.addEventListener('hashchange', handleHashCheck);
+    return () => window.removeEventListener('hashchange', handleHashCheck);
+  }, []);
+  const projectImages = activeProject?.images || (activeProject?.image ? [activeProject.image] : []);
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (lightboxImageIndex === null || projectImages.length === 0) return;
+      if (e.key === 'Escape') {
+        setLightboxImageIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxImageIndex((prev) => 
+          prev === 0 ? projectImages.length - 1 : prev - 1
+        );
+      } else if (e.key === 'ArrowRight') {
+        setLightboxImageIndex((prev) => 
+          prev === projectImages.length - 1 ? 0 : prev + 1
+        );
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImageIndex, projectImages]);
 
   const filteredProjects = selectedCategory === 'All'
     ? projects
@@ -178,11 +247,14 @@ export default function Works({ setIsModalOpen }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, ease, delay: index * 0.05 }}
-                  onClick={() => setActiveProject(project)}
-                  className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[380px]"
+                  onClick={() => {
+                    setActiveProject(project);
+                    setActiveImageIndex(0);
+                  }}
+                  className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
                 >
                   {/* Top image/pattern container */}
-                  <div className={`h-48 w-full bg-gradient-to-br ${project.color} relative p-6 flex flex-col justify-between overflow-hidden`}>
+                  <div className={`h-60 w-full bg-gradient-to-br ${project.color} relative p-6 flex flex-col justify-between overflow-hidden`}>
                     {/* Project Thumbnail Image */}
                     {project.image && (
                       <>
@@ -255,17 +327,19 @@ export default function Works({ setIsModalOpen }) {
       <AnimatePresence>
         {activeProject && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-md cursor-zoom-out"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setActiveProject(null)}
           >
             <motion.div
-              className="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-line relative max-h-[85vh] flex flex-col"
+              className="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-line relative max-h-[85vh] flex flex-col cursor-default"
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               transition={{ ease, duration: 0.4 }}
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
@@ -277,21 +351,43 @@ export default function Works({ setIsModalOpen }) {
 
               <div className="overflow-y-auto w-full">
                 {/* Header Banner */}
-                <div className={`h-48 bg-gradient-to-br ${activeProject.color} p-8 flex flex-col justify-end relative overflow-hidden`}>
-                  {activeProject.image && (
+                <div 
+                  onClick={() => {
+                    if (projectImages.length > 0) {
+                      setLightboxImageIndex(activeImageIndex);
+                    }
+                  }}
+                  className={`h-48 bg-gradient-to-br ${activeProject.color} p-8 flex flex-col justify-end relative overflow-hidden cursor-zoom-in group/header`}
+                >
+                  {((activeProject.images && activeProject.images[activeImageIndex]) || activeProject.image) && (
                     <>
                       <img 
-                        src={activeProject.image} 
+                        src={(activeProject.images && activeProject.images[activeImageIndex]) || activeProject.image} 
                         alt={activeProject.title} 
-                        className="absolute inset-0 w-full h-full object-cover z-0" 
+                        className="absolute inset-0 w-full h-full object-cover z-0 transition-all duration-500 group-hover/header:scale-[1.02]" 
                       />
-                      <div className="absolute inset-0 bg-black/30 z-0" />
+                      <div className="absolute inset-0 bg-black/30 group-hover/header:bg-black/45 transition-colors duration-300 z-0" />
                     </>
                   )}
+
+                  {/* Zoom indicator button */}
+                  {projectImages.length > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLightboxImageIndex(activeImageIndex);
+                      }}
+                      className="absolute bottom-6 right-6 bg-black/60 hover:bg-black/80 hover:scale-105 text-white rounded-full p-2.5 backdrop-blur-sm border border-white/20 transition-all cursor-pointer z-20 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider font-mono"
+                    >
+                      <ZoomIn className="w-4 h-4" />
+                      <span>Zoom</span>
+                    </button>
+                  )}
+
                   <span className="bg-white/95 text-ink backdrop-blur-md rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider font-mono shadow-sm absolute top-8 left-8 z-10">
                     {activeProject.category}
                   </span>
-                  <h3 className={`font-serif text-3xl md:text-4xl ${activeProject.image ? 'text-white' : 'text-ink'} font-normal leading-tight relative z-10`}>
+                  <h3 className={`font-serif text-3xl md:text-4xl ${activeProject.image ? 'text-white' : 'text-ink'} font-normal leading-tight relative z-10 mb-2`}>
                     {activeProject.title}
                   </h3>
                 </div>
@@ -355,6 +451,35 @@ export default function Works({ setIsModalOpen }) {
                     </ul>
                   </div>
 
+                  {/* Gallery */}
+                  {activeProject.images && activeProject.images.length > 0 && (
+                    <div className="border-t border-line pt-6">
+                      <h4 className="text-[10px] font-semibold uppercase tracking-widest text-muted font-mono mb-3">Project Gallery</h4>
+                      <div className="grid grid-cols-3 gap-3">
+                        {activeProject.images.map((img, idx) => (
+                          <div 
+                            key={idx}
+                            onClick={() => {
+                              setActiveImageIndex(idx);
+                              setLightboxImageIndex(idx);
+                            }}
+                            className={`relative aspect-[4/3] rounded-xl overflow-hidden cursor-zoom-in border-2 transition-all duration-300 ${
+                              activeImageIndex === idx ? 'border-jelly-deep shadow-md scale-[1.02]' : 'border-line hover:border-jelly/40'
+                            }`}
+                          >
+                            <img 
+                              src={img} 
+                              alt={`${activeProject.title} screenshot ${idx + 1}`} 
+                              className="absolute inset-0 w-full h-full object-cover"
+                            />
+                            {/* Hover overlay */}
+                            <div className={`absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300 ${activeImageIndex === idx ? 'bg-transparent' : ''}`} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Project Call to Action */}
                   <div className="bg-cream rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border border-line">
                     <div>
@@ -388,6 +513,85 @@ export default function Works({ setIsModalOpen }) {
                 </div>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Lightbox Popup */}
+      <AnimatePresence>
+        {lightboxImageIndex !== null && projectImages.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-60 flex items-center justify-center bg-black/95 backdrop-blur-lg select-none"
+            onClick={() => setLightboxImageIndex(null)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxImageIndex(null);
+              }}
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all cursor-pointer z-70"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Prev Button */}
+            {projectImages.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxImageIndex((prev) => 
+                    prev === 0 ? projectImages.length - 1 : prev - 1
+                  );
+                }}
+                className="absolute left-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-4 rounded-full transition-all cursor-pointer z-70"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            {/* Main Image Container */}
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="relative max-w-[90vw] max-h-[85vh] md:max-w-[80vw] md:max-h-[80vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={projectImages[lightboxImageIndex]}
+                alt={`${activeProject.title} lightbox screenshot`}
+                className="max-w-full max-h-[80vh] object-contain"
+              />
+              {/* Caption or info */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-6 text-white flex justify-between items-center z-10">
+                <span className="font-mono text-xs text-white/50">
+                  {lightboxImageIndex + 1} / {projectImages.length}
+                </span>
+                <span className="font-serif text-sm font-light">
+                  {activeProject.title}
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Next Button */}
+            {projectImages.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxImageIndex((prev) => 
+                    prev === projectImages.length - 1 ? 0 : prev + 1
+                  );
+                }}
+                className="absolute right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-4 rounded-full transition-all cursor-pointer z-70"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

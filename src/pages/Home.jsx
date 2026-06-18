@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star } from 'lucide-react';
+import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink } from 'lucide-react';
+import { projects } from './Works';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -117,20 +118,16 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           animate="visible"
         >
           <video
-            src="/hero.mp4"
-            poster="/hero_poster.png"
+            src="./hero.mp4"
+            poster="./hero_poster.png"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
+            className="absolute inset-0 w-full h-full object-cover z-0"
           />
         </motion.div>
-
-        {/* Cinematic Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#151313]/65 via-[#151313]/10 to-[#151313]/40 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(21,19,19,0.55),transparent_60%)] z-10 pointer-events-none" />
 
         {/* Lower-Left Glass Hero Card */}
         <div className="relative z-20 w-full px-6 md:px-12 hero-bottom-padding flex justify-start">
@@ -178,7 +175,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
 
           {/* Large Rounded Video Frame */}
           <motion.div
-            className="skyArt w-full h-[48vh] sm:h-[58vh] min-h-[360px] sm:min-h-[520px] rounded-[24px] md:rounded-[40px] shadow-custom flex flex-col justify-between p-5 md:p-12 text-white relative"
+            className="skyArt w-full h-[60vh] sm:h-[68vh] min-h-[480px] sm:min-h-[560px] rounded-[24px] md:rounded-[40px] shadow-custom flex flex-col justify-between p-5 md:p-12 text-white relative"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
@@ -187,8 +184,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             {/* Sky-garden video */}
             <video
               className="skyVideo"
-              src="/Pixel_art_flower_meadow_golden_202606141516.mp4"
-              poster="/Pixel.png"
+              src="./Pixel_art_flower_meadow_golden_202606141516.mp4"
+              poster="./Pixel.png"
               autoPlay
               muted
               loop
@@ -201,8 +198,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a2806]/55 via-transparent to-black/15 z-5 pointer-events-none" />
 
             <div className="relative z-10 flex flex-col justify-between h-full w-full">
-              {/* Floating status card */}
-              <div className="flex justify-start">
+              {/* Floating status card + Explore button */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
                 <motion.div
                   className="glass-effect rounded-2xl p-4 sm:p-5 border border-white/20 max-w-[270px] sm:max-w-sm flex items-start gap-3 sm:gap-4 shadow-lg"
                   initial={{ x: -20, opacity: 0 }}
@@ -227,6 +224,19 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                     </div>
                   </div>
                 </motion.div>
+
+                {/* Explore Portfolio button */}
+                <motion.button
+                  onClick={() => setRoute('#/works')}
+                  initial={{ x: 20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.8, ease }}
+                  className="glass-effect rounded-full px-5 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/10 text-white font-semibold text-[10px] sm:text-xs tracking-wider uppercase font-mono transition-all flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-[0.98] cursor-pointer self-start sm:self-center"
+                >
+                  <span>Explore Portfolio</span>
+                  <ArrowRight className="w-4 h-4" />
+                </motion.button>
               </div>
 
               {/* Panel copy */}
@@ -300,6 +310,110 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ── LATEST PROJECTS ─────────────────────────────────────────────── */}
+      <section className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-16">
+            <div className="max-w-xl">
+              <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+                Recent Work
+              </span>
+              <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
+                Latest Projects // Proof in the pixels.
+              </h2>
+            </div>
+            <button
+              onClick={() => setRoute('#/works')}
+              className="group inline-flex items-center gap-1.5 bg-ink hover:bg-ink/90 text-white text-xs font-bold px-6 py-3 rounded-full transition-all shadow-md cursor-pointer"
+            >
+              <span>View All Projects</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+          {/* Cards Grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={getContainerStagger()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            {projects.slice(0, 3).map((project) => {
+              const Icon = project.icon;
+              return (
+                <motion.div
+                  key={project.id}
+                  variants={getCardItem()}
+                  onClick={() => setRoute(`#/works?project=${project.id}`)}
+                  className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
+                >
+                  {/* Top image/pattern container */}
+                  <div className={`h-60 w-full bg-gradient-to-br ${project.color} relative p-6 flex flex-col justify-between overflow-hidden`}>
+                    {/* Project Thumbnail Image */}
+                    {project.image && (
+                      <>
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
+                        />
+                        <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-500 z-0" />
+                      </>
+                    )}
+
+                    {/* Background Overlay */}
+                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+                    
+                    {/* Category tag & Video Badge */}
+                    <div className="flex justify-between items-start relative z-10 w-full">
+                      <span className="bg-white/95 text-ink backdrop-blur-md rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider font-mono shadow-sm">
+                        {project.category}
+                      </span>
+                      {project.youtubeId ? (
+                        <span className="bg-jelly text-ink backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider font-mono shadow-sm flex items-center gap-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-ink animate-pulse" />
+                          Watch Ad
+                        </span>
+                      ) : (
+                        <div className="bg-white/90 backdrop-blur-md text-ink p-2 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Logo/Icon */}
+                    <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-md flex items-center justify-center text-jelly-deep shadow-sm self-start mt-4 relative z-10">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Copy info */}
+                  <div className="p-6 flex-grow flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold font-sans text-ink group-hover:text-jelly-deep transition-colors duration-300 mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted text-xs md:text-sm font-light leading-relaxed line-clamp-2">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-jelly-deep mt-4">
+                      <span>View Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
         </div>
       </section>
 
