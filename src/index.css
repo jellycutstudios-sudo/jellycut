@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* ─── Jellycut Studios Color System ──────────────────────────────────────── */
+/* Extracted from the glossy jelly lime-green logo */
+:root {
+  /* Neutrals — kept warm & cinematic */
+  --ink: #0f1a0d;          /* Deep forest ink — richer than plain black */
+  --paper: #f8fcf5;        /* Very light botanical white */
+  --line: #d8edd0;         /* Soft green-tinted divider */
+  --muted: #5a7255;        /* Mid-tone muted sage */
+  --cream: #f0f8ec;        /* Light green-cream surface */
+
+  /* Brand greens — from the jelly logo */
+  --jelly: #6fd62a;        /* Primary vivid lime — logo highlight */
+  --jelly-deep: #3d8c00;   /* Deep forest green — logo shadow/border */
+  --jelly-mid: #5abf1a;    /* Mid lime — logo body */
+  --jelly-glow: rgba(111, 214, 42, 0.35);   /* Glow tint for glass/badge overlays */
+  --jelly-light: rgba(111, 214, 42, 0.12);  /* Soft tint for card hovers */
+
+  /* Glass overlay */
+  --glass: rgba(15, 40, 8, 0.38);
+
+  /* Shadows */
+  --shadow-custom: 0 28px 70px rgba(20, 60, 8, 0.18);
+  --ease-custom: cubic-bezier(.16, 1, .3, 1);
+}
+
+@theme {
+  /* Map CSS vars into Tailwind tokens */
+  --color-ink:        var(--ink);
+  --color-paper:      var(--paper);
+  --color-line:       var(--line);
+  --color-muted:      var(--muted);
+  --color-cream:      var(--cream);
+  --color-jelly:      var(--jelly);
+  --color-jelly-deep: var(--jelly-deep);
+  --color-jelly-mid:  var(--jelly-mid);
+
+  /* Keep blue-brand alias pointing to jelly so existing classes still compile */
+  --color-blue-brand: var(--jelly);
+
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans:  "Inter Tight", system-ui, sans-serif;
+
+  --transition-timing-function-custom: var(--ease-custom);
+}
+
+/* ─── Base resets ────────────────────────────────────────────────────────── */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "Inter Tight", system-ui, sans-serif;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+/* ─── Glass Components ───────────────────────────────────────────────────── */
+.glass-effect {
+  background: rgba(15, 40, 8, 0.36);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(111, 214, 42, 0.25);
+  box-shadow: 0 12px 40px -10px rgba(15, 40, 8, 0.22),
+              inset 0 1px 0 rgba(111, 214, 42, 0.12);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 30px rgba(20, 60, 8, 0.06);
+}
+
+/* ─── Sky-garden video panel ─────────────────────────────────────────────── */
+.skyArt {
+  position: relative;
+  overflow: hidden;
+  background: url("/Pixel.png") center / cover no-repeat;
+}
+
+.skyVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  transform: scale(1.1);
+}
+
+/* ─── Jelly accent utilities ─────────────────────────────────────────────── */
+.jelly-glow {
+  box-shadow: 0 0 24px var(--jelly-glow), 0 2px 8px rgba(61, 140, 0, 0.2);
+}
+
+.jelly-text {
+  background: linear-gradient(135deg, var(--jelly) 0%, var(--jelly-deep) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Mobile Utilities & Resets ──────────────────────────────────────────── */
+/* Safe-area utilities */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.header-padding {
+  padding-top: calc(2rem + env(safe-area-inset-top, 0px));
+  padding-bottom: 1rem;
+}
+.hero-bottom-padding {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 768px) {
+  .header-padding {
+    padding-top: calc(2.5rem + env(safe-area-inset-top, 0px));
+    padding-bottom: 2rem;
+  }
+  .hero-bottom-padding {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Touch devices tap highlight reset */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+

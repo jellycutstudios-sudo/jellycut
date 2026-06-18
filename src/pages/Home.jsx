@@ -1,0 +1,441 @@
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star } from 'lucide-react';
+
+const ease = [0.16, 1, 0.3, 1];
+
+// ─── Services data ─────────────────────────────────────────────────────────
+const services = [
+  {
+    id: '01',
+    icon: Video,
+    title: 'AI Video Ads',
+    description:
+      'Scroll-stopping ad creative for Meta, TikTok, YouTube, and LinkedIn — produced with AI and refined by real creative direction.',
+    cta: 'See Ad Samples',
+    path: '#/works'
+  },
+  {
+    id: '02',
+    icon: Palette,
+    title: 'Brand Identity',
+    description:
+      'Logo, colour system, typography, and brand guidelines built for a digital-first world. Built to last and scale.',
+    cta: 'View Brand Work',
+    path: '#/works'
+  },
+  {
+    id: '03',
+    icon: Code,
+    title: 'Vibe-Coded Apps',
+    description:
+      'Fast, beautiful web apps and interactive experiences — built with AI-assisted coding that ships in weeks, not months.',
+    cta: 'View App Builds',
+    path: '#/works'
+  },
+  {
+    id: '04',
+    icon: Globe,
+    title: 'Website Design',
+    description:
+      'Cinematic, conversion-optimised websites that make your first impression your best impression. Always.',
+    cta: 'See Site Examples',
+    path: '#/works'
+  },
+];
+
+// ─── Process steps data ────────────────────────────────────────────────────
+const steps = [
+  {
+    num: '01',
+    icon: FileText,
+    title: 'Brief in 15 minutes',
+    description:
+      'Fill a short intake form. Tell us your brand, goal, and any references. No calls required to get started.',
+  },
+  {
+    num: '02',
+    icon: Zap,
+    title: 'We build in 48–72h',
+    description:
+      'Our AI-assisted studio produces your first draft. You review it async on a shared preview link — no scheduling needed.',
+  },
+  {
+    num: '03',
+    icon: Star,
+    title: 'Revise, approve, ship',
+    description:
+      'One revision round included. Final files delivered in every format you need, ready to publish immediately.',
+  },
+];
+
+export default function Home({ setIsModalOpen, setRoute, isMobile }) {
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduce = prefersReducedMotion || isMobile;
+
+  // Dynamic animation variants based on device capabilities and preferences
+  const getFadeInScale = () => ({
+    hidden: { opacity: 0, scale: shouldReduce ? 1 : 1.05 },
+    visible: { opacity: 1, scale: 1, transition: { duration: shouldReduce ? 0.4 : 1.5, ease } },
+  });
+
+  const getSlideUpHeroCard = () => ({
+    hidden: { y: shouldReduce ? 20 : 60, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: shouldReduce ? 0.4 : 1.2, delay: shouldReduce ? 0.1 : 0.4, ease } },
+  });
+
+  const getRevealSection = () => ({
+    hidden: { opacity: 0, y: shouldReduce ? 10 : 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0.3 : 0.8, ease } },
+  });
+
+  const getContainerStagger = () => ({
+    hidden: {},
+    visible: { transition: { staggerChildren: shouldReduce ? 0.04 : 0.12 } },
+  });
+
+  const getCardItem = () => ({
+    hidden: { opacity: 0, y: shouldReduce ? 8 : 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0.25 : 0.7, ease } },
+  });
+
+  const getStepItem = () => ({
+    hidden: { opacity: 0, y: shouldReduce ? 8 : 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0.2 : 0.6, ease } },
+  });
+
+  return (
+    <div className="w-full">
+      {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
+      <section className="relative w-full h-screen min-h-[640px] sm:min-h-[720px] flex flex-col justify-end overflow-hidden bg-[#100f0f]">
+        
+        {/* Background Video */}
+        <motion.div
+          className="absolute inset-0 w-full h-full"
+          variants={getFadeInScale()}
+          initial="hidden"
+          animate="visible"
+        >
+          <video
+            src="/hero.mp4"
+            poster="/hero_poster.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
+          />
+        </motion.div>
+
+        {/* Cinematic Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#151313]/65 via-[#151313]/10 to-[#151313]/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(21,19,19,0.55),transparent_60%)] z-10 pointer-events-none" />
+
+        {/* Lower-Left Glass Hero Card */}
+        <div className="relative z-20 w-full px-6 md:px-12 hero-bottom-padding flex justify-start">
+          <motion.div
+            className="glass-effect rounded-[24px] p-5 sm:p-8 md:p-10 border border-white/20 max-w-xl text-white shadow-custom"
+            variants={getSlideUpHeroCard()}
+            initial="hidden"
+            animate="visible"
+          >
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-[1.08] mb-4 tracking-tight">
+              We make brands impossible to scroll&nbsp;past.
+            </h1>
+            <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 font-sans font-light max-w-md">
+              Jellycut is a creative AI studio from Kerala — building cinematic video ads, bold brand identities, and vibe-coded apps for founders and brands ready to&nbsp;grow.
+            </p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group inline-flex items-center gap-2 text-white font-semibold text-xs sm:text-sm tracking-wide font-sans hover:text-jelly transition-colors cursor-pointer"
+            >
+              <span>Start Your First Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 2. WORK / SKY-GARDEN VIDEO PANEL ─────────────────────────────── */}
+      <section id="work" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
+        <div className="max-w-7xl mx-auto">
+          {/* Intro headline */}
+          <motion.div
+            className="max-w-3xl mb-16 md:mb-20"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={getRevealSection()}
+          >
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              The Creative Stack
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.1] font-normal tracking-tight">
+              From brief to brand-ready in days, not months.
+            </h2>
+          </motion.div>
+
+          {/* Large Rounded Video Frame */}
+          <motion.div
+            className="skyArt w-full h-[48vh] sm:h-[58vh] min-h-[360px] sm:min-h-[520px] rounded-[24px] md:rounded-[40px] shadow-custom flex flex-col justify-between p-5 md:p-12 text-white relative"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={getRevealSection()}
+          >
+            {/* Sky-garden video */}
+            <video
+              className="skyVideo"
+              src="/Pixel_art_flower_meadow_golden_202606141516.mp4"
+              poster="/Pixel.png"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            />
+
+            <div className="absolute inset-0 bg-[#0f3d08]/25 mix-blend-multiply z-5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a2806]/55 via-transparent to-black/15 z-5 pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col justify-between h-full w-full">
+              {/* Floating status card */}
+              <div className="flex justify-start">
+                <motion.div
+                  className="glass-effect rounded-2xl p-4 sm:p-5 border border-white/20 max-w-[270px] sm:max-w-sm flex items-start gap-3 sm:gap-4 shadow-lg"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.8, ease }}
+                >
+                  <div className="bg-jelly/20 p-2.5 rounded-xl text-jelly">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold tracking-wider text-white/50 uppercase font-mono">
+                      Project Pipeline // Active
+                    </div>
+                    <div className="text-xs font-semibold text-white mt-0.5">AI Ad Delivered — 48h</div>
+                    <p className="text-xs text-white/80 mt-1 font-light leading-snug">
+                      Creative brief compiled. Final video rendered and exported across all formats.
+                    </p>
+                    <div className="mt-2.5 flex items-center gap-1.5 text-[9px] font-mono text-jelly">
+                      <span className="h-1.5 w-1.5 bg-jelly rounded-full animate-pulse" />
+                      Delivered in 2 days
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Panel copy */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-end mt-6 md:mt-12">
+                <div className="md:col-span-7">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-serif text-white font-normal leading-tight tracking-tight max-w-xl">
+                    We combine AI production with real creative direction — so your ads look like they cost 10× what you paid.
+                  </p>
+                </div>
+                <div className="md:col-span-5 md:text-right">
+                  <p className="text-xs md:text-sm text-white/80 max-w-xs md:ml-auto font-light leading-relaxed font-sans">
+                    We work async across time zones, deliver in 48–72 hours, and communicate in plain English. No agency bloat. No retainer traps.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 3. MANIFESTO ─────────────────────────────────────────────────── */}
+      <section id="about" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-paper border-b border-line">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+            {/* Left — image */}
+            <motion.div
+              className="md:col-span-5 flex justify-center items-center order-last md:order-first"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={getRevealSection()}
+            >
+              <div className="relative group max-w-[320px] md:max-w-full">
+                <img
+                  src="https://playground.bravebrand.com/assets/backgrounds/signal-foundry-pixel-flower.webp"
+                  alt="Jellycut creative signal"
+                  className="max-h-[380px] md:max-h-[460px] object-contain mix-blend-multiply opacity-90 transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            </motion.div>
+
+            {/* Right — copy */}
+            <motion.div
+              className="md:col-span-7 flex flex-col justify-center text-left order-first md:order-none"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={getRevealSection()}
+            >
+              <span className="text-muted text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+                Why We Exist
+              </span>
+              <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-ink font-normal leading-tight mb-8 tracking-tight max-w-2xl">
+                Creative quality shouldn't cost a Fortune 500 budget.
+              </h3>
+              <div className="space-y-6 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
+                <p>
+                  We believe every ambitious brand deserves cinematic-quality creative — not just the ones who can afford a 20-person agency on retainer.
+                </p>
+                <p>
+                  Jellycut was built in Kerala with one idea: use AI to compress the gap between a great brief and a stunning result. Fast, affordable, and genuinely excellent.
+                </p>
+              </div>
+
+              {/* Studio signature */}
+              <div className="mt-10 border-t border-line pt-6 flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-jelly animate-pulse" />
+                <span className="text-xs font-mono uppercase tracking-wider text-ink font-semibold">
+                  Jellycut Studios — Kerala, India
+                </span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. SERVICES ──────────────────────────────────────────────────── */}
+      <section id="services" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-cream">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-16">
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              What We Make
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
+              Creative output that actually converts.
+            </h2>
+          </div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={getContainerStagger()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            {services.map((svc) => {
+              const Icon = svc.icon;
+              return (
+                <motion.div
+                  key={svc.id}
+                  variants={getCardItem()}
+                  whileHover={{ y: -6, transition: { duration: 0.3, ease } }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setRoute(svc.path)}
+                  className="bg-white rounded-2xl p-6 md:p-8 border border-line flex flex-col justify-between min-h-[220px] md:min-h-[260px] shadow-sm hover:shadow-md transition-shadow duration-300 group cursor-pointer"
+                >
+                  <div>
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="bg-cream p-3 rounded-xl text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 transition-colors duration-300">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-muted/60">{svc.id}</span>
+                    </div>
+                    <h3 className="text-lg font-bold font-sans text-ink mb-2">{svc.title}</h3>
+                    <p className="text-muted text-xs md:text-sm font-light leading-relaxed">
+                      {svc.description}
+                    </p>
+                  </div>
+                  <div className="mt-6 flex items-center gap-1.5 text-xs font-medium text-jelly-deep opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                    <span>{svc.cta}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 5. HOW WE WORK ───────────────────────────────────────────────── */}
+      <section id="process" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-t border-b border-line">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="max-w-3xl mb-16 md:mb-20"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={getRevealSection()}
+          >
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              How We Work
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
+              Built for async. Delivered&nbsp;fast.
+            </h2>
+            <p className="mt-5 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
+              We work with US & UK clients fully remote — no awkward time-zone calls, no chasing updates. Just clean creative, on time.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10"
+            variants={getContainerStagger()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            {steps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <motion.div
+                  key={step.num}
+                  variants={getStepItem()}
+                  className="flex flex-col gap-5 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="bg-cream border border-line rounded-2xl p-3.5 text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 group-hover:border-jelly/30 transition-all duration-300">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-3xl font-serif text-line font-normal tracking-tight select-none">
+                      {step.num}
+                    </span>
+                  </div>
+                  <div className="h-px bg-line w-full" />
+                  <div>
+                    <h3 className="text-base font-bold font-sans text-ink mb-2">{step.title}</h3>
+                    <p className="text-muted text-sm font-light leading-relaxed">{step.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Async trust badges */}
+          <motion.div
+            className="mt-12 md:mt-16 flex flex-wrap gap-2.5 md:gap-3 items-center justify-center md:justify-start"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={getRevealSection()}
+          >
+            {[
+              '48–72h first delivery',
+              'No calls required',
+              'Async-friendly',
+              'US & UK time zones covered',
+              '1 revision included',
+            ].map((badge) => (
+              <span
+                key={badge}
+                className="inline-flex items-center gap-1.5 bg-cream border border-line rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-medium text-ink/80 font-sans"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-jelly" />
+                {badge}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
