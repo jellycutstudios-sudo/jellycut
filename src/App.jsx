@@ -75,6 +75,21 @@ function App() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email) {
+      const serviceLabels = {
+        'ai-video-ad': 'AI Video Ad',
+        'brand-identity': 'Brand Identity',
+        'vibe-coded-app': 'Vibe-Coded App',
+        'website': 'Website Design',
+        'not-sure': 'Not sure yet',
+      };
+      const serviceLabel = serviceLabels[formData.service] || formData.service || 'Not specified';
+      
+      const whatsappText = `Hello Jellycut Studios,\n\nI would like to discuss a project:\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Service:* ${serviceLabel}\n*Brief:* ${formData.brief}`;
+      const whatsappUrl = `https://wa.me/919400112833?text=${encodeURIComponent(whatsappText)}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+
       setFormSubmitted(true);
       setTimeout(() => {
         setIsModalOpen(false);
@@ -244,9 +259,12 @@ function App() {
                         type="submit"
                         className="w-full flex items-center justify-center gap-2 bg-ink hover:bg-ink/90 text-white font-semibold py-3.5 rounded-xl text-sm transition-all mt-2 shadow-md active:scale-[0.98] cursor-pointer"
                       >
-                        <span>Submit Brief</span>
+                        <span>Submit &amp; Open WhatsApp</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
+                      <p className="text-[10px] text-muted text-center mt-2 font-mono">
+                        Note: Submitting will open WhatsApp to send your project details.
+                      </p>
 
                       <p className="text-center text-[11px] text-muted font-light pt-1">
                         We reply within 24 hours. No calls required to start.
