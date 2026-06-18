@@ -215,21 +215,31 @@ export default function Works({ setIsModalOpen }) {
         </div>
 
         {/* Filter Navigation */}
-        <div className="flex flex-wrap items-center gap-2 mb-12 border-b border-line pb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-ink text-white shadow-sm'
-                  : 'bg-cream text-muted hover:text-ink hover:bg-line/45'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="flex items-center w-full mb-12 border-b border-line pb-5 overflow-hidden">
+          <div className="flex flex-row overflow-x-auto scrollbar-none gap-3 pb-2 -mb-2 w-full max-w-full touch-pan-x">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`relative px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 cursor-pointer select-none outline-none focus:outline-none focus:ring-0 active:scale-95 z-10 whitespace-nowrap ${
+                  selectedCategory === cat 
+                    ? 'text-paper font-bold shadow-sm' 
+                    : 'bg-cream text-muted hover:text-ink hover:bg-line/45'
+                }`}
+              >
+                {selectedCategory === cat && (
+                  <motion.div
+                    layoutId="activeCategory"
+                    className="absolute inset-0 bg-ink rounded-full -z-10"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span>{cat}</span>
+              </button>
+            ))}
+          </div>
         </div>
+
 
         {/* Works Grid */}
         <motion.div 
@@ -344,10 +354,11 @@ export default function Works({ setIsModalOpen }) {
               {/* Close Button */}
               <button
                 onClick={() => setActiveProject(null)}
-                className="absolute top-5 right-5 text-muted hover:text-ink p-2 rounded-full hover:bg-cream transition-colors z-10 cursor-pointer"
+                className="absolute top-5 right-5 bg-white/80 hover:bg-white text-ink shadow-md backdrop-blur-md p-2 rounded-full hover:scale-105 transition-all z-20 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
+
 
               <div className="overflow-y-auto w-full">
                 {/* Header Banner */}

@@ -53,10 +53,6 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
     { label: 'Contact Us', path: '#/contact' },
   ];
 
-  const subItems = [
-    { label: 'Services', path: '/#services' },
-    { label: 'Process', path: '/#process' },
-  ];
 
   const handleNavClick = (path) => {
     if (path.startsWith('/#')) {
@@ -128,18 +124,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             >
               Contact
             </button>
-            <button 
-              onClick={() => handleNavClick('/#services')} 
-              className="px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer"
-            >
-              Services
-            </button>
-            <button 
-              onClick={() => handleNavClick('/#process')} 
-              className="px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer"
-            >
-              Process
-            </button>
+
           </div>
 
           <button
@@ -266,23 +251,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
                 ))}
               </motion.nav>
 
-              {/* Sub Navigation / Anchors */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 }}
-                className="flex gap-6 pl-6 mt-1"
-              >
-                {subItems.map((item) => (
-                  <button
-                    key={item.label}
-                    onClick={() => handleNavClick(item.path)}
-                    className="text-xs font-mono tracking-wider text-white/60 hover:text-jelly transition-colors cursor-pointer"
-                  >
-                    // {item.label}
-                  </button>
-                ))}
-              </motion.div>
+
             </div>
 
             {/* Middle Section: Featured Project Mini-Card */}

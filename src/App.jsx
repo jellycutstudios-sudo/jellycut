@@ -44,19 +44,19 @@ function App() {
 
   // 3. Dynamic SEO Metadata Update
   useEffect(() => {
-    let title = 'Jellycut Studios | Cinematic Creative AI Studio';
-    let description = 'Creative AI studio from Kerala building scroll-stopping video ads, brand identities, and vibe-coded apps.';
+    let title = 'Jellycut Studios — AI Video Ads, Brand Identity & Web Apps | Kerala, India';
+    let description = 'Jellycut Studios is an AI-first creative studio from Kerala, India. Cinematic video ads, bold brand identities, and vibe-coded web apps for global brands — delivered in 48–72 hours.';
     
     const mainRoute = route.split('?')[0];
     if (mainRoute === '#/works') {
-      title = 'Selected Portfolio | Jellycut Studios';
-      description = 'Check out our cinematic video ads, brand identities, vibe-coded apps, and website designs.';
+      title = 'Portfolio & Case Studies — AI Video Ads & Brand Design | Jellycut Studios';
+      description = 'Browse Jellycut Studios\' portfolio — cinematic AI video ads, brand identities, vibe-coded apps, and website designs for global clients. See real results.';
     } else if (mainRoute === '#/about') {
-      title = 'About Us | Jellycut Studios';
-      description = 'Disrupting agency models. We combine generative AI speed with meticulous human creative direction from Kerala.';
+      title = 'About Jellycut Studios — AI Creative Studio from Kerala, India';
+      description = 'Jellycut Studios combines generative AI speed with human creative direction. Built in Kerala, India to deliver agency-quality creative for US, UK & global brands at startup-friendly prices.';
     } else if (mainRoute === '#/contact') {
-      title = 'Start a Project | Jellycut Studios';
-      description = 'Submit your project brief online in 15 minutes. No scheduling required. First draft in 48-72 hours.';
+      title = 'Start a Project — 48-Hour Creative Brief | Jellycut Studios';
+      description = 'Start your project with Jellycut Studios in 15 minutes. No calls required. Submit your brief online and get your first draft within 48–72 hours. AI video ads, brand identity, web apps.';
     }
 
     document.title = title;
@@ -125,7 +125,16 @@ function App() {
       />
 
       {/* Page Content Switcher with Cross-Fade Transitions */}
-      <main className="w-full relative">
+      <main
+        className="w-full relative"
+        aria-label={(() => {
+          const r = route.split('?')[0];
+          if (r === '#/works') return 'Portfolio and case studies';
+          if (r === '#/about') return 'About Jellycut Studios';
+          if (r === '#/contact') return 'Start a project with Jellycut Studios';
+          return 'Jellycut Studios home';
+        })()}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={route}
@@ -166,10 +175,11 @@ function App() {
               {/* Close button */}
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-5 right-5 text-muted hover:text-ink p-1.5 rounded-full hover:bg-cream transition-colors z-10 cursor-pointer"
+                className="absolute top-5 right-5 bg-white/80 hover:bg-white text-ink shadow-md backdrop-blur-md p-1.5 rounded-full hover:scale-105 transition-all z-20 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
+
 
               <div className="p-6 md:p-10 overflow-y-auto w-full">
                 {!formSubmitted ? (

@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from './Works';
 
 const ease = [0.16, 1, 0.3, 1];
@@ -43,6 +43,53 @@ const services = [
     cta: 'See Site Examples',
     path: '#/works'
   },
+];
+
+// ─── FAQ data ──────────────────────────────────────────────────────────────
+const faqs = [
+  {
+    q: 'How fast do you deliver projects?',
+    a: 'Most projects ship within 48–72 hours of receiving your creative brief. AI video ads and brand identity projects have a 48-hour first-draft turnaround, with one revision round included. Web apps are scoped individually but ship in weeks, not months.',
+  },
+  {
+    q: 'Do I need to get on a call to start?',
+    a: 'Never. You fill a 15-minute intake form, we produce your first draft, and you review it on a shared preview link. All async. No scheduling. No calls — unless you specifically want one.',
+  },
+  {
+    q: 'Do you work with clients outside India?',
+    a: 'Yes — most of our clients are in the US, UK, Australia, and Canada. We are a fully async-first studio built for remote collaboration across time zones. We cover US and UK working hours through async updates.',
+  },
+  {
+    q: 'What platforms are your video ads optimised for?',
+    a: 'We produce for Meta (Facebook & Instagram Reels), TikTok, YouTube, and LinkedIn. Every project is delivered in all required aspect ratios — 9:16 vertical, 16:9 landscape, and 1:1 square — ready to publish immediately.',
+  },
+  {
+    q: 'What is vibe-coding?',
+    a: 'Vibe-coding is AI-assisted software development where large language models handle repetitive code, letting human designers focus on creative decisions and user experience. We use it to ship beautiful web apps in weeks instead of months.',
+  },
+  {
+    q: 'How is Jellycut different from a traditional agency?',
+    a: 'Traditional agencies take 2–6 weeks, charge $5k+ retainers, and require multiple calls. Jellycut delivers in 48–72 hours, charges per project with no retainer traps, and works fully async. Same cinematic quality — none of the bloat.',
+  },
+  {
+    q: 'How much does a project cost?',
+    a: 'We offer per-project pricing — no monthly retainers. AI video ads and brand identity packages start at a fraction of traditional agency rates because AI production removes overhead without sacrificing quality. Contact us for a custom quote.',
+  },
+  {
+    q: 'Can I see work samples before committing?',
+    a: 'Absolutely. Our full portfolio — video ads, brand identity case studies, and app builds — is available on the Works page, no sign-up required.',
+  },
+];
+
+// ─── Comparison table data ─────────────────────────────────────────────────
+const comparisonRows = [
+  { label: 'Delivery time',         agency: '2–6 weeks',          jellycut: '48–72 hours' },
+  { label: 'Pricing model',         agency: '$5k+/mo retainer',   jellycut: 'Per-project, no lock-in' },
+  { label: 'Calls required',        agency: 'Yes — many',         jellycut: 'Never' },
+  { label: 'AI-enhanced quality',   agency: 'Rarely',             jellycut: 'Always' },
+  { label: 'Revision cost',         agency: 'Extra charge',       jellycut: '1 round included' },
+  { label: 'Timezone flexibility',  agency: 'Fixed hours',        jellycut: 'Async across all zones' },
+  { label: 'Onboarding time',       agency: '1–2 weeks',          jellycut: '15-min brief form' },
 ];
 
 // ─── Process steps data ────────────────────────────────────────────────────
@@ -550,6 +597,129 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           </motion.div>
         </div>
       </section>
+      {/* ── 6. COMPARISON TABLE ───────────────────────────────────────────── */}
+      <section aria-label="Jellycut vs Traditional Agency comparison" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-cream border-t border-line">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="max-w-2xl mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
+          >
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              Why Jellycut
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
+              Agency quality. Startup&nbsp;speed.
+            </h2>
+          </motion.div>
+
+          {/* Table */}
+          <motion.div
+            className="overflow-hidden rounded-2xl border border-line shadow-sm"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, ease }}
+          >
+            {/* Header */}
+            <div className="grid grid-cols-[1fr_1fr_1fr] bg-ink text-white text-xs font-bold font-mono uppercase tracking-widest">
+              <div className="px-5 py-4 text-white/50">What matters</div>
+              <div className="px-5 py-4 border-l border-white/10 flex items-center gap-2">
+                <X className="w-3.5 h-3.5 text-red-400" />
+                Traditional Agency
+              </div>
+              <div className="px-5 py-4 border-l border-white/10 flex items-center gap-2 text-jelly">
+                <CheckCircle className="w-3.5 h-3.5" />
+                Jellycut Studios
+              </div>
+            </div>
+
+            {/* Rows */}
+            {comparisonRows.map((row, i) => (
+              <div
+                key={row.label}
+                className={`grid grid-cols-[1fr_1fr_1fr] text-sm ${
+                  i % 2 === 0 ? 'bg-white' : 'bg-paper'
+                } border-t border-line`}
+              >
+                <div className="px-5 py-4 text-ink font-medium font-sans text-xs md:text-sm">{row.label}</div>
+                <div className="px-5 py-4 border-l border-line text-muted font-light text-xs md:text-sm">{row.agency}</div>
+                <div className="px-5 py-4 border-l border-line text-ink font-semibold text-xs md:text-sm flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-jelly shrink-0" />
+                  {row.jellycut}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 7. FAQ ───────────────────────────────────────────────────────── */}
+      <section aria-label="Frequently asked questions" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-[#100f0f] border-t border-white/10">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            className="mb-14"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <span className="text-jelly text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              FAQ
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-white font-normal tracking-tight leading-tight">
+              Everything you're probably wondering.
+            </h2>
+          </motion.div>
+
+          <FaqAccordion faqs={faqs} ease={ease} />
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// ─── FAQ Accordion sub-component ──────────────────────────────────────────
+function FaqAccordion({ faqs, ease }) {
+  const [open, setOpen] = useState(null);
+  return (
+    <div className="divide-y divide-white/10">
+      {faqs.map((item, i) => (
+        <div key={i} className="py-1">
+          <button
+            onClick={() => setOpen(open === i ? null : i)}
+            className="w-full flex items-center justify-between gap-6 py-5 text-left group cursor-pointer"
+            aria-expanded={open === i}
+          >
+            <span className="text-white font-sans font-medium text-base md:text-lg leading-snug group-hover:text-jelly transition-colors duration-200">
+              {item.q}
+            </span>
+            <ChevronDown
+              className={`w-5 h-5 shrink-0 text-white/40 group-hover:text-jelly transition-all duration-300 ${
+                open === i ? 'rotate-180 text-jelly' : ''
+              }`}
+            />
+          </button>
+          <AnimatePresence initial={false}>
+            {open === i && (
+              <motion.div
+                key="content"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease }}
+                style={{ overflow: 'hidden' }}
+              >
+                <p className="pb-6 text-white/60 text-sm md:text-base font-light leading-relaxed font-sans">
+                  {item.a}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
     </div>
   );
 }
