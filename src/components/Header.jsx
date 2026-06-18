@@ -154,12 +154,12 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
       {/* Mobile Floating Glass Pill Header */}
       <div className="md:hidden fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <motion.div 
-          className="h-13 rounded-full border bg-white/10 dark:bg-black/35 backdrop-blur-lg px-4.5 flex justify-between items-center shadow-lg transition-all duration-300 w-[55vw] min-w-[210px] max-w-[280px]"
+          className="h-13 rounded-full border bg-line/85 dark:bg-line/75 backdrop-blur-lg px-4.5 flex justify-between items-center shadow-lg transition-all duration-300 w-[55vw] min-w-[210px] max-w-[280px]"
           style={{ 
             borderColor: isMenuOpen 
-              ? 'rgba(111, 214, 42, 0.25)' 
-              : (isMenuDark ? 'rgba(255, 255, 255, 0.18)' : 'rgba(15, 26, 13, 0.15)'),
-            boxShadow: isMenuOpen ? '0 4px 30px rgba(111, 214, 42, 0.08)' : '0 4px 24px rgba(0,0,0,0.06)'
+              ? 'rgba(111, 214, 42, 0.4)' 
+              : 'rgba(90, 114, 85, 0.25)', // border-muted/25
+            boxShadow: isMenuOpen ? '0 4px 30px rgba(111, 214, 42, 0.1)' : '0 4px 24px rgba(20, 60, 8, 0.08)'
           }}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -177,14 +177,14 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             />
           </div>
 
-          {/* Right: Burger Toggle with Custom Morphing Lines */}
+          {/* Right: Burger Toggle with Custom Morphing Lines (Deep forest ink for readability on light green background) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-            className="flex items-center justify-center w-8.5 h-8.5 rounded-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none transition-transform active:scale-90"
+            className="flex items-center justify-center w-8.5 h-8.5 rounded-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none transition-transform active:scale-90 text-ink"
             style={{ outline: 'none' }}
           >
-            <svg width="17" height="17" viewBox="0 0 20 20" className={textColorClass}>
+            <svg width="17" height="17" viewBox="0 0 20 20">
               <Path
                 variants={{
                   closed: { d: "M 3 5 L 17 5" },
