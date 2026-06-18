@@ -33,7 +33,7 @@ const stack = [
 
 export default function About() {
   return (
-    <section className="relative min-h-screen bg-paper text-ink pt-8 pb-20 px-6 md:px-12 lg:px-24">
+    <section className="relative min-h-screen bg-paper text-ink pt-24 md:pt-8 pb-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
         
         {/* Page Title */}
