@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Clock, Sparkles, ArrowRight } from 'lucide-react';
+import { Menu, X, Sparkles, ArrowRight } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -162,29 +162,8 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
           </button>
         </motion.nav>
 
-        {/* Right: US ET Clock & Mobile Hamburger Button */}
+        {/* Right: Mobile Hamburger Button */}
         <div className="flex items-center gap-3">
-          <motion.div
-            initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease }}
-          >
-            {/* Mobile View: Sleek glass capsule badge */}
-            <div 
-              className={`flex md:hidden items-center gap-1.5 px-2.5 py-1 rounded-full border bg-white/5 backdrop-blur-md text-[10px] font-mono tracking-wider ${textColorClass}`}
-              style={{ borderColor: isMenuOpen ? 'rgba(111, 214, 42, 0.3)' : (isMenuDark ? 'rgba(255, 255, 255, 0.15)' : 'var(--line)') }}
-            >
-              <Clock className="w-3 h-3 text-jelly animate-pulse" />
-              <span className="tabular-nums font-semibold">{time || '12:00 PM'}</span>
-            </div>
-
-            {/* Desktop View: Standard Layout */}
-            <div className={`hidden md:flex items-center gap-2 text-xs font-mono tracking-widest text-right ${textColorClass}`}>
-              <span className="opacity-60">US ET</span>
-              <Clock className="w-3.5 h-3.5 text-jelly" />
-              <span className="tabular-nums font-semibold opacity-95">{time || '12:00 PM'}</span>
-            </div>
-          </motion.div>
 
           {/* Mobile Burger Toggle with Custom Morphing Lines */}
           <button
@@ -371,9 +350,6 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
                   <div className="flex items-center gap-1.5 text-white/60">
                     <span className="h-1.5 w-1.5 rounded-full bg-jelly animate-pulse" />
                     <span>US &amp; UK // OPEN</span>
-                  </div>
-                  <div className="text-white/60">
-                    ET: <span className="tabular-nums font-semibold text-white">{time || '12:00 PM'}</span>
                   </div>
                 </div>
               </motion.div>

@@ -14,7 +14,6 @@ const ease = [0.16, 1, 0.3, 1];
 
 function App() {
   const [route, setRoute] = useState(window.location.hash || '#/');
-  const [time, setTime] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -72,21 +71,6 @@ function App() {
     metaDesc.setAttribute('content', description);
   }, [route]);
 
-  // 4. Live US Eastern Time Clock
-  useEffect(() => {
-    const updateTime = () => {
-      const formatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/New_York',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      });
-      setTime(formatter.format(new Date()));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -123,7 +107,6 @@ function App() {
         currentRoute={route.split('?')[0]} 
         setRoute={setRoute} 
         setIsModalOpen={setIsModalOpen} 
-        time={time} 
       />
 
       {/* Page Content Switcher with Cross-Fade Transitions */}
