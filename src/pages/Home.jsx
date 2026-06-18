@@ -166,7 +166,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         >
           <video
             src="./hero.mp4"
-            poster="./hero_poster.png"
+            poster="./hero_poster.avif"
             autoPlay
             muted
             loop
@@ -228,18 +228,27 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             viewport={{ once: true, margin: '-100px' }}
             variants={getRevealSection()}
           >
-            {/* Sky-garden video */}
-            <video
-              className="skyVideo"
-              src="./Pixel_art_flower_meadow_golden_202606141516.mp4"
-              poster="./Pixel.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-hidden="true"
-            />
+            {/* YouTube background — Starbucks AI Ad */}
+            <div className="skyVideo" style={{ pointerEvents: 'none' }}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/TLmlYZSDTMw?autoplay=1&mute=1&loop=1&playlist=TLmlYZSDTMw&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
+                allow="autoplay; encrypted-media"
+                allowFullScreen={false}
+                title="Jellycut Studios — Starbucks AI Ad Background"
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '100vw',
+                  height: '56.25vw',
+                  minHeight: '100%',
+                  minWidth: '177.77vh',
+                  transform: 'translate(-50%, -50%) scale(1.15)',
+                  border: 'none',
+                  pointerEvents: 'none',
+                }}
+              />
+            </div>
 
             <div className="absolute inset-0 bg-[#0f3d08]/25 mix-blend-multiply z-5 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a2806]/55 via-transparent to-black/15 z-5 pointer-events-none" />
@@ -317,10 +326,10 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               variants={getRevealSection()}
             >
               <div className="relative group max-w-[320px] md:max-w-full">
-                <img
-                  src="https://playground.bravebrand.com/assets/backgrounds/signal-foundry-pixel-flower.webp"
-                  alt="Jellycut creative signal"
-                  className="max-h-[380px] md:max-h-[460px] object-contain mix-blend-multiply opacity-90 transition-transform duration-700 group-hover:scale-105"
+              <img
+                  src="./jelly.avif"
+                  alt="Jellycut Studios mascot — bold, creative, AI-powered"
+                  className="max-h-[380px] md:max-h-[460px] object-contain opacity-95 transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
             </motion.div>

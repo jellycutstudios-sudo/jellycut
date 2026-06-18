@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 .skyArt {
   position: relative;
   overflow: hidden;
-  background: url("/Pixel.png") center / cover no-repeat;
+  background: url("/Pixel.avif") center / cover no-repeat;
 }
 
 .skyVideo {
@@ -93,10 +93,8 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  overflow: hidden;
   z-index: 0;
-  transform: scale(1.1);
 }
 
 /* ─── Jelly accent utilities ─────────────────────────────────────────────── */

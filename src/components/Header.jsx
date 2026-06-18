@@ -99,9 +99,9 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             className="flex items-center pl-1 pr-2 py-0.5 cursor-pointer"
           >
             <img
-              src="./logo.png"
+              src="./logo.svg"
               alt="Jellycut Studios"
-              className="h-7 w-auto object-contain"
+              className="h-4 w-auto object-contain"
             />
           </div>
 
@@ -156,9 +156,9 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             className="flex items-center cursor-pointer hover:opacity-85 transition-opacity"
           >
             <img
-              src="./logo.png"
+              src="./logo.svg"
               alt="Jellycut Studios"
-              className="h-7.5 w-auto object-contain"
+              className="h-4.5 w-auto object-contain"
             />
           </div>
 
