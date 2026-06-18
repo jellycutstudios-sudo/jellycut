@@ -105,7 +105,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             <img
               src="./logo.png"
               alt="Jellycut Studios"
-              className="h-7 w-auto object-contain drop-shadow-sm"
+              className="h-7 w-auto object-contain"
             />
           </div>
 
@@ -173,7 +173,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             <img
               src="./logo.png"
               alt="Jellycut Studios"
-              className="h-7.5 w-auto object-contain drop-shadow-sm"
+              className="h-7.5 w-auto object-contain"
             />
           </div>
 
