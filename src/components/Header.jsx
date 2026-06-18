@@ -154,7 +154,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
       {/* Mobile Floating Glass Pill Header */}
       <div className="md:hidden fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <motion.div 
-          className="h-12 rounded-full border bg-white/10 dark:bg-black/35 backdrop-blur-lg px-4 flex items-center gap-5 shadow-lg transition-all duration-300"
+          className="h-13 rounded-full border bg-white/10 dark:bg-black/35 backdrop-blur-lg px-4.5 flex justify-between items-center shadow-lg transition-all duration-300 w-[55vw] min-w-[210px] max-w-[280px]"
           style={{ 
             borderColor: isMenuOpen 
               ? 'rgba(111, 214, 42, 0.25)' 
@@ -173,21 +173,18 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
             <img
               src="./logo.png"
               alt="Jellycut Studios"
-              className="h-7 w-auto object-contain drop-shadow-sm"
+              className="h-7.5 w-auto object-contain drop-shadow-sm"
             />
           </div>
-
-          {/* Thin vertical separator line in the pill */}
-          <div className="h-4 w-px bg-white/10 dark:bg-white/15" />
 
           {/* Right: Burger Toggle with Custom Morphing Lines */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-            className="flex items-center justify-center w-8 h-8 rounded-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none transition-transform active:scale-90"
+            className="flex items-center justify-center w-8.5 h-8.5 rounded-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none transition-transform active:scale-90"
             style={{ outline: 'none' }}
           >
-            <svg width="16" height="16" viewBox="0 0 20 20" className={textColorClass}>
+            <svg width="17" height="17" viewBox="0 0 20 20" className={textColorClass}>
               <Path
                 variants={{
                   closed: { d: "M 3 5 L 17 5" },
