@@ -16,10 +16,10 @@ export const projects = [
       'Dynamic Brand Media Integration'
     ],
     results: 'Shipped a premium showcase in 3 days with sub-second page rendering and clean, native responsiveness across all device sizes.',
-    image: '/filbey_home.avif',
+    image: '/filbey_home.webp',
     images: [
-      '/filbey_home.avif',
-      '/filbey_detail.avif'
+      '/filbey_home.webp',
+      '/filbey_detail.webp'
     ],
     projectUrl: 'https://www.filbey.in/',
     color: 'from-[#1C1C1C]/40 to-jelly/10'
@@ -129,11 +129,11 @@ export const projects = [
       'WhatsApp Daily Sales Engine'
     ],
     results: 'Trusted by 100+ textile shops. Bill in seconds, prevent staff leakage, and monitor inventory live.',
-    image: '/rupos_checkout.avif',
+    image: '/rupos_checkout.webp',
     images: [
-      '/rupos_checkout.avif',
-      '/rupos_tablet.avif',
-      '/rupos_lifestyle.avif'
+      '/rupos_checkout.webp',
+      '/rupos_tablet.webp',
+      '/rupos_lifestyle.webp'
     ],
     projectUrl: 'https://rupos.in/',
     color: 'from-[#0A120E]/40 to-jelly/10'

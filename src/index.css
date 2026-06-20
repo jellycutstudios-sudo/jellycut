@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 .skyArt {
   position: relative;
   overflow: hidden;
-  background: url("/Pixel.avif") center / cover no-repeat;
+  background: url("/Pixel.webp") center / cover no-repeat;
 }
 
 .skyVideo {

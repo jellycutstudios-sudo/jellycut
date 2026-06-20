@@ -518,7 +518,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         >
           {/* Poster image renders instantly */}
           <img
-            src="/hero_poster.avif"
+            src="/hero_poster.webp"
             alt="Jellycut Studios Hero"
             className="absolute inset-0 w-full h-full object-cover z-0"
           />
