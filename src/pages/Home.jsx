@@ -346,7 +346,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 Why We Exist
               </span>
               <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-ink font-normal leading-tight mb-8 tracking-tight max-w-2xl">
-                Creative quality shouldn't cost a Fortune 500 budget.
+                Cinema-grade creative, shipped at the speed of culture.
               </h3>
               <div className="space-y-6 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
                 <p>
