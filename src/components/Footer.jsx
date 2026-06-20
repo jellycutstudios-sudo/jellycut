@@ -29,8 +29,9 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
       {/* Background image */}
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="https://playground.bravebrand.com/assets/backgrounds/signal-foundry-painted-city-hero.webp"
+          src="/footer_bg.webp"
           alt="Jellycut Studios closing background"
+          loading="lazy"
           className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
         />
       </div>

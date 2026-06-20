@@ -135,6 +135,7 @@ export default function Works({ setIsModalOpen, currentRoute }) {
                         <img 
                           src={project.image} 
                           alt={project.title} 
+                          loading="lazy"
                           className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
                         />
                         <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-500 z-0" />

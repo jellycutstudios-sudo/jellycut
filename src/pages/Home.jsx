@@ -462,14 +462,16 @@ const steps = [
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
   const [videoSrc, setVideoSrc] = useState(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [loadYoutube, setLoadYoutube] = useState(false);
 
   useEffect(() => {
+    if (isMobile) return;
     // Load video deferred to ensure it doesn't block initial page load/render
     const timer = setTimeout(() => {
       setVideoSrc('/hero.mp4');
     }, 1200); // 1.2s delay is sweet spot for mobile paint stability
     return () => clearTimeout(timer);
-  }, []);
+  }, [isMobile]);
 
   const prefersReducedMotion = useReducedMotion();
   const shouldReduce = prefersReducedMotion || isMobile;
@@ -520,6 +522,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           <img
             src="/hero_poster.webp"
             alt="Jellycut Studios Hero"
+            fetchPriority="high"
+            loading="eager"
             className="absolute inset-0 w-full h-full object-cover z-0"
           />
 
@@ -590,27 +594,31 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
             variants={getRevealSection()}
+            onViewportEnter={() => setLoadYoutube(true)}
           >
             {/* YouTube background — Starbucks AI Ad */}
             <div className="skyVideo" style={{ pointerEvents: 'none' }}>
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/TLmlYZSDTMw?autoplay=1&mute=1&loop=1&playlist=TLmlYZSDTMw&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
-                allow="autoplay; encrypted-media"
-                allowFullScreen={false}
-                title="Jellycut Studios — Starbucks AI Ad Background"
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  width: '100vw',
-                  height: '56.25vw',
-                  minHeight: '100%',
-                  minWidth: '177.77vh',
-                  transform: 'translate(-50%, -50%) scale(1.15)',
-                  border: 'none',
-                  pointerEvents: 'none',
-                }}
-              />
+              {loadYoutube && (
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/TLmlYZSDTMw?autoplay=1&mute=1&loop=1&playlist=TLmlYZSDTMw&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  title="Jellycut Studios — Starbucks AI Ad Background"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100vw',
+                    height: '56.25vw',
+                    minHeight: '100%',
+                    minWidth: '177.77vh',
+                    transform: 'translate(-50%, -50%) scale(1.15)',
+                    border: 'none',
+                    pointerEvents: 'none',
+                  }}
+                />
+              )}
             </div>
 
             <div className="absolute inset-0 bg-[#0f3d08]/25 mix-blend-multiply z-5 pointer-events-none" />
@@ -692,6 +700,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               <img
                   src="/jelly.avif"
                   alt="Jellycut Studios mascot — bold, creative, AI-powered"
+                  loading="lazy"
                   className="max-h-[380px] md:max-h-[460px] object-contain opacity-95 transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -780,6 +789,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                         <img 
                           src={project.image} 
                           alt={project.title} 
+                          loading="lazy"
                           className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
                         />
                         <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-500 z-0" />
