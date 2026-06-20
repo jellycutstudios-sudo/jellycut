@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink, ChevronDown, X } from 'lucide-react';
+import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from './Works';
 
 const ease = [0.16, 1, 0.3, 1];
@@ -11,7 +11,7 @@ function AnimatedVideoIcon() {
     <motion.svg
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="-1.5 -1.5 27 27"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"
@@ -54,7 +54,7 @@ function AnimatedPaletteIcon() {
     <motion.svg
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="-1.5 -1.5 27 27"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"
@@ -137,7 +137,7 @@ function AnimatedCodeIcon() {
     <motion.svg
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="-1.5 -1.5 27 27"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"
@@ -175,7 +175,7 @@ function AnimatedGlobeIcon() {
     <motion.svg
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="-1.5 -1.5 27 27"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"
@@ -214,6 +214,132 @@ function AnimatedGlobeIcon() {
             pathLength: [0, 1],
             opacity: [0, 1],
             transition: { duration: 0.3, delay: 0.4, ease: 'easeInOut' }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+// ─── Custom Animated Process Icons ─────────────────────────────────────────
+function AnimatedFileTextIcon() {
+  return (
+    <motion.svg
+      width="24"
+      height="24"
+      viewBox="-1.5 -1.5 27 27"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.path
+        d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.6, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.path
+        d="M14 2v4a2 2 0 0 0 2 2h4"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.path
+        d="M10 9H8"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.4 }
+          }
+        }}
+      />
+      <motion.path
+        d="M16 13H8"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.5 }
+          }
+        }}
+      />
+      <motion.path
+        d="M16 17H8"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.6 }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+function AnimatedZapIcon() {
+  return (
+    <motion.svg
+      width="24"
+      height="24"
+      viewBox="-1.5 -1.5 27 27"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.path
+        d="M13 2 L3 14h9l-1 8 10-12h-9l1-8Z"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.6, ease: 'easeInOut' }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+function AnimatedStarIcon() {
+  return (
+    <motion.svg
+      width="24"
+      height="24"
+      viewBox="-1.5 -1.5 27 27"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.polygon
+        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.7, ease: 'easeInOut' }
           }
         }}
       />
@@ -312,21 +438,21 @@ const comparisonRows = [
 const steps = [
   {
     num: '01',
-    icon: FileText,
+    icon: AnimatedFileTextIcon,
     title: 'Brief in 15 minutes',
     description:
       'Fill a short intake form. Tell us your brand, goal, and any references. No calls required to get started.',
   },
   {
     num: '02',
-    icon: Zap,
+    icon: AnimatedZapIcon,
     title: 'We build in 48–72h',
     description:
       'Our AI-assisted studio produces your first draft. You review it async on a shared preview link — no scheduling needed.',
   },
   {
     num: '03',
-    icon: Star,
+    icon: AnimatedStarIcon,
     title: 'Revise, approve, ship',
     description:
       'One revision round included. Final files delivered in every format you need, ready to publish immediately.',
@@ -781,12 +907,19 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               return (
                 <motion.div
                   key={step.num}
-                  variants={getStepItem()}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  variants={{
+                    hidden: getStepItem().hidden,
+                    visible: getStepItem().visible,
+                    hover: {}
+                  }}
                   className="flex flex-col gap-5 group"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="bg-cream border border-line rounded-2xl p-3.5 text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 group-hover:border-jelly/30 transition-all duration-300">
-                      <Icon className="w-6 h-6" />
+                    <div className="bg-cream border border-line rounded-2xl p-3.5 text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 group-hover:border-jelly/30 transition-all duration-300 flex items-center justify-center">
+                      <Icon />
                     </div>
                     <span className="text-3xl font-serif text-line font-normal tracking-tight select-none">
                       {step.num}
