@@ -13,7 +13,7 @@ import Contact from './pages/Contact';
 const ease = [0.16, 1, 0.3, 1];
 
 function App() {
-  const [route, setRoute] = useState(window.location.hash || '#/');
+  const [route, setRoute] = useState(window.location.pathname + window.location.search);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,18 +32,20 @@ function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // 2. Hash router change listener
+  // 2. Path router change listener
   useEffect(() => {
-    const handleHashChange = () => {
-      setRoute(window.location.hash || '#/');
+    const handlePopState = () => {
+      setRoute(window.location.pathname + window.location.search);
       window.scrollTo(0, 0); // Scroll to top on navigation
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const handleNavigate = (path) => {
-    window.location.hash = path;
+    window.history.pushState({}, '', path);
+    setRoute(path);
+    window.scrollTo(0, 0);
   };
 
   // 3. Dynamic SEO Metadata Update
@@ -52,13 +54,13 @@ function App() {
     let description = 'Jellycut Studios is an AI-first creative studio from Kerala, India. Cinematic video ads, bold brand identities, and vibe-coded web apps for global brands — delivered in 48–72 hours.';
     
     const mainRoute = route.split('?')[0];
-    if (mainRoute === '#/works') {
+    if (mainRoute === '/works') {
       title = 'Portfolio & Case Studies — AI Video Ads & Brand Design | Jellycut Studios';
       description = 'Browse Jellycut Studios\' portfolio — cinematic AI video ads, brand identities, vibe-coded apps, and website designs for global clients. See real results.';
-    } else if (mainRoute === '#/about') {
+    } else if (mainRoute === '/about') {
       title = 'About Jellycut Studios — AI Creative Studio from Kerala, India';
       description = 'Jellycut Studios combines generative AI speed with human creative direction. Built in Kerala, India to deliver agency-quality creative for US, UK & global brands at startup-friendly prices.';
-    } else if (mainRoute === '#/contact') {
+    } else if (mainRoute === '/contact') {
       title = 'Start a Project — 48-Hour Creative Brief | Jellycut Studios';
       description = 'Start your project with Jellycut Studios in 15 minutes. No calls required. Submit your brief online and get your first draft within 48–72 hours. AI video ads, brand identity, web apps.';
     }
@@ -106,13 +108,13 @@ function App() {
   const renderActivePage = () => {
     const mainRoute = route.split('?')[0];
     switch (mainRoute) {
-      case '#/works':
-        return <Works setIsModalOpen={setIsModalOpen} />;
-      case '#/about':
+      case '/works':
+        return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+      case '/about':
         return <About />;
-      case '#/contact':
+      case '/contact':
         return <Contact />;
-      case '#/':
+      case '/':
       default:
         return <Home setIsModalOpen={setIsModalOpen} setRoute={handleNavigate} isMobile={isMobile} />;
     }
@@ -133,9 +135,9 @@ function App() {
         className="w-full relative"
         aria-label={(() => {
           const r = route.split('?')[0];
-          if (r === '#/works') return 'Portfolio and case studies';
-          if (r === '#/about') return 'About Jellycut Studios';
-          if (r === '#/contact') return 'Start a project with Jellycut Studios';
+          if (r === '/works') return 'Portfolio and case studies';
+          if (r === '/about') return 'About Jellycut Studios';
+          if (r === '/contact') return 'Start a project with Jellycut Studios';
           return 'Jellycut Studios home';
         })()}
       >

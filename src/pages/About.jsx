@@ -84,15 +84,20 @@ export default function About() {
               Made in Kerala. Serving founders globally.
             </h2>
             <p className="text-muted text-sm md:text-base font-light leading-relaxed">
-              Jellycut is proudly based in Kochi, Kerala — a lush tropical hub of tech talent, design heritage, and creative expression. 
+              Jellycut is proudly based in Kooriyad, Kerala — a lush tropical hub of tech talent, design heritage, and creative expression. 
             </p>
             <p className="text-muted text-sm md:text-base font-light leading-relaxed">
               Operating fully remote, we serve clients across the US, UK, and Europe. We have structured our workflows around async collaboration, meaning you get detailed progress logs and drafts in your inbox without having to coordinate time-zone calls.
             </p>
-            <div className="flex items-center gap-2 text-xs text-ink font-mono mt-4">
+            <a 
+              href="https://maps.app.goo.gl/FW4w87cYtvGjYMHN6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs text-ink hover:text-jelly-deep transition-colors font-mono mt-4 cursor-pointer"
+            >
               <MapPin className="w-4 h-4 text-jelly" />
-              <span>Kochi, Kerala, India (IST // UTC+5:30)</span>
-            </div>
+              <span>Kooriyad, Kerala, India (IST // UTC+5:30)</span>
+            </a>
           </div>
 
           <div className="lg:col-span-5 flex justify-center">

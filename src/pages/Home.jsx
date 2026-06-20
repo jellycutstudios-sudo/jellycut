@@ -14,7 +14,7 @@ const services = [
     description:
       'Scroll-stopping ad creative for Meta, TikTok, YouTube, and LinkedIn — produced with AI and refined by real creative direction.',
     cta: 'See Ad Samples',
-    path: '#/works'
+    path: '/works'
   },
   {
     id: '02',
@@ -23,7 +23,7 @@ const services = [
     description:
       'Logo, colour system, typography, and brand guidelines built for a digital-first world. Built to last and scale.',
     cta: 'View Brand Work',
-    path: '#/works'
+    path: '/works'
   },
   {
     id: '03',
@@ -32,7 +32,7 @@ const services = [
     description:
       'Fast, beautiful web apps and interactive experiences — built with AI-assisted coding that ships in weeks, not months.',
     cta: 'View App Builds',
-    path: '#/works'
+    path: '/works'
   },
   {
     id: '04',
@@ -41,7 +41,7 @@ const services = [
     description:
       'Cinematic, conversion-optimised websites that make your first impression your best impression. Always.',
     cta: 'See Site Examples',
-    path: '#/works'
+    path: '/works'
   },
 ];
 
@@ -283,7 +283,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
 
                 {/* Explore Portfolio button */}
                 <motion.button
-                  onClick={() => setRoute('#/works')}
+                  onClick={() => setRoute('/works')}
                   initial={{ x: 20, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   viewport={{ once: true }}
@@ -384,7 +384,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               </h2>
             </div>
             <button
-              onClick={() => setRoute('#/works')}
+              onClick={() => setRoute('/works')}
               className="group inline-flex items-center gap-1.5 bg-ink hover:bg-ink/90 text-white text-xs font-bold px-6 py-3 rounded-full transition-all shadow-md cursor-pointer"
             >
               <span>View All Projects</span>
@@ -406,7 +406,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 <motion.div
                   key={project.id}
                   variants={getCardItem()}
-                  onClick={() => setRoute(`#/works?project=${project.id}`)}
+                  onClick={() => setRoute(`/works?project=${project.id}`)}
                   className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
                 >
                   {/* Top image/pattern container */}

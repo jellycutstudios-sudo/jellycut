@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/|fav.png|logo.svg|hero.mp4|hero_poster.avif|jelly.avif|filbey_home.jpeg|filbey_detail.png|rupos_checkout.jpeg|rupos_tablet.jpeg|rupos_lifestyle.jpeg|robots.txt|sitemap.xml|.*\\..*$).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

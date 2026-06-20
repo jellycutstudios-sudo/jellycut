@@ -128,15 +128,20 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 bg-white border border-line rounded-2xl">
-                  <div className="bg-cream text-jelly-deep p-2 rounded-xl">
+                <a 
+                  href="https://maps.app.goo.gl/FW4w87cYtvGjYMHN6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-white border border-line rounded-2xl hover:border-jelly transition-colors group cursor-pointer"
+                >
+                  <div className="bg-cream text-jelly-deep p-2 rounded-xl group-hover:bg-jelly/10">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-[9px] font-semibold uppercase tracking-wider text-muted font-mono">Location</div>
-                    <div className="text-xs font-bold text-ink">Kochi, Kerala, India</div>
+                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">Vengara Rd, opp. Market, Kooriyad, Kerala</div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 

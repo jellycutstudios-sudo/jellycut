@@ -35,10 +35,12 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setIsMenuOpen(false);
+    setTimeout(() => {
+      setIsMenuOpen(false);
+    }, 0);
   }, [currentRoute]);
 
-  const isHome = currentRoute === '#/' || currentRoute === '' || currentRoute === '#';
+  const isHome = currentRoute === '/' || currentRoute === '' || currentRoute === '#/' || currentRoute === '#';
   const isMenuDark = isMenuOpen || isHome;
 
   // Text/border colour flips to white on home (dark hero) or when menu overlay is open
@@ -47,17 +49,17 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
   const borderClass = isMenuDark ? 'border-white/20' : 'border-line';
 
   const menuItems = [
-    { label: 'Home', path: '#/' },
-    { label: 'Works', path: '#/works' },
-    { label: 'About Us', path: '#/about' },
-    { label: 'Contact Us', path: '#/contact' },
+    { label: 'Home', path: '/' },
+    { label: 'Works', path: '/works' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Contact Us', path: '/contact' },
   ];
 
 
   const handleNavClick = (path) => {
     if (path.startsWith('/#')) {
       // It's an anchor on home page
-      setRoute('#/');
+      setRoute('/');
       setIsMenuOpen(false);
       setTimeout(() => {
         const id = path.replace('/#', '');
@@ -95,7 +97,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
           transition={{ duration: 0.8, ease }}
         >
           <div 
-            onClick={() => handleNavClick('#/')}
+            onClick={() => handleNavClick('/')}
             className="flex items-center pl-1 pr-2 py-0.5 cursor-pointer"
           >
             <img
@@ -107,20 +109,20 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
 
           <div className="flex items-center text-xs font-medium text-ink/90">
             <button 
-              onClick={() => handleNavClick('#/works')} 
-              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '#/works' ? 'text-jelly-deep font-semibold' : ''}`}
+              onClick={() => handleNavClick('/works')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/works' ? 'text-jelly-deep font-semibold' : ''}`}
             >
               Works
             </button>
             <button 
-              onClick={() => handleNavClick('#/about')} 
-              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '#/about' ? 'text-jelly-deep font-semibold' : ''}`}
+              onClick={() => handleNavClick('/about')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/about' ? 'text-jelly-deep font-semibold' : ''}`}
             >
               About
             </button>
             <button 
-              onClick={() => handleNavClick('#/contact')} 
-              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '#/contact' ? 'text-jelly-deep font-semibold' : ''}`}
+              onClick={() => handleNavClick('/contact')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/contact' ? 'text-jelly-deep font-semibold' : ''}`}
             >
               Contact
             </button>
@@ -152,7 +154,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
         >
           {/* Left: Mobile Logo */}
           <div 
-            onClick={() => handleNavClick('#/')}
+            onClick={() => handleNavClick('/')}
             className="flex items-center cursor-pointer hover:opacity-85 transition-opacity"
           >
             <img
@@ -261,7 +263,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, type: 'spring', stiffness: 90 }}
                 className="relative p-3.5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden group cursor-pointer"
-                onClick={() => handleNavClick('#/works?project=p7')}
+                onClick={() => handleNavClick('/works?project=p7')}
               >
                 {/* Accent glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-jelly/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

@@ -146,7 +146,7 @@ export const projects = [
 
 const categories = ['All', 'AI Video Ads', 'Websites', 'Vibe-Coded Apps'];
 
-export default function Works({ setIsModalOpen }) {
+export default function Works({ setIsModalOpen, currentRoute }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeProject, setActiveProject] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -154,23 +154,22 @@ export default function Works({ setIsModalOpen }) {
 
   // Parse query parameter to open project modal directly
   useEffect(() => {
-    const handleHashCheck = () => {
-      const hash = window.location.hash;
-      if (hash.includes('?project=')) {
-        const projectId = hash.split('?project=')[1];
-        const project = projects.find(p => p.id === projectId);
-        if (project) {
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('project');
+    if (projectId) {
+      const project = projects.find(p => p.id === projectId);
+      if (project) {
+        setTimeout(() => {
           setActiveProject(project);
           setActiveImageIndex(0);
-        }
-      } else {
-        setActiveProject(null);
+        }, 0);
+        return;
       }
-    };
-    handleHashCheck();
-    window.addEventListener('hashchange', handleHashCheck);
-    return () => window.removeEventListener('hashchange', handleHashCheck);
-  }, []);
+    }
+    setTimeout(() => {
+      setActiveProject(null);
+    }, 0);
+  }, [currentRoute]);
   const projectImages = activeProject?.images || (activeProject?.image ? [activeProject.image] : []);
 
   // Keyboard navigation for Lightbox
