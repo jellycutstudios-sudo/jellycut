@@ -1,8 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import { Compass, Cpu, Clock, Award, ShieldCheck, MapPin } from 'lucide-react';
-
-const ease = [0.16, 1, 0.3, 1];
 
 const guarantees = [
   {

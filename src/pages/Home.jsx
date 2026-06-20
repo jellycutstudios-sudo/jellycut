@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
-import { projects } from './Works';
+import { projects } from '../data/projects';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -499,23 +499,30 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
       <section className="relative w-full h-screen min-h-[640px] sm:min-h-[720px] flex flex-col justify-end overflow-hidden bg-[#100f0f]">
         
-        {/* Background Video */}
         <motion.div
           className="absolute inset-0 w-full h-full"
           variants={getFadeInScale()}
           initial="hidden"
           animate="visible"
         >
-          <video
-            src="/hero.mp4"
-            poster="/hero_poster.avif"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+          {!isMobile ? (
+            <video
+              src="/hero.mp4"
+              poster="/hero_poster.avif"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          ) : (
+            <img
+              src="/hero_poster.avif"
+              alt="Jellycut Studios Hero"
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          )}
         </motion.div>
 
         {/* Lower-Left Glass Hero Card */}

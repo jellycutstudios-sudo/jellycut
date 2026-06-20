@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Clock, MapPin, ChevronDown, CheckCircle, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
 

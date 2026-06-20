@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -30,7 +30,7 @@ const itemVariants = {
   show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 120, damping: 18 } }
 };
 
-export default function Header({ currentRoute, setRoute, setIsModalOpen, time }) {
+export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Close mobile menu when route changes
@@ -44,9 +44,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen, time })
   const isMenuDark = isMenuOpen || isHome;
 
   // Text/border colour flips to white on home (dark hero) or when menu overlay is open
-  const textColorClass = isMenuDark ? 'text-white' : 'text-ink';
   const mutedColorClass = isMenuDark ? 'text-white/50' : 'text-muted';
-  const borderClass = isMenuDark ? 'border-white/20' : 'border-line';
 
   const menuItems = [
     { label: 'Home', path: '/' },
