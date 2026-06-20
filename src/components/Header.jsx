@@ -101,6 +101,8 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
             <img
               src="/logo.svg"
               alt="Jellycut Studios"
+              width="120"
+              height="16"
               className="h-4 w-auto object-contain"
             />
           </div>
@@ -158,6 +160,8 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
             <img
               src="/logo.svg"
               alt="Jellycut Studios"
+              width="120"
+              height="18"
               className="h-4.5 w-auto object-contain"
             />
           </div>

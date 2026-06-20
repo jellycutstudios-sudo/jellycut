@@ -39,7 +39,7 @@ export const projects = [
       'Immersive Foley Sound Design'
     ],
     results: 'Delivered a broadcast-ready concept commercial in 24 hours with zero physical production costs or gear requirements.',
-    image: 'https://img.youtube.com/vi/9jdw_X2ADJw/maxresdefault.jpg',
+    image: 'https://img.youtube.com/vi/9jdw_X2ADJw/hqdefault.jpg',
     youtubeId: '9jdw_X2ADJw',
     color: 'from-[#711F2E]/30 to-jelly/10'
   },
@@ -58,7 +58,7 @@ export const projects = [
       'Immersive Foley Sound Design'
     ],
     results: 'Produced a broadcast-quality cosmetics commercial in 24 hours with zero physical studio gear, saving over 95% in typical production budgets.',
-    image: 'https://img.youtube.com/vi/i7f8MPgUqfQ/maxresdefault.jpg',
+    image: 'https://img.youtube.com/vi/i7f8MPgUqfQ/hqdefault.jpg',
     youtubeId: 'i7f8MPgUqfQ',
     color: 'from-[#EAE0D5]/40 to-jelly/10'
   },
@@ -76,7 +76,7 @@ export const projects = [
       'Automated Billing Flow Animation'
     ],
     results: 'Successfully translated a complex automated collection flow into a clear, 60-second visual hook that accelerates client onboarding.',
-    image: 'https://img.youtube.com/vi/tB6UQac9DB4/maxresdefault.jpg',
+    image: 'https://img.youtube.com/vi/tB6UQac9DB4/hqdefault.jpg',
     youtubeId: 'tB6UQac9DB4',
     projectUrl: 'https://feesync.com/',
     color: 'from-[#0B1E36]/40 to-jelly/10'
@@ -96,7 +96,7 @@ export const projects = [
       'Immersive Foley Sound Design'
     ],
     results: 'Created a broadcast-quality beverage commercial in 24 hours with zero camera equipment or production set, saving over 95% in typical production budgets.',
-    image: 'https://img.youtube.com/vi/GZmORUV77wI/maxresdefault.jpg',
+    image: 'https://img.youtube.com/vi/GZmORUV77wI/hqdefault.jpg',
     youtubeId: 'GZmORUV77wI',
     color: 'from-[#D9381E]/30 to-jelly/10'
   },
@@ -110,7 +110,7 @@ export const projects = [
     timeline: '24 Hours',
     deliverables: ['1x 45s Concept Commercial', 'Vibrant Color Grading Assets', 'Sound FX Design'],
     results: 'Delivered a broadcast-ready beverage commercial in 24 hours, saving over 90% in typical camera production costs.',
-    image: 'https://img.youtube.com/vi/TLmlYZSDTMw/maxresdefault.jpg',
+    image: 'https://img.youtube.com/vi/TLmlYZSDTMw/hqdefault.jpg',
     youtubeId: 'TLmlYZSDTMw',
     color: 'from-[#006241]/20 to-jelly/10'
   },

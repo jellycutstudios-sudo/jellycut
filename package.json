@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/inter-tight": "^5.2.7",
+    "@fontsource/instrument-serif": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.18.0",

@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Highest-priority preloads: fonts + LCP image — parsed first, zero render-blocking -->
+    <link rel="preload" href="/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/hero_poster.webp" as="image" type="image/webp" fetchpriority="high" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href="/hero_poster.webp" as="image" type="image/webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ── Primary Meta ──────────────────────────────────────────────────── -->
@@ -176,11 +179,8 @@
     }
     </script>
 
-    <!-- ── Fonts ──────────────────────────────────────────────────────────── -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter+Tight:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- ── Fonts: self-hosted, zero third-party, zero CLS ─────────────────── -->
+    <!-- @font-face rules are in index.css — woff2 files preloaded above -->
   </head>
   <body class="bg-[#fffdf8] text-[#151313]">
     <div id="root">

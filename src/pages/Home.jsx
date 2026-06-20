@@ -700,6 +700,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               <img
                   src="/jelly.avif"
                   alt="Jellycut Studios mascot — bold, creative, AI-powered"
+                  width="460"
+                  height="460"
                   loading="lazy"
                   className="max-h-[380px] md:max-h-[460px] object-contain opacity-95 transition-transform duration-700 group-hover:scale-105"
                 />

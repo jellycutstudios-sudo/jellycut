@@ -11,7 +11,7 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
         {/* Footer link row */}
         <footer className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <img src="/logo.svg" alt="Jellycut Studios" className="h-5 w-auto object-contain" />
+            <img src="/logo.svg" alt="Jellycut Studios" width="120" height="20" className="h-5 w-auto object-contain" />
           </div>
           <div className="text-muted text-xs font-light text-center font-sans tracking-wide">
             Creative AI for brands that want to grow.
@@ -67,7 +67,7 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
       {/* Footer link row */}
       <footer className={`relative z-10 max-w-7xl mx-auto ${footerMarginClass} border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6`}>
         <div className="flex items-center gap-3">
-          <img src="/logo.svg" alt="Jellycut Studios" className="h-5 w-auto object-contain brightness-0 invert" />
+          <img src="/logo.svg" alt="Jellycut Studios" width="120" height="20" className="h-5 w-auto object-contain brightness-0 invert" />
         </div>
         <div className="text-white/60 text-xs font-light text-center font-sans tracking-wide">
           Creative AI for brands that want to grow.
