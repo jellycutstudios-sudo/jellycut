@@ -1,15 +1,231 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Video, Palette, Code, Globe, ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink, ChevronDown, X } from 'lucide-react';
+import { ArrowRight, CheckCircle, FileText, Zap, Star, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from './Works';
 
 const ease = [0.16, 1, 0.3, 1];
+
+// ─── Custom Animated Icons (Framer Motion Path Drawings) ───────────────────
+function AnimatedVideoIcon() {
+  return (
+    <motion.svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.rect
+        width="14"
+        height="12"
+        x="2"
+        y="6"
+        rx="2"
+        ry="2"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.5, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.path
+        d="m22 8-6 4 6 4V8Z"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+function AnimatedPaletteIcon() {
+  return (
+    <motion.svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.path
+        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.63-.77 1.63-1.7 0-.43-.16-.83-.41-1.16a.81.81 0 0 1-.16-.5c0-.44.36-.8 1.8-.8h2.14c4.42 0 8-3.58 8-8 0-5.5-4.5-10-10-10Z"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.6, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.circle
+        cx="13.5"
+        cy="6.5"
+        r=".5"
+        fill="currentColor"
+        variants={{
+          normal: { scale: 1, opacity: 1 },
+          hover: {
+            scale: [0, 1.2, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.2 }
+          }
+        }}
+      />
+      <motion.circle
+        cx="17.5"
+        cy="10.5"
+        r=".5"
+        fill="currentColor"
+        variants={{
+          normal: { scale: 1, opacity: 1 },
+          hover: {
+            scale: [0, 1.2, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.3 }
+          }
+        }}
+      />
+      <motion.circle
+        cx="8.5"
+        cy="7.5"
+        r=".5"
+        fill="currentColor"
+        variants={{
+          normal: { scale: 1, opacity: 1 },
+          hover: {
+            scale: [0, 1.2, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.4 }
+          }
+        }}
+      />
+      <motion.circle
+        cx="6.5"
+        cy="12.5"
+        r=".5"
+        fill="currentColor"
+        variants={{
+          normal: { scale: 1, opacity: 1 },
+          hover: {
+            scale: [0, 1.2, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.5 }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+function AnimatedCodeIcon() {
+  return (
+    <motion.svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.polyline
+        points="16 18 22 12 16 6"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.4, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.polyline
+        points="8 6 2 12 8 18"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
+
+function AnimatedGlobeIcon() {
+  return (
+    <motion.svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <motion.circle
+        cx="12"
+        cy="12"
+        r="10"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.5, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.path
+        d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
+          }
+        }}
+      />
+      <motion.path
+        d="M2 12h20"
+        variants={{
+          normal: { pathLength: 1, opacity: 1 },
+          hover: {
+            pathLength: [0, 1],
+            opacity: [0, 1],
+            transition: { duration: 0.3, delay: 0.4, ease: 'easeInOut' }
+          }
+        }}
+      />
+    </motion.svg>
+  );
+}
 
 // ─── Services data ─────────────────────────────────────────────────────────
 const services = [
   {
     id: '01',
-    icon: Video,
+    icon: AnimatedVideoIcon,
     title: 'AI Video Ads',
     description:
       'Scroll-stopping ad creative for Meta, TikTok, YouTube, and LinkedIn — produced with AI and refined by real creative direction.',
@@ -18,7 +234,7 @@ const services = [
   },
   {
     id: '02',
-    icon: Palette,
+    icon: AnimatedPaletteIcon,
     title: 'Brand Identity',
     description:
       'Logo, colour system, typography, and brand guidelines built for a digital-first world. Built to last and scale.',
@@ -27,7 +243,7 @@ const services = [
   },
   {
     id: '03',
-    icon: Code,
+    icon: AnimatedCodeIcon,
     title: 'Vibe-Coded Apps',
     description:
       'Fast, beautiful web apps and interactive experiences — built with AI-assisted coding that ships in weeks, not months.',
@@ -36,7 +252,7 @@ const services = [
   },
   {
     id: '04',
-    icon: Globe,
+    icon: AnimatedGlobeIcon,
     title: 'Website Design',
     description:
       'Cinematic, conversion-optimised websites that make your first impression your best impression. Always.',
@@ -497,16 +713,22 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               return (
                 <motion.div
                   key={svc.id}
-                  variants={getCardItem()}
-                  whileHover={{ y: -6, transition: { duration: 0.3, ease } }}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
                   whileTap={{ scale: 0.98 }}
+                  variants={{
+                    hidden: getCardItem().hidden,
+                    visible: getCardItem().visible,
+                    hover: { y: -6, transition: { duration: 0.3, ease } }
+                  }}
                   onClick={() => setRoute(svc.path)}
                   className="bg-white rounded-2xl p-6 md:p-8 border border-line flex flex-col justify-between min-h-[220px] md:min-h-[260px] shadow-sm hover:shadow-md transition-shadow duration-300 group cursor-pointer"
                 >
                   <div>
                     <div className="flex justify-between items-start mb-6">
-                      <div className="bg-cream p-3 rounded-xl text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 transition-colors duration-300">
-                        <Icon className="w-5 h-5" />
+                      <div className="bg-cream p-3 rounded-xl text-ink/70 group-hover:text-jelly-deep group-hover:bg-jelly/10 transition-colors duration-300 flex items-center justify-center">
+                        <Icon />
                       </div>
                       <span className="text-xs font-mono font-bold text-muted/60">{svc.id}</span>
                     </div>
