@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, Sparkles, ChevronDown, ArrowRight } from 'lucide-react';
 
@@ -6,24 +6,10 @@ import { X, CheckCircle, Sparkles, ChevronDown, ArrowRight } from 'lucide-react'
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-// Lazy load pages for fast initial loading
-const Home = lazy(() => import('./pages/Home'));
-const Works = lazy(() => import('./pages/Works'));
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-
-function PageLoader() {
-  return (
-    <div className="w-full min-h-[60vh] flex items-center justify-center bg-paper">
-      <div className="flex flex-col items-center gap-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-jelly animate-ping" />
-        <span className="text-[10px] font-mono uppercase tracking-widest text-muted">
-          Loading Page...
-        </span>
-      </div>
-    </div>
-  );
-}
+import Home from './pages/Home';
+import Works from './pages/Works';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 
 const ease = [0.16, 1, 0.3, 1];
@@ -38,7 +24,12 @@ function App() {
     service: '',
     brief: '',
   });
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
 
   // 1. Mobile viewport detection
   useEffect(() => {
@@ -166,9 +157,7 @@ function App() {
             transition={{ duration: 0.35, ease }}
             className="w-full"
           >
-            <Suspense fallback={<PageLoader />}>
-              {renderActivePage()}
-            </Suspense>
+            {renderActivePage()}
           </motion.div>
         </AnimatePresence>
       </main>

@@ -4,5 +4,34 @@
       "source": "/((?!assets/|fav.png|logo.svg|hero.mp4|hero_poster.avif|jelly.avif|filbey_home.jpeg|filbey_detail.png|rupos_checkout.jpeg|rupos_tablet.jpeg|rupos_lifestyle.jpeg|robots.txt|sitemap.xml|.*\\..*$).*)",
       "destination": "/index.html"
     }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).(webp|avif|mp4|svg|png|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, must-revalidate"
+        }
+      ]
+    }
   ]
 }
