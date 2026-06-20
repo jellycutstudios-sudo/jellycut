@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -460,6 +460,17 @@ const steps = [
 ];
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
+  const [videoSrc, setVideoSrc] = useState(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    // Load video deferred to ensure it doesn't block initial page load/render
+    const timer = setTimeout(() => {
+      setVideoSrc('/hero.mp4');
+    }, 1200); // 1.2s delay is sweet spot for mobile paint stability
+    return () => clearTimeout(timer);
+  }, []);
+
   const prefersReducedMotion = useReducedMotion();
   const shouldReduce = prefersReducedMotion || isMobile;
 
@@ -505,22 +516,25 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           initial="hidden"
           animate="visible"
         >
-          {!isMobile ? (
+          {/* Poster image renders instantly */}
+          <img
+            src="/hero_poster.avif"
+            alt="Jellycut Studios Hero"
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+
+          {/* Video loads asynchronously and fades in once ready */}
+          {videoSrc && (
             <video
-              src="/hero.mp4"
-              poster="/hero_poster.avif"
+              src={videoSrc}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover z-0"
-            />
-          ) : (
-            <img
-              src="/hero_poster.avif"
-              alt="Jellycut Studios Hero"
-              className="absolute inset-0 w-full h-full object-cover z-0"
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
+              style={{ opacity: videoLoaded ? 1 : 0 }}
+              onLoadedData={() => setVideoLoaded(true)}
             />
           )}
         </motion.div>
