@@ -3,6 +3,7 @@ import { Globe, Video, Code } from 'lucide-react';
 export const projects = [
   {
     id: 'p11',
+    slug: 'filbey-premium-website',
     title: 'Filbey Premium Website',
     category: 'Websites',
     icon: Globe,
@@ -26,6 +27,7 @@ export const projects = [
   },
   {
     id: 'p12',
+    slug: 'dr-pepper-concept-ad',
     title: 'Dr Pepper Concept Ad',
     category: 'AI Video Ads',
     icon: Video,
@@ -45,6 +47,7 @@ export const projects = [
   },
   {
     id: 'p13',
+    slug: 'elf-skin-concept-ad',
     title: 'e.l.f. Skin Concept Ad',
     category: 'AI Video Ads',
     icon: Video,
@@ -64,6 +67,7 @@ export const projects = [
   },
   {
     id: 'p9',
+    slug: 'feesync-explainer-campaign',
     title: 'FeeSync Explainer Campaign',
     category: 'AI Video Ads',
     icon: Video,
@@ -83,6 +87,7 @@ export const projects = [
   },
   {
     id: 'p10',
+    slug: 'froot-concept-commercial',
     title: 'Froot Concept Commercial',
     category: 'AI Video Ads',
     icon: Video,
@@ -102,6 +107,7 @@ export const projects = [
   },
   {
     id: 'p7',
+    slug: 'starbucks-summer-ai-ad',
     title: 'Starbucks Summer AI Ad',
     category: 'AI Video Ads',
     icon: Video,
@@ -116,6 +122,7 @@ export const projects = [
   },
   {
     id: 'p8',
+    slug: 'rupos-billing-software',
     title: 'RuPOS Billing Software',
     category: 'Vibe-Coded Apps',
     icon: Code,

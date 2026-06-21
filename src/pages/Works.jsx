@@ -12,6 +12,12 @@ export default function Works({ setIsModalOpen, currentRoute }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [activeProject, setActiveProject] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const handleCloseProject = () => {
+    setActiveProject(null);
+    window.history.pushState(null, '', '/works');
+    document.title = 'Portfolio & Case Studies — AI Video Ads & Brand Design | Jellycut Studios';
+  };
   const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
 
   // Parse query parameter to open project modal directly
@@ -124,6 +130,8 @@ export default function Works({ setIsModalOpen, currentRoute }) {
                   onClick={() => {
                     setActiveProject(project);
                     setActiveImageIndex(0);
+                    window.history.pushState(null, '', '/works/' + project.slug);
+                    document.title = `${project.title} Case Study — AI Video Ads & Brand Design | Jellycut Studios`;
                   }}
                   className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
                 >
@@ -206,10 +214,10 @@ export default function Works({ setIsModalOpen, currentRoute }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setActiveProject(null)}
+            onClick={handleCloseProject}
           >
             <motion.div
-              className="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-line relative max-h-[85vh] flex flex-col cursor-default"
+              className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-line relative max-h-[85vh] flex flex-col cursor-default"
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
@@ -218,7 +226,7 @@ export default function Works({ setIsModalOpen, currentRoute }) {
             >
               {/* Close Button */}
               <button
-                onClick={() => setActiveProject(null)}
+                onClick={handleCloseProject}
                 className="absolute top-5 right-5 bg-white/80 hover:bg-white text-ink shadow-md backdrop-blur-md p-2 rounded-full hover:scale-105 transition-all z-20 cursor-pointer"
               >
                 <X className="w-5 h-5" />
@@ -376,7 +384,7 @@ export default function Works({ setIsModalOpen, currentRoute }) {
                       )}
                       <button
                         onClick={() => {
-                          setActiveProject(null);
+                          handleCloseProject();
                           setIsModalOpen(true);
                         }}
                         className="bg-ink hover:bg-ink/90 text-white rounded-full px-5 py-2.5 text-xs font-bold tracking-wide transition-all shadow-md cursor-pointer w-full sm:w-auto flex items-center justify-center gap-1.5"

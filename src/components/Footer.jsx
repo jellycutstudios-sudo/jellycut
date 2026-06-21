@@ -29,7 +29,7 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
       {/* Background image */}
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="/footer_bg.webp"
+          src="/hero_poster.webp"
           alt="Jellycut Studios closing background"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"

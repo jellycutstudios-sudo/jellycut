@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import Works from './pages/Works';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ProjectDetail from './pages/ProjectDetail';
+import { projects } from './data/projects';
 
 
 const ease = [0.16, 1, 0.3, 1];
@@ -64,6 +66,13 @@ function App() {
     if (mainRoute === '/works') {
       title = 'Portfolio & Case Studies — AI Video Ads & Brand Design | Jellycut Studios';
       description = 'Browse Jellycut Studios\' portfolio — cinematic AI video ads, brand identities, vibe-coded apps, and website designs for global clients. See real results.';
+    } else if (mainRoute.startsWith('/works/')) {
+      const slug = mainRoute.substring(7);
+      const project = projects.find(p => p.slug === slug);
+      if (project) {
+        title = `${project.title} Case Study — AI Video Ads & Brand Design | Jellycut Studios`;
+        description = project.description;
+      }
     } else if (mainRoute === '/about') {
       title = 'About Jellycut Studios — AI Creative Studio from Kerala, India';
       description = 'Jellycut Studios combines generative AI speed with human creative direction. Built in Kerala, India to deliver agency-quality creative for US, UK & global brands at startup-friendly prices.';
@@ -114,9 +123,23 @@ function App() {
 
   const renderActivePage = () => {
     const mainRoute = route.split('?')[0];
+    if (mainRoute === '/works') {
+      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+    } else if (mainRoute.startsWith('/works/')) {
+      const slug = mainRoute.substring(7);
+      const project = projects.find(p => p.slug === slug);
+      if (project) {
+        return (
+          <ProjectDetail 
+            project={project} 
+            setRoute={handleNavigate} 
+            setIsModalOpen={setIsModalOpen} 
+          />
+        );
+      }
+      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+    }
     switch (mainRoute) {
-      case '/works':
-        return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
       case '/about':
         return <About />;
       case '/contact':

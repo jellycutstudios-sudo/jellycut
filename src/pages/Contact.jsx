@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Clock, MapPin, ChevronDown, CheckCircle, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
+import { 
+  Mail, Clock, MapPin, ChevronDown, CheckCircle, Sparkles, ArrowRight, ArrowLeft, 
+  MessageSquare, Video, Globe, Code, Palette 
+} from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -23,43 +26,167 @@ const faqs = [
   }
 ];
 
+const serviceOptions = [
+  {
+    id: 'ai-video-ad',
+    label: 'AI Video Ad',
+    desc: '⚡ Shipped in 24-48h',
+    icon: Video,
+    color: 'border-red-500/20 hover:border-red-500/40 text-red-600 bg-red-50/20'
+  },
+  {
+    id: 'website',
+    label: 'Website Design',
+    desc: '🌐 Sub-second speeds',
+    icon: Globe,
+    color: 'border-blue-500/20 hover:border-blue-500/40 text-blue-600 bg-blue-50/20'
+  },
+  {
+    id: 'vibe-coded-app',
+    label: 'Vibe-Coded App',
+    desc: '📱 Custom React builds',
+    icon: Code,
+    color: 'border-emerald-500/20 hover:border-emerald-500/40 text-emerald-600 bg-emerald-50/20'
+  },
+  {
+    id: 'brand-identity',
+    label: 'Brand Identity',
+    desc: '🎨 Bold brand guidelines',
+    icon: Palette,
+    color: 'border-amber-500/20 hover:border-amber-500/40 text-amber-600 bg-amber-50/20'
+  },
+  {
+    id: 'not-sure',
+    label: 'Other / Let\'s Talk',
+    desc: '💬 Custom consulting',
+    icon: MessageSquare,
+    color: 'border-purple-500/20 hover:border-purple-500/40 text-purple-600 bg-purple-50/20'
+  }
+];
+
+const budgetOptions = [
+  { val: 'under-2k', label: '< $2,000' },
+  { val: '2k-5k', label: '$2,000 – $5,000' },
+  { val: '5k-10k', label: '$5,000 – $10,000' },
+  { val: '10k-plus', label: '$10,000+' }
+];
+
+const timelineOptions = [
+  { val: 'urgent', label: '⚡ 24-48 Hours (AI Rush)' },
+  { val: '1-week', label: '📅 1 Week' },
+  { val: '2-3-weeks', label: '📅 2-3 Weeks' },
+  { val: 'flexible', label: '🗓️ Flexible' }
+];
+
+const aiBriefTemplates = {
+  'ai-video-ad': `Campaign Goal: Launch a new product campaign
+Target Audience: Millennial beverage consumers
+Key Message: The ultimate sugar-free energy boost
+Visual Vibe: High-fidelity slow motion, bright summer colors, energetic liquid splashes`,
+  'website': `Company Type: Premium e-commerce brand
+Core Pages: Home, Product Grid, Checkout, About
+Key Integrations: Stripe payment processing, headless Shopify
+Visual Vibe: Minimalist dark mode, smooth transitions, clean typography`,
+  'vibe-coded-app': `App Type: Mobile-first branch manager / POS dashboard
+Key Features: Offline billing support, staff PIN cashout, WhatsApp reporting
+Platform: Web app (React + Tailwind)
+Visual Vibe: Compact, dashboard-style, high readability`,
+  'brand-identity': `Brand Name: [Brand Name]
+Industry: Sustainable fashion tech
+Deliverables: Logo package, typography system, brand guideline deck
+Visual Vibe: Clean organic colors, modern sans-serif, premium minimalist`,
+  'not-sure': `Brief Description: [Briefly describe your idea]
+Our Target Audience is: [Audience]
+Reference Styles: [Style links or adjectives]`
+};
+
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 50 : -50,
+    opacity: 0
+  }),
+  center: {
+    x: 0,
+    opacity: 1
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 50 : -50,
+    opacity: 0
+  })
+};
+
 export default function Contact() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [step, setStep] = useState(1);
+  const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     service: '',
     brief: '',
+    budget: '',
+    timeline: '',
   });
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
+  const handleNextStep = () => {
+    if (step === 1 && !formData.service) return;
+    if (step === 2 && (!formData.name || !formData.email || !validateEmail(formData.email))) return;
+    if (step === 3 && !formData.brief) return;
+
+    setDirection(1);
+    setStep((prev) => prev + 1);
+  };
+
+  const handlePrevStep = () => {
+    setDirection(-1);
+    setStep((prev) => prev - 1);
+  };
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const handleAiBriefAssist = () => {
+    const template = aiBriefTemplates[formData.service] || aiBriefTemplates['not-sure'];
+    setFormData(prev => ({
+      ...prev,
+      brief: template
+    }));
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (formData.name && formData.email) {
-      const serviceLabels = {
-        'ai-video-ad': 'AI Video Ad',
-        'brand-identity': 'Brand Identity',
-        'vibe-coded-app': 'Vibe-Coded App',
-        'website': 'Website Design',
-        'not-sure': 'Not sure yet',
-      };
-      const serviceLabel = serviceLabels[formData.service] || formData.service || 'Not specified';
-      
-      const whatsappText = `Hello Jellycut Studios,\n\nI would like to discuss a project:\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Service:* ${serviceLabel}\n*Brief:* ${formData.brief}`;
+    if (formData.name && formData.email && formData.service && formData.brief) {
+      const selectedService = serviceOptions.find(s => s.id === formData.service)?.label || formData.service;
+      const selectedBudget = budgetOptions.find(b => b.val === formData.budget)?.label || 'Not specified';
+      const selectedTimeline = timelineOptions.find(t => t.val === formData.timeline)?.label || 'Not specified';
+
+      const whatsappText = `Hello Jellycut Studios,\n\nI would like to discuss a project:\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Service:* ${selectedService}\n*Timeline:* ${selectedTimeline}\n*Budget:* ${selectedBudget}\n\n*Brief:* \n${formData.brief}`;
       const whatsappUrl = `https://wa.me/919400112833?text=${encodeURIComponent(whatsappText)}`;
       
-      // Open WhatsApp in a new tab
       window.open(whatsappUrl, '_blank');
 
       setFormSubmitted(true);
       setTimeout(() => {
         setFormSubmitted(false);
-        setFormData({ name: '', email: '', service: '', brief: '' });
+        setStep(1);
+        setFormData({ name: '', email: '', service: '', brief: '', budget: '', timeline: '' });
       }, 5000);
+    }
+  };
+
+  const getStepTitle = () => {
+    switch (step) {
+      case 1: return 'Choose Service';
+      case 2: return 'Your Info';
+      case 3: return 'Project Vision';
+      case 4: return 'Budget & Timeline';
+      default: return '';
     }
   };
 
@@ -91,7 +218,7 @@ export default function Contact() {
               <h3 className="font-serif text-2xl text-ink font-normal">Coordinates</h3>
               <div className="space-y-4">
                 <a 
-                  href="mailto:hello@jellycut.studio" 
+                  href="mailto:jellycutstudios@gmail.com" 
                   className="flex items-center gap-3 p-3 bg-white border border-line rounded-2xl hover:border-jelly transition-colors group cursor-pointer"
                 >
                   <div className="bg-cream text-jelly-deep p-2 rounded-xl group-hover:bg-jelly/10">
@@ -99,7 +226,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[9px] font-semibold uppercase tracking-wider text-muted font-mono">Email Address</div>
-                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">hello@jellycut.studio</div>
+                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">jellycutstudios@gmail.com</div>
                   </div>
                 </a>
 
@@ -190,111 +317,289 @@ export default function Contact() {
 
           </div>
 
-          {/* Right Column: Interactive Intake Widget */}
+          {/* Right Column: Premium Interactive Intake Wizard */}
           <div className="lg:col-span-7">
-            <div className="bg-white border border-line rounded-[32px] p-6 md:p-10 shadow-lg relative overflow-hidden">
+            <div className="bg-white border border-line rounded-[32px] p-6 md:p-10 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-jelly/5 blur-3xl pointer-events-none" />
 
               {!formSubmitted ? (
                 <>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Sparkles className="w-5 h-5 text-jelly-deep" />
-                    <span className="text-xs font-mono uppercase tracking-wider text-jelly-deep font-semibold">
-                      Jellycut Portal // Online
-                    </span>
+                  {/* Progress Header */}
+                  <div className="flex flex-col gap-3 mb-8">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4.5 h-4.5 text-jelly-deep" />
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-jelly-deep font-semibold">
+                          Jellycut Portal // Step {step} of 4
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono font-medium text-muted uppercase">
+                        {getStepTitle()}
+                      </span>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="w-full h-1.5 bg-cream border border-line/35 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-jelly-mid rounded-full"
+                        initial={{ width: '25%' }}
+                        animate={{ width: `${(step / 4) * 100}%` }}
+                        transition={{ duration: 0.3, ease }}
+                      />
+                    </div>
                   </div>
 
-                  <h3 className="font-serif text-3xl text-ink font-normal mb-2 leading-snug">
-                    Tell us about your project
-                  </h3>
-                  <p className="text-muted text-xs md:text-sm font-light leading-relaxed mb-8">
-                    Compile your brief in 15 minutes. We will review and provide a structured project statement and proposal within 24 hours.
-                  </p>
-
                   <form onSubmit={handleFormSubmit} className="space-y-6">
-                    {/* Name */}
-                    <div>
-                      <label className="block text-[10px] font-semibold text-ink uppercase tracking-wider mb-2 font-sans">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Alex Rivera"
-                        className="w-full bg-cream border border-line rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-jelly transition-colors text-ink placeholder:text-muted/50"
-                      />
-                    </div>
+                    <AnimatePresence mode="wait" custom={direction}>
+                      <motion.div
+                        key={step}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.25, ease }}
+                        className="min-h-[290px] flex flex-col justify-between"
+                      >
+                        
+                        {/* STEP 1: SERVICE SELECTION */}
+                        {step === 1 && (
+                          <div className="space-y-4">
+                            <div>
+                              <h3 className="font-serif text-2xl text-ink font-normal leading-snug">
+                                What are we creating?
+                              </h3>
+                              <p className="text-muted text-xs font-light mt-1">
+                                Select the service that best aligns with your goals to customize your builder.
+                              </p>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                              {serviceOptions.map((opt) => {
+                                const Icon = opt.icon;
+                                const isSelected = formData.service === opt.id;
+                                return (
+                                  <button
+                                    type="button"
+                                    key={opt.id}
+                                    onClick={() => setFormData({ ...formData, service: opt.id })}
+                                    className={`flex items-center gap-3.5 p-4 rounded-2xl border text-left cursor-pointer transition-all duration-300 ${
+                                      isSelected 
+                                        ? 'bg-ink border-ink text-white shadow-md' 
+                                        : 'bg-white border-line hover:border-jelly-mid/40 hover:bg-cream/20'
+                                    }`}
+                                  >
+                                    <div className={`p-2.5 rounded-xl border flex-shrink-0 ${
+                                      isSelected 
+                                        ? 'bg-white/10 border-white/10 text-jelly' 
+                                        : opt.color
+                                    }`}>
+                                      <Icon className="w-4.5 h-4.5" />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <div className="text-xs font-bold leading-tight truncate">{opt.label}</div>
+                                      <div className={`text-[10px] mt-0.5 ${isSelected ? 'text-white/60' : 'text-muted'}`}>{opt.desc}</div>
+                                    </div>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
 
-                    {/* Email */}
-                    <div>
-                      <label className="block text-[10px] font-semibold text-ink uppercase tracking-wider mb-2 font-sans">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="hello@yourbrand.com"
-                        className="w-full bg-cream border border-line rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-jelly transition-colors text-ink placeholder:text-muted/50"
-                      />
-                    </div>
+                        {/* STEP 2: IDENTITY / INFO */}
+                        {step === 2 && (
+                          <div className="space-y-4">
+                            <div>
+                              <h3 className="font-serif text-2xl text-ink font-normal leading-snug">
+                                How can we reach you?
+                              </h3>
+                              <p className="text-muted text-xs font-light mt-1">
+                                Tell us who you are so we can prepare your project space.
+                              </p>
+                            </div>
+                            <div className="space-y-4 pt-2">
+                              <div>
+                                <label className="block text-[9px] font-semibold text-ink uppercase tracking-wider mb-2 font-mono">
+                                  Your Name
+                                </label>
+                                <input
+                                  type="text"
+                                  required
+                                  value={formData.name}
+                                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                  placeholder="e.g. Alex Rivera"
+                                  className="w-full bg-cream border border-line rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-jelly transition-colors text-ink placeholder:text-muted/50 font-sans"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[9px] font-semibold text-ink uppercase tracking-wider mb-2 font-mono">
+                                  Email Address
+                                </label>
+                                <input
+                                  type="email"
+                                  required
+                                  value={formData.email}
+                                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                  placeholder="hello@yourbrand.com"
+                                  className={`w-full bg-cream border rounded-xl px-4 py-3.5 text-sm focus:outline-none transition-colors text-ink placeholder:text-muted/50 font-sans ${
+                                    formData.email && !validateEmail(formData.email) 
+                                      ? 'border-red-400 focus:border-red-500' 
+                                      : 'border-line focus:border-jelly'
+                                  }`}
+                                />
+                                {formData.email && !validateEmail(formData.email) && (
+                                  <span className="text-[10px] text-red-500 font-mono mt-1 block">Please enter a valid email address</span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        )}
 
-                    {/* Service selection pills */}
-                    <div>
-                      <label className="block text-[10px] font-semibold text-ink uppercase tracking-wider mb-2 font-sans">
-                        What Service Do You Need?
-                      </label>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          { val: 'ai-video-ad', label: 'AI Video Ad' },
-                          { val: 'brand-identity', label: 'Brand Identity' },
-                          { val: 'vibe-coded-app', label: 'Vibe-Coded App' },
-                          { val: 'website', label: 'Website Design' },
-                          { val: 'not-sure', label: 'Not sure yet' },
-                        ].map((item) => (
-                          <button
-                            type="button"
-                            key={item.val}
-                            onClick={() => setFormData({ ...formData, service: item.val })}
-                            className={`px-4 py-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                              formData.service === item.val
-                                ? 'bg-ink border-ink text-white shadow-sm'
-                                : 'bg-cream border-line text-muted hover:border-jelly hover:text-ink'
-                            }`}
-                          >
-                            {item.label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                        {/* STEP 3: BRIEF / THE VISION */}
+                        {step === 3 && (
+                          <div className="space-y-4">
+                            <div className="flex justify-between items-start gap-4">
+                              <div>
+                                <h3 className="font-serif text-2xl text-ink font-normal leading-snug">
+                                  Tell us about the vision
+                                </h3>
+                                <p className="text-muted text-xs font-light mt-1">
+                                  Detail your project goals, references, or specific deliverables.
+                                </p>
+                              </div>
+                              
+                              {/* AI Assist Button */}
+                              <button
+                                type="button"
+                                onClick={handleAiBriefAssist}
+                                className="flex items-center gap-1.5 bg-jelly text-ink hover:bg-jelly/90 text-[10px] font-bold px-3 py-2 rounded-xl transition-all cursor-pointer shadow-sm border border-jelly-deep/15 flex-shrink-0 animate-pulse hover:animate-none"
+                              >
+                                <Sparkles className="w-3.5 h-3.5" />
+                                <span>AI Assist</span>
+                              </button>
+                            </div>
 
-                    {/* Brief description */}
-                    <div>
-                      <label className="block text-[10px] font-semibold text-ink uppercase tracking-wider mb-2 font-sans">
-                        Brief &amp; Project Goals
-                      </label>
-                      <textarea
-                        rows="4"
-                        value={formData.brief}
-                        onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
-                        placeholder="Detail your goals, budget range, timeline guidelines, or references. The more context you provide, the faster we can initiate..."
-                        className="w-full bg-cream border border-line rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-jelly transition-colors text-ink placeholder:text-muted/50 resize-none h-32"
-                      />
-                    </div>
+                            <div className="pt-2">
+                              <textarea
+                                required
+                                rows="5"
+                                value={formData.brief}
+                                onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
+                                placeholder="Detail your project guidelines... Use the AI Assist button to populate a custom industry brief template you can fill in!"
+                                className="w-full bg-cream border border-line rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-jelly transition-colors text-ink placeholder:text-muted/50 resize-none h-40 font-mono leading-relaxed"
+                              />
+                            </div>
+                          </div>
+                        )}
 
-                    <button
-                      type="submit"
-                      className="w-full flex items-center justify-center gap-2 bg-ink hover:bg-ink/90 text-white font-semibold py-4 rounded-xl text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer"
-                    >
-                      <span>Submit &amp; Open WhatsApp</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <p className="text-[10px] text-muted text-center mt-2 font-mono">
-                      Note: Submitting will open WhatsApp to send your project details.
-                    </p>
+                        {/* STEP 4: TIMELINE & BUDGET */}
+                        {step === 4 && (
+                          <div className="space-y-4">
+                            <div>
+                              <h3 className="font-serif text-2xl text-ink font-normal leading-snug">
+                                Timeline &amp; Budget
+                              </h3>
+                              <p className="text-muted text-xs font-light mt-1">
+                                Help us gauge velocity and resource allocation.
+                              </p>
+                            </div>
+                            
+                            <div className="space-y-5 pt-2">
+                              {/* Budget selector pills */}
+                              <div>
+                                <label className="block text-[9px] font-semibold text-ink uppercase tracking-wider mb-2.5 font-mono">
+                                  Estimated Budget
+                                </label>
+                                <div className="grid grid-cols-2 gap-2">
+                                  {budgetOptions.map((opt) => {
+                                    const isSel = formData.budget === opt.val;
+                                    return (
+                                      <button
+                                        type="button"
+                                        key={opt.val}
+                                        onClick={() => setFormData({ ...formData, budget: opt.val })}
+                                        className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                                          isSel
+                                            ? 'bg-ink border-ink text-white shadow-sm'
+                                            : 'bg-cream border-line text-muted hover:border-jelly hover:text-ink'
+                                        }`}
+                                      >
+                                        {opt.label}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+
+                              {/* Timeline selector pills */}
+                              <div>
+                                <label className="block text-[9px] font-semibold text-ink uppercase tracking-wider mb-2.5 font-mono">
+                                  Desired Delivery
+                                </label>
+                                <div className="grid grid-cols-2 gap-2">
+                                  {timelineOptions.map((opt) => {
+                                    const isSel = formData.timeline === opt.val;
+                                    return (
+                                      <button
+                                        type="button"
+                                        key={opt.val}
+                                        onClick={() => setFormData({ ...formData, timeline: opt.val })}
+                                        className={`py-2 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                                          isSel
+                                            ? 'bg-ink border-ink text-white shadow-sm'
+                                            : 'bg-cream border-line text-muted hover:border-jelly hover:text-ink'
+                                        }`}
+                                      >
+                                        {opt.label}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Step Navigation Button Row */}
+                    <div className="flex gap-4 pt-6 border-t border-line/65">
+                      {step > 1 && (
+                        <button
+                          type="button"
+                          onClick={handlePrevStep}
+                          className="flex items-center justify-center gap-1.5 border border-line bg-white hover:bg-cream text-ink font-semibold py-3 px-5 rounded-xl text-xs transition-all cursor-pointer active:scale-95"
+                        >
+                          <ArrowLeft className="w-3.5 h-3.5" />
+                          <span>Back</span>
+                        </button>
+                      )}
+
+                      {step < 4 ? (
+                        <button
+                          type="button"
+                          onClick={handleNextStep}
+                          disabled={
+                            (step === 1 && !formData.service) ||
+                            (step === 2 && (!formData.name || !formData.email || !validateEmail(formData.email))) ||
+                            (step === 3 && !formData.brief)
+                          }
+                          className="flex-grow flex items-center justify-center gap-1.5 bg-ink hover:bg-ink/90 text-white font-semibold py-3 px-5 rounded-xl text-xs transition-all cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
+                        >
+                          <span>Continue</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className="flex-grow flex items-center justify-center gap-2 bg-jelly text-ink hover:bg-jelly/90 font-bold py-3.5 px-5 rounded-xl text-xs transition-all cursor-pointer active:scale-95 shadow-md shadow-jelly/10"
+                        >
+                          <span>Compile &amp; Open WhatsApp</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
                   </form>
                 </>
               ) : (

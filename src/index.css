@@ -188,4 +188,33 @@ div:focus {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* ─── SVG Drawing Animation on Card Hover ─── */
+.group:hover svg :is(path, circle, line, rect, polyline, polygon) {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawIconPath 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
 
+@keyframes drawIconPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* ─── Custom Scrollbars ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}

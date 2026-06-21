@@ -10,6 +10,7 @@ const Path = (props) => (
     strokeWidth="2.2"
     stroke="currentColor"
     strokeLinecap="round"
+    initial="closed"
     {...props}
   />
 );
@@ -265,7 +266,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, type: 'spring', stiffness: 90 }}
                 className="relative p-3.5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden group cursor-pointer"
-                onClick={() => handleNavClick('/works?project=p7')}
+                onClick={() => handleNavClick('/works/starbucks-summer-ai-ad')}
               >
                 {/* Accent glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-jelly/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -321,7 +322,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
               >
                 <div className="flex flex-col gap-1.5 text-left">
                   <span className="text-white/20">Connect</span>
-                  <a href="mailto:hello@jellycut.com" className="hover:text-jelly transition-colors normal-case text-white/60">hello@jellycut.com</a>
+                  <a href="mailto:jellycutstudios@gmail.com" className="hover:text-jelly transition-colors normal-case text-white/60">jellycutstudios@gmail.com</a>
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-jelly transition-colors normal-case text-white/60">@jellycutstudios</a>
                 </div>
                 <div className="flex flex-col gap-1.5 items-end text-right">

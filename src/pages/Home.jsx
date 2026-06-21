@@ -780,7 +780,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 <motion.div
                   key={project.id}
                   variants={getCardItem()}
-                  onClick={() => setRoute(`/works?project=${project.id}`)}
+                  onClick={() => setRoute(`/works/${project.slug}`)}
                   className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
                 >
                   {/* Top image/pattern container */}
