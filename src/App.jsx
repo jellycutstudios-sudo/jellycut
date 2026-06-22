@@ -107,7 +107,7 @@ function App() {
       const serviceLabel = serviceLabels[formData.service] || formData.service || 'Not specified';
       
       const whatsappText = `Hello Jellycut Studios,\n\nI would like to discuss a project:\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Service:* ${serviceLabel}\n*Brief:* ${formData.brief}`;
-      const whatsappUrl = `https://wa.me/919400112833?text=${encodeURIComponent(whatsappText)}`;
+      const whatsappUrl = `https://wa.me/919400025062?text=${encodeURIComponent(whatsappText)}`;
       
       // Open WhatsApp in a new tab
       window.open(whatsappUrl, '_blank');
