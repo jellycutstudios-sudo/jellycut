@@ -2,6 +2,46 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p15',
+    slug: 'rupos-b2b-storytelling',
+    title: 'RuPOS B2B UGC Ad',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A B2B UGC campaign for RuPOS POS software designed to build trust with Keralan retail shop owners through relatable local storytelling.',
+    longDescription: 'Selling B2B software to local retail owners requires building real trust rather than relying on standard corporate pitches. For RuPOS, we produced a B2B UGC-style (User-Generated Content) video campaign addressing the exact everyday struggles of shop owners, such as staff cash theft and internet drops. By leveraging native social media pacing, Malayalam voiceover direction, and dynamic captions, the ad highlights RuPOS\'s offline-syncing capability and automatic WhatsApp daily sales reports in a way that feels organic and authentic to social feeds.',
+    timeline: '48 Hours',
+    deliverables: [
+      '9:16 Vertical Video Ad (Meta & Instagram Reels)',
+      'B2B UGC Narrative & Storyboard',
+      'Dynamic On-Screen Typography & Captions',
+      'Malayalam Sound Design & Hook Optimization'
+    ],
+    results: 'Shipped a highly relatable B2B SaaS advertisement in 48 hours, converting complex tech features into authentic, scroll-stopping social proof.',
+    image: 'https://img.youtube.com/vi/Zcsob0enXXs/hqdefault.jpg',
+    youtubeId: 'Zcsob0enXXs',
+    color: 'from-[#0A120E]/40 to-jelly/10'
+  },
+  {
+    id: 'p14',
+    slug: 'tiktok-ugc-liquid-dynamics',
+    title: 'TikTok UGC Liquid Dynamics',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A high-converting, TikTok-native UGC campaign enhanced with hyper-realistic AI liquid dynamics and fruit physics.',
+    longDescription: 'We took the standard UGC format and gave it a high-end visual upgrade by developing a high-converting, TikTok-native campaign. Leveraging advanced AI-driven fluid dynamics and complex fruit physics, we seamlessly blended organic creator-style video with hyper-realistic product and liquid simulations. The resulting ad campaign captures viewer attention in the first three seconds, significantly enhancing hook rates and brand recall.',
+    timeline: '24 Hours',
+    deliverables: [
+      'TikTok-Native Vertical Video Ad',
+      'Hyper-Realistic AI Liquid Dynamics',
+      'Fruit Physics Simulations',
+      'Engaging Hook Optimization'
+    ],
+    results: 'Upgraded organic creator formats with broadcast-quality AI physics, driving high scroll-stop engagement rates.',
+    image: 'https://img.youtube.com/vi/UruEt87fsuA/hqdefault.jpg',
+    youtubeId: 'UruEt87fsuA',
+    color: 'from-[#FF0050]/20 via-[#00F2FE]/10 to-jelly/10'
+  },
+  {
     id: 'p11',
     slug: 'filbey-premium-website',
     title: 'Filbey Premium Website',
