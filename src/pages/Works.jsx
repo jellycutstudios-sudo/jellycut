@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, X, ExternalLink, Calendar, CheckCircle, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects } from '../data/projects';
+import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -335,33 +336,40 @@ export default function Works({ setIsModalOpen, currentRoute }) {
                     </ul>
                   </div>
 
-                  {/* Gallery */}
-                  {activeProject.images && activeProject.images.length > 0 && (
-                    <div className="border-t border-line pt-6">
-                      <h4 className="text-[10px] font-semibold uppercase tracking-widest text-muted font-mono mb-3">Project Gallery</h4>
-                      <div className="grid grid-cols-3 gap-3">
-                        {activeProject.images.map((img, idx) => (
-                          <div 
-                            key={idx}
-                            onClick={() => {
-                              setActiveImageIndex(idx);
-                              setLightboxImageIndex(idx);
-                            }}
-                            className={`relative aspect-[4/3] rounded-xl overflow-hidden cursor-zoom-in border-2 transition-all duration-300 ${
-                              activeImageIndex === idx ? 'border-jelly-deep shadow-md scale-[1.02]' : 'border-line hover:border-jelly/40'
-                            }`}
-                          >
-                            <img 
-                              src={img} 
-                              alt={`${activeProject.title} screenshot ${idx + 1}`} 
-                              className="absolute inset-0 w-full h-full object-cover"
-                            />
-                            {/* Hover overlay */}
-                            <div className={`absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300 ${activeImageIndex === idx ? 'bg-transparent' : ''}`} />
-                          </div>
-                        ))}
+                  {/* Dior Specific Content or General Gallery */}
+                  {activeProject.isDiorShowcase ? (
+                    <DiorCaseStudyDetails 
+                      project={activeProject} 
+                      onZoomIndex={setLightboxImageIndex} 
+                    />
+                  ) : (
+                    activeProject.images && activeProject.images.length > 0 && (
+                      <div className="border-t border-line pt-6">
+                        <h4 className="text-[10px] font-semibold uppercase tracking-widest text-muted font-mono mb-3">Project Gallery</h4>
+                        <div className="grid grid-cols-3 gap-3">
+                          {activeProject.images.map((img, idx) => (
+                            <div 
+                              key={idx}
+                              onClick={() => {
+                                setActiveImageIndex(idx);
+                                setLightboxImageIndex(idx);
+                              }}
+                              className={`relative aspect-[4/3] rounded-xl overflow-hidden cursor-zoom-in border-2 transition-all duration-300 ${
+                                activeImageIndex === idx ? 'border-jelly-deep shadow-md scale-[1.02]' : 'border-line hover:border-jelly/40'
+                              }`}
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${activeProject.title} screenshot ${idx + 1}`} 
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                              {/* Hover overlay */}
+                              <div className={`absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300 ${activeImageIndex === idx ? 'bg-transparent' : ''}`} />
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )
                   )}
 
                   {/* Project Call to Action */}

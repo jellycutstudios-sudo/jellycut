@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, CheckCircle, ZoomIn, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
 
 
 
@@ -126,33 +127,39 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
                 {project.longDescription}
               </p>
             </div>
-
-            {/* Project Gallery */}
-            {project.images && project.images.length > 0 && (
-              <div className="space-y-4 border-t border-line pt-10">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">Project Gallery</h2>
-                <div className="grid grid-cols-3 gap-4">
-                  {project.images.map((img, idx) => (
-                    <div 
-                      key={idx}
-                      onClick={() => {
-                        setActiveImageIndex(idx);
-                        setLightboxImageIndex(idx);
-                      }}
-                      className={`relative aspect-[4/3] rounded-2xl overflow-hidden cursor-zoom-in border-2 transition-all duration-300 ${
-                        activeImageIndex === idx ? 'border-jelly-deep shadow-md scale-[1.02]' : 'border-line hover:border-jelly/40'
-                      }`}
-                    >
-                      <img 
-                        src={img} 
-                        alt={`${project.title} screenshot ${idx + 1}`} 
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className={`absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300 ${activeImageIndex === idx ? 'bg-transparent' : ''}`} />
-                    </div>
-                  ))}
+            {/* Dior Specific Content or General Gallery */}
+            {project.isDiorShowcase ? (
+              <DiorCaseStudyDetails 
+                project={project} 
+                onZoomIndex={setLightboxImageIndex} 
+              />
+            ) : (
+              project.images && project.images.length > 0 && (
+                <div className="space-y-4 border-t border-line pt-10">
+                  <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">Project Gallery</h2>
+                  <div className="grid grid-cols-3 gap-4">
+                    {project.images.map((img, idx) => (
+                      <div 
+                        key={idx}
+                        onClick={() => {
+                          setActiveImageIndex(idx);
+                          setLightboxImageIndex(idx);
+                        }}
+                        className={`relative aspect-[4/3] rounded-2xl overflow-hidden cursor-zoom-in border-2 transition-all duration-300 ${
+                          activeImageIndex === idx ? 'border-jelly-deep shadow-md scale-[1.02]' : 'border-line hover:border-jelly/40'
+                        }`}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${project.title} screenshot ${idx + 1}`} 
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className={`absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300 ${activeImageIndex === idx ? 'bg-transparent' : ''}`} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )
             )}
           </div>
 

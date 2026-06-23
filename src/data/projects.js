@@ -2,6 +2,64 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p16',
+    slug: 'dior-chessboard-concept',
+    title: 'Dior Concept Ad – "The Chessboard"',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A 15-second cinematic CGI commercial concept for Christian Dior, contrasting monumental chessboard scale with photorealistic crimson macro details.',
+    longDescription: 'We engineered a 15-second conceptual sprint to explore a darker, more surreal edge for luxury fragrance. The goal was to contrast monumental scale (the giant marble chessboard) with extreme, photoreal macro details (the black stiletto, the crimson glass). This speculative CGI proof-of-concept showcases how high-end lighting, texturing, and rapid speed-ramping camera work can capture a brand\'s luxury identity with modern fashion-edit energy.',
+    timeline: '48 Hours',
+    deliverables: [
+      '15-Second CGI Master Edit',
+      'Surreal Mist & Alabaster Lighting',
+      'High-Fidelity 3D Texture Mapping',
+      'Fashion Phonk Sound Design'
+    ],
+    results: 'Delivered a hyper-premium CGI commercial proof-of-concept with extreme macro-fidelity and dynamic editing.',
+    image: '/dior_wide_chessboard.webp',
+    youtubeId: 'ltb9V0oZppk',
+    color: 'from-[#141414]/90 via-[#261014]/50 to-[#0A120E]/40',
+    isDiorShowcase: true,
+    storyboard: '/dior_storyboard.jpeg',
+    breakdown: {
+      vision: 'We engineered a 15-second conceptual sprint to explore a darker, more surreal edge for luxury fragrance. The goal was to contrast monumental scale (the giant marble chessboard) with extreme, photoreal macro details (the stiletto, the crimson glass).',
+      technicalFocus: [
+        {
+          title: 'Lighting & Texturing',
+          desc: 'Muted cinematic color grading to emphasize the alabaster mist and the deep, light-warping crimson of the glass. Specular highlights were carefully mapped to the silver "DIOR" engraving.'
+        },
+        {
+          title: 'Camera Work',
+          desc: 'Aggressive speed-ramping and whip-pans synchronized to a dark luxury phonk beat to give the piece a modern, aggressive "fashion edit" energy.'
+        }
+      ]
+    },
+    styleframes: [
+      {
+        url: '/dior_stiletto.webp',
+        title: 'Frame 1: Cut 1',
+        desc: 'The black stiletto in mist.'
+      },
+      {
+        url: '/dior_wide_chessboard.webp',
+        title: 'Frame 2: Cut 5',
+        desc: 'The wide shot of the woman dwarfed by the chess pieces.'
+      },
+      {
+        url: '/dior_macro_crimson.webp',
+        title: 'Frame 3: Cut 7',
+        desc: 'The extreme macro of the crimson glass and silver engraving.'
+      }
+    ],
+    behindTheScenes: {
+      clay: '/dior_chessboard_clay.webp',
+      final: '/dior_chessboard_final.webp',
+      desc: 'Transition from clay render / wireframe to the final composited shot, showing the environment engineered from scratch.'
+    },
+    disclaimer: 'This is a speculative concept project created by Jellycut Studio for portfolio purposes. It is not an official Dior campaign and is not affiliated with, endorsed by, or commissioned by Christian Dior SE.'
+  },
+  {
     id: 'p15',
     slug: 'rupos-b2b-storytelling',
     title: 'RuPOS B2B UGC Ad',
