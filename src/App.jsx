@@ -11,7 +11,10 @@ import Works from './pages/Works';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
+import Blog from './pages/Blog';
+import BlogPostDetail from './pages/BlogPostDetail';
 import { projects } from './data/projects';
+import { posts } from './data/posts';
 
 
 const ease = [0.16, 1, 0.3, 1];
@@ -79,6 +82,16 @@ function App() {
     } else if (mainRoute === '/contact') {
       title = 'Start a Project — 48-Hour Creative Brief | Jellycut Studios';
       description = 'Start your project with Jellycut Studios in 15 minutes. No calls required. Submit your brief online and get your first draft within 48–72 hours. AI video ads, brand identity, web apps.';
+    } else if (mainRoute === '/blog') {
+      title = 'Creative Engineering Blog — Video Ads, CGI & UI Strategy | Jellycut Studios';
+      description = 'Read Jellycut Studios\' insights on AI video ads, 3D CGI product rendering, local UGC marketing, and performance-focused branding strategies for global startups.';
+    } else if (mainRoute.startsWith('/blog/')) {
+      const slug = mainRoute.substring(6);
+      const post = posts.find(p => p.slug === slug);
+      if (post) {
+        title = `${post.title} | Jellycut Studios Blog`;
+        description = post.summary;
+      }
     }
 
     document.title = title;
@@ -138,6 +151,21 @@ function App() {
         );
       }
       return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+    } else if (mainRoute === '/blog') {
+      return <Blog setRoute={handleNavigate} />;
+    } else if (mainRoute.startsWith('/blog/')) {
+      const slug = mainRoute.substring(6);
+      const post = posts.find(p => p.slug === slug);
+      if (post) {
+        return (
+          <BlogPostDetail 
+            post={post} 
+            setRoute={handleNavigate} 
+            setIsModalOpen={setIsModalOpen} 
+          />
+        );
+      }
+      return <Blog setRoute={handleNavigate} />;
     }
     switch (mainRoute) {
       case '/about':

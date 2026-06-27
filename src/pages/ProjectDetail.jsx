@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, CheckCircle, ZoomIn, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
+import FawahCaseStudyDetails from '../components/FawahCaseStudyDetails';
 
 
 
@@ -107,7 +108,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             {project.youtubeId && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">Watch Campaign Video</h2>
-                <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-line shadow-md bg-black">
+                <div className={`relative ${project.isVertical ? 'max-w-sm mx-auto aspect-[9/16]' : 'w-full aspect-video'} rounded-3xl overflow-hidden border border-line shadow-md bg-black`}>
                   <iframe
                     src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=0&rel=0`}
                     title={project.title}
@@ -127,11 +128,16 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
                 {project.longDescription}
               </p>
             </div>
-            {/* Dior Specific Content or General Gallery */}
+            {/* Dior/Fawah Specific Content or General Gallery */}
             {project.isDiorShowcase ? (
               <DiorCaseStudyDetails 
                 project={project} 
                 onZoomIndex={setLightboxImageIndex} 
+              />
+            ) : project.isFawahShowcase ? (
+              <FawahCaseStudyDetails 
+                project={project} 
+                setIsModalOpen={setIsModalOpen}
               />
             ) : (
               project.images && project.images.length > 0 && (

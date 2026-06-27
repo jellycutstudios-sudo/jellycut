@@ -50,6 +50,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
   const menuItems = [
     { label: 'Home', path: '/' },
     { label: 'Works', path: '/works' },
+    { label: 'Blog', path: '/blog' },
     { label: 'About Us', path: '/about' },
     { label: 'Contact Us', path: '/contact' },
   ];
@@ -116,6 +117,12 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
               Works
             </button>
             <button 
+              onClick={() => handleNavClick('/blog')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${(currentRoute === '/blog' || currentRoute.startsWith('/blog/')) ? 'text-jelly-deep font-semibold' : ''}`}
+            >
+              Blog
+            </button>
+            <button 
               onClick={() => handleNavClick('/about')} 
               className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/about' ? 'text-jelly-deep font-semibold' : ''}`}
             >
@@ -127,7 +134,6 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
             >
               Contact
             </button>
-
           </div>
 
           <button

@@ -2,6 +2,28 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p17',
+    slug: 'fawah-fragrances',
+    title: 'Case Study: Crafting a Photoreal Luxury CGI Commercial for FAWAH Fragrances',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A photoreal cinematic CGI commercial campaign for FAWAH Fragrances, visualizing a luxury scent through moody environments and slow-motion golden mist.',
+    longDescription: 'When approaching the "Al Taraheeb" fragrance by FAWAH, the goal was to create a visual identity as bold and premium as the scent itself. The brand required a cinematic product video that communicated luxury, mystery, and elegance without relying on traditional, restrictive live-action photography.',
+    timeline: '48 Hours',
+    deliverables: [
+      'Cinematic CGI Video',
+      'Fluid & Particle Simulations',
+      'Bespoke Macro Environments',
+      'Photoreal 3D Texturing'
+    ],
+    results: 'Engineered a high-impact product render yielding versatile marketing assets.',
+    image: 'https://img.youtube.com/vi/EaLAd1Wj0o0/hqdefault.jpg',
+    youtubeId: 'EaLAd1Wj0o0',
+    isVertical: true,
+    isFawahShowcase: true,
+    color: 'from-[#111111] via-[#241d15]/50 to-[#0c0e09]/45'
+  },
+  {
     id: 'p16',
     slug: 'dior-chessboard-concept',
     title: 'Dior Concept Ad – "The Chessboard"',
