@@ -51,6 +51,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
     { label: 'Home', path: '/' },
     { label: 'Works', path: '/works' },
     { label: 'Blog', path: '/blog' },
+    { label: 'Editor', path: '/editor' },
     { label: 'About Us', path: '/about' },
     { label: 'Contact Us', path: '/contact' },
   ];
@@ -121,6 +122,12 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
               className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${(currentRoute === '/blog' || currentRoute.startsWith('/blog/')) ? 'text-jelly-deep font-semibold' : ''}`}
             >
               Blog
+            </button>
+            <button 
+              onClick={() => handleNavClick('/editor')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${(currentRoute === '/editor' || currentRoute === '/video-editor') ? 'text-jelly-deep font-semibold' : ''}`}
+            >
+              Editor
             </button>
             <button 
               onClick={() => handleNavClick('/about')} 
@@ -246,13 +253,13 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
                         <span className="font-mono text-[10px] text-white/30 tracking-wider">
                           0{idx + 1}
                         </span>
-                        <span className={`font-serif text-3xl tracking-tight transition-colors group-hover:text-jelly ${currentRoute === item.path ? 'text-jelly' : 'text-white'}`}>
+                        <span className={`font-serif text-3xl tracking-tight transition-colors group-hover:text-jelly ${(currentRoute === item.path || (item.path === '/editor' && currentRoute === '/video-editor')) ? 'text-jelly' : 'text-white'}`}>
                           {item.label}
                         </span>
                       </div>
                       
                       <div className="flex items-center gap-2 overflow-hidden">
-                        {currentRoute === item.path && (
+                        {(currentRoute === item.path || (item.path === '/editor' && currentRoute === '/video-editor')) && (
                           <span className="h-1.5 w-1.5 rounded-full bg-jelly animate-ping" />
                         )}
                         <ArrowRight className="w-4 h-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-jelly" />

@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
 import Blog from './pages/Blog';
 import BlogPostDetail from './pages/BlogPostDetail';
+import Editor from './pages/Editor';
 import { projects } from './data/projects';
 import { posts } from './data/posts';
 
@@ -92,6 +93,9 @@ function App() {
         title = `${post.title} | Jellycut Studios Blog`;
         description = post.summary;
       }
+    } else if (mainRoute === '/editor' || mainRoute === '/video-editor') {
+      title = 'Jellycut Video Editor — Online Watermark Removal & Video Upscaling';
+      description = 'Edit video directly in your browser with Jellycut Video Editor. Features built-in AI watermark remover and HD/4K video upscaling on export. 100% free and client-side.';
     }
 
     document.title = title;
@@ -166,6 +170,8 @@ function App() {
         );
       }
       return <Blog setRoute={handleNavigate} />;
+    } else if (mainRoute === '/editor' || mainRoute === '/video-editor') {
+      return <Editor setIsModalOpen={setIsModalOpen} />;
     }
     switch (mainRoute) {
       case '/about':
