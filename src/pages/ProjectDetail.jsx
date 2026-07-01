@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, CheckCircle, ZoomIn, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
 import FawahCaseStudyDetails from '../components/FawahCaseStudyDetails';
+import CrimsonSilverCaseStudyDetails from '../components/CrimsonSilverCaseStudyDetails';
 
 
 
@@ -137,6 +138,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             ) : project.isFawahShowcase ? (
               <FawahCaseStudyDetails 
                 project={project} 
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isCrimsonSilverShowcase ? (
+              <CrimsonSilverCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}
               />
             ) : (

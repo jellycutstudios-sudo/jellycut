@@ -2,6 +2,44 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p18',
+    slug: 'crimson-silver-heritage',
+    title: 'Case Study: Crimson & Silver Heritage',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A conceptual campaign redefining luxury jewelry commercials through a moody, chiaroscuro-driven atmospheric visual identity.',
+    longDescription: 'Traditional fine jewelry marketing often relies on a very specific formula: bright white studios, sparkling diamonds, and smiling models. For this conceptual project, we wanted to break that mold. The objective was to create a visual identity that felt ancient, powerful, and deeply atmospheric—a campaign that didn\'t just display product, but built a world around it.',
+    timeline: '48 Hours',
+    deliverables: [
+      'Cinematic Concept Edit',
+      'Chiaroscuro & Silhouette Lighting',
+      'Extreme Macro Texturing & CGI',
+      'Intimate Interaction Direction'
+    ],
+    results: 'Delivered an atmospheric, high-impact conceptual campaign that commands a premium market position.',
+    image: '/crimson_heritage_cover.png',
+    youtubeId: 'dtTiZnu2EbQ',
+    color: 'from-[#0d0708]/95 via-[#23090e]/70 to-[#101114]/60',
+    isCrimsonSilverShowcase: true,
+    styleframes: [
+      {
+        url: '/crimson_heritage_stallion.png',
+        title: 'The Power of the Silhouette',
+        desc: 'Instead of revealing everything at once, shadow and silhouette build mystery. The black Arabian stallion grounds the piece in noble heritage.'
+      },
+      {
+        url: '/crimson_heritage_veil.png',
+        title: 'Ancient Heritage & Mystery',
+        desc: 'Portrait of the model looking through an intricate metallic silver coin veil, drawing the viewer into a deep, atmospheric story.'
+      },
+      {
+        url: '/crimson_heritage_bangles.png',
+        title: 'Texture, Tactility & Interaction',
+        desc: 'Extreme macro CGI techniques highlight the engravings of silver coins, showing the clink of metal bangles sliding down a wrist.'
+      }
+    ]
+  },
+  {
     id: 'p17',
     slug: 'fawah-fragrances',
     title: 'Case Study: Crafting a Photoreal Luxury CGI Commercial for FAWAH Fragrances',

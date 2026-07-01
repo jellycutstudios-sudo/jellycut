@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, X, ExternalLink, Calendar, CheckCircle, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
+import CrimsonSilverCaseStudyDetails from '../components/CrimsonSilverCaseStudyDetails';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -341,6 +342,12 @@ export default function Works({ setIsModalOpen, currentRoute }) {
                     <DiorCaseStudyDetails 
                       project={activeProject} 
                       onZoomIndex={setLightboxImageIndex} 
+                    />
+                  ) : activeProject.isCrimsonSilverShowcase ? (
+                    <CrimsonSilverCaseStudyDetails
+                      project={activeProject}
+                      onZoomIndex={setLightboxImageIndex}
+                      setIsModalOpen={setIsModalOpen}
                     />
                   ) : (
                     activeProject.images && activeProject.images.length > 0 && (
