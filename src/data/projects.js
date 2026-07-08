@@ -2,6 +2,31 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p19',
+    slug: 'treat-in-kerala',
+    title: 'Treat In Kerala',
+    category: 'Websites',
+    icon: Globe,
+    description: 'A premium multilingual medical tourism platform connecting international patients with JCI & NABH accredited hospitals in Kerala.',
+    longDescription: 'We designed and developed the official digital experience for Treat In Kerala, a premier medical tourism gateway. The platform facilitates end-to-end medical trip coordination—from treatments and Ayurveda therapies to visa documentation, translation assistance, and local travel logistics. Built with high-fidelity React/Next.js architectures, the portal offers multilingual Arabic & English localized search, intuitive medical estimate calculators, and an elegant natural aesthetic referencing Kerala\'s lush landscape.',
+    timeline: '5 Days',
+    deliverables: [
+      'High-Performance Multilingual Frontend',
+      'Custom Medical Cost Estimator',
+      'Accredited Hospital Network Directory',
+      'WhatsApp Integration & Concierge Workflows'
+    ],
+    results: 'Launched a high-converting, localized medical gateway driving zero-friction international patient inquiries.',
+    image: '/treat_kerala_home.webp',
+    images: [
+      '/treat_kerala_home.webp',
+      '/treat_kerala_1.webp',
+      '/treat_kerala_2.webp'
+    ],
+    projectUrl: 'https://www.treatinkerala.com/en',
+    color: 'from-[#1B4332]/95 via-[#2D6A4F]/70 to-[#FAF7F2]/60'
+  },
+  {
     id: 'p18',
     slug: 'crimson-silver-heritage',
     title: 'Case Study: Crimson & Silver Heritage',

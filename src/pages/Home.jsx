@@ -460,7 +460,7 @@ const steps = [
 ];
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
-  const [videoSrc, setVideoSrc] = useState(null);
+  const [videoSrc, setVideoSrc] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [loadYoutube, setLoadYoutube] = useState(false);
 
@@ -468,7 +468,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
     if (isMobile) return;
     // Load video deferred to ensure it doesn't block initial page load/render
     const timer = setTimeout(() => {
-      setVideoSrc('/hero.mp4');
+      setVideoSrc(true);
     }, 1200); // 1.2s delay is sweet spot for mobile paint stability
     return () => clearTimeout(timer);
   }, [isMobile]);
@@ -530,7 +530,6 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           {/* Video loads asynchronously and fades in once ready */}
           {videoSrc && (
             <video
-              src={videoSrc}
               autoPlay
               muted
               loop
@@ -539,7 +538,10 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
               style={{ opacity: videoLoaded ? 1 : 0 }}
               onLoadedData={() => setVideoLoaded(true)}
-            />
+            >
+              <source src="/hero.webm" type="video/webm" />
+              <source src="/hero.mp4" type="video/mp4" />
+            </video>
           )}
         </motion.div>
 

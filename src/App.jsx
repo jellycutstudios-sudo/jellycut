@@ -141,7 +141,7 @@ function App() {
   const renderActivePage = () => {
     const mainRoute = route.split('?')[0];
     if (mainRoute === '/works') {
-      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} setRoute={handleNavigate} />;
     } else if (mainRoute.startsWith('/works/')) {
       const slug = mainRoute.substring(7);
       const project = projects.find(p => p.slug === slug);
@@ -154,7 +154,7 @@ function App() {
           />
         );
       }
-      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} />;
+      return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} setRoute={handleNavigate} />;
     } else if (mainRoute === '/blog') {
       return <Blog setRoute={handleNavigate} />;
     } else if (mainRoute.startsWith('/blog/')) {
