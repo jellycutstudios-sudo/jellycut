@@ -42,9 +42,9 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
   }, [currentRoute]);
 
   const isHome = currentRoute === '/' || currentRoute === '' || currentRoute === '#/' || currentRoute === '#';
-  const isMenuDark = isMenuOpen || isHome;
+  const isMenuDark = isMenuOpen;
 
-  // Text/border colour flips to white on home (dark hero) or when menu overlay is open
+  // Text/border colour flips to white when menu overlay is open
   const mutedColorClass = isMenuDark ? 'text-white/50' : 'text-muted';
 
   const menuItems = [

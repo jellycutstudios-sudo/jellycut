@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -460,18 +460,9 @@ const steps = [
 ];
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
-  const [videoSrc, setVideoSrc] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [loadYoutube, setLoadYoutube] = useState(false);
 
-  useEffect(() => {
-    if (isMobile) return;
-    // Load video deferred to ensure it doesn't block initial page load/render
-    const timer = setTimeout(() => {
-      setVideoSrc(true);
-    }, 1200); // 1.2s delay is sweet spot for mobile paint stability
-    return () => clearTimeout(timer);
-  }, [isMobile]);
+  // Native Vimeo background loop is used, so custom fade logic is removed
 
   const prefersReducedMotion = useReducedMotion();
   const shouldReduce = prefersReducedMotion || isMobile;
@@ -510,65 +501,37 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
   return (
     <div className="w-full">
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
-      <section className="relative w-full h-screen min-h-[640px] sm:min-h-[720px] flex flex-col justify-end overflow-hidden bg-[#100f0f]">
+      <div className="relative min-h-screen w-full overflow-hidden bg-white">
         
-        <motion.div
-          className="absolute inset-0 w-full h-full"
-          variants={getFadeInScale()}
-          initial="hidden"
-          animate="visible"
+        {/* Background video layer (z-0) */}
+        <video 
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '80vh', objectFit: 'cover' }}
+          className="z-0 pointer-events-none"
         >
-          {/* Poster image renders instantly */}
-          <img
-            src="/hero_poster.webp"
-            alt="Jellycut Studios Hero"
-            fetchPriority="high"
-            loading="eager"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+          <source src="/hero-kerala.mp4" type="video/mp4" />
+        </video>
 
-          {/* Video loads asynchronously and fades in once ready */}
-          {videoSrc && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
-              style={{ opacity: videoLoaded ? 1 : 0 }}
-              onLoadedData={() => setVideoLoaded(true)}
-            >
-              <source src="/hero.webm" type="video/webm" />
-              <source src="/hero.mp4" type="video/mp4" />
-            </video>
-          )}
-        </motion.div>
+        {/* Gradient overlay to ensure white sky behind text */}
+        <div className="absolute top-0 left-0 right-0 h-[75vh] bg-gradient-to-b from-white via-white/90 to-transparent z-10 pointer-events-none" />
 
-        {/* Lower-Left Glass Hero Card */}
-        <div className="relative z-20 w-full px-6 md:px-12 hero-bottom-padding flex justify-start">
-          <motion.div
-            className="glass-effect rounded-[24px] p-5 sm:p-8 md:p-10 border border-white/20 max-w-xl text-white shadow-custom"
-            variants={getSlideUpHeroCard()}
-            initial="hidden"
-            animate="visible"
-          >
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-[1.08] mb-4 tracking-tight">
-              We make brands impossible to scroll&nbsp;past.
-            </h1>
-            <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 font-sans font-light max-w-md">
-              Jellycut is a creative AI studio from Kerala — building cinematic video ads, bold brand identities, and vibe-coded apps for founders and brands ready to&nbsp;grow.
-            </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="group inline-flex items-center gap-2 text-white font-semibold text-xs sm:text-sm tracking-wide font-sans hover:text-jelly transition-colors cursor-pointer"
-            >
-              <span>Start Your First Project</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-            </button>
-          </motion.div>
-        </div>
-      </section>
+        {/* Hero Section (z-20) */}
+        <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:whitespace-nowrap max-w-7xl font-normal font-serif text-[#000000] animate-fade-rise" style={{ lineHeight: '0.95', letterSpacing: '-2.46px' }}>
+            We build <em className="text-[#6F6F6F] not-italic">the unforgettable.</em>
+          </h1>
+          <p className="text-base sm:text-lg max-w-4xl mt-8 leading-relaxed text-[#6F6F6F] animate-fade-rise-delay font-sans">
+            Blending cinematic AI storytelling with flawless engineering.<br />
+            We craft bold brand identities, video campaigns, and immersive digital platforms.
+          </p>
+          <button onClick={() => setIsModalOpen(true)} className="rounded-full px-14 py-5 text-base mt-12 bg-[#000000] text-[#FFFFFF] hover:scale-[1.03] transition-transform animate-fade-rise-delay-2 cursor-pointer font-medium">
+            Begin Journey
+          </button>
+        </section>
+      </div>
 
       {/* ── 2. WORK / SKY-GARDEN VIDEO PANEL ─────────────────────────────── */}
       <section id="work" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
