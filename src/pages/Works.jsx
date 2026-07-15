@@ -7,7 +7,7 @@ const ease = [0.16, 1, 0.3, 1];
 
 const categories = ['All', 'AI Video Ads', 'Websites', 'Vibe-Coded Apps'];
 
-export default function Works({ setIsModalOpen, setRoute }) {
+export default function Works({ setRoute }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const filteredProjects = selectedCategory === 'All'
