@@ -2,6 +2,49 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p20',
+    slug: 'rupos-dine',
+    title: 'RuPOS Dine — Restaurant POS',
+    category: 'Vibe-Coded Apps',
+    icon: Code,
+    description: 'A modern, premium restaurant POS system with live table maps, token systems, and direct online orders.',
+    longDescription: 'We engineered DineOS (RuPOS Dine), a lightning-fast, multi-mode restaurant POS system. Designed with a sleek, minimalist aesthetic to eliminate kitchen clutter, DineOS handles table layouts, KDS (Kitchen Display System), automated tokens, and direct QR-code online ordering. Built using custom React architectures and optimized for sub-second order dispatching, it enables fast-paced restaurants to run entirely paperless with zero operational complexity.',
+    timeline: '5 Days',
+    deliverables: [
+      'High-Fidelity iPad POS Interface',
+      'Real-time Table Management & Billing',
+      'Instant Kitchen Token Generation',
+      'Interactive Owner Dashboard & Insights'
+    ],
+    results: 'Empowered modern restaurants to ditch spreadsheets, speed up checkouts by 40%, and manage orders with zero friction.',
+    image: '/rupos_checkout.webp',
+    images: [
+      '/rupos_checkout.webp',
+      '/rupos_tablet.webp',
+      '/rupos_lifestyle.webp'
+    ],
+    projectUrl: 'https://dine.rupos.in/',
+    color: 'from-[#0A0A0B]/95 via-[#161618]/70 to-[#27272A]/60',
+    isDineShowcase: true,
+    styleframes: [
+      {
+        url: '/rupos_checkout.webp',
+        title: 'POS Terminal Interface',
+        desc: 'A premium, black-slate design focusing on fast item selection, visual grid layout, and real-time cart/dine-in tracking.'
+      },
+      {
+        url: '/rupos_tablet.webp',
+        title: 'Landing & Demo Experience',
+        desc: 'A minimal, high-converting homepage showcasing the tablet interface, emphasizing the core value proposition: "Run your restaurant. Not spreadsheets."'
+      },
+      {
+        url: '/rupos_lifestyle.webp',
+        title: 'Real-time Owner Insights',
+        desc: 'A sleek dashboard offering daily sales analysis, order statistics, active tables count, and traffic summaries to help managers optimize their operations.'
+      }
+    ]
+  },
+  {
     id: 'p19',
     slug: 'treat-in-kerala',
     title: 'Treat In Kerala',
