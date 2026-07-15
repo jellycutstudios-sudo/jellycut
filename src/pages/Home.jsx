@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -468,15 +468,6 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
   const shouldReduce = prefersReducedMotion || isMobile;
 
   // Dynamic animation variants based on device capabilities and preferences
-  const getFadeInScale = () => ({
-    hidden: { opacity: 0, scale: shouldReduce ? 1 : 1.05 },
-    visible: { opacity: 1, scale: 1, transition: { duration: shouldReduce ? 0.4 : 1.5, ease } },
-  });
-
-  const getSlideUpHeroCard = () => ({
-    hidden: { y: shouldReduce ? 20 : 60, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: shouldReduce ? 0.4 : 1.2, delay: shouldReduce ? 0.1 : 0.4, ease } },
-  });
 
   const getRevealSection = () => ({
     hidden: { opacity: 0, y: shouldReduce ? 10 : 30 },
