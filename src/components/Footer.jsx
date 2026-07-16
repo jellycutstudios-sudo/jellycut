@@ -64,8 +64,37 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
         </motion.div>
       </div>
 
+        {/* Global markets */}
+        <motion.div
+          className="relative z-10 max-w-7xl mx-auto mt-16 flex flex-col items-center gap-3"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        >
+          <p className="text-white/30 text-[10px] font-mono font-semibold tracking-widest uppercase">Trusted by brands across</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {[
+              { flag: '🇮🇳', label: 'India' },
+              { flag: '🇺🇸', label: 'United States' },
+              { flag: '🇬🇧', label: 'United Kingdom' },
+              { flag: '🇦🇪', label: 'UAE' },
+              { flag: '🇦🇺', label: 'Australia' },
+              { flag: '🇨🇦', label: 'Canada' },
+            ].map(({ flag, label }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-[11px] font-medium text-white/50 hover:text-white/80 hover:bg-white/10 transition-all duration-200"
+              >
+                <span className="text-sm leading-none">{flag}</span>
+                <span>{label}</span>
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
       {/* Footer link row */}
-      <footer className={`relative z-10 max-w-7xl mx-auto ${footerMarginClass} border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6`}>
+      <footer className={`relative z-10 max-w-7xl mx-auto mt-10 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6`}>
         <div className="flex items-center gap-3">
           <img src="/logo.svg" alt="Jellycut Studios" width="120" height="20" className="h-5 w-auto object-contain brightness-0 invert" />
         </div>

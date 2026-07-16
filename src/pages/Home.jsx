@@ -521,29 +521,6 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           <button onClick={() => setIsModalOpen(true)} className="rounded-full px-14 py-5 text-base mt-12 bg-[#000000] text-[#FFFFFF] hover:scale-[1.03] transition-transform animate-fade-rise-delay-2 cursor-pointer font-medium">
             Begin Journey
           </button>
-
-          {/* Global Markets Trust Strip */}
-          <div className="mt-10 animate-fade-rise-delay-2 flex flex-col items-center gap-3">
-            <p className="text-[10px] font-mono font-semibold tracking-widest text-[#9a9a9a] uppercase">Trusted by brands across</p>
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
-              {[
-                { flag: '🇮🇳', label: 'India' },
-                { flag: '🇺🇸', label: 'United States' },
-                { flag: '🇬🇧', label: 'United Kingdom' },
-                { flag: '🇦🇪', label: 'UAE' },
-                { flag: '🇦🇺', label: 'Australia' },
-                { flag: '🇨🇦', label: 'Canada' },
-              ].map(({ flag, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-black/8 rounded-full px-3.5 py-1.5 text-[11px] font-medium text-[#3a3a3a] shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200"
-                >
-                  <span className="text-sm leading-none">{flag}</span>
-                  <span>{label}</span>
-                </span>
-              ))}
-            </div>
-          </div>
         </section>
       </div>
 
@@ -959,7 +936,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               '48–72h first delivery',
               'No calls required',
               'Async-friendly',
-              '🇮🇳 🇺🇸 🇬🇧 🇦🇪 🇦🇺 time zones covered',
+              '🌍 Worldwide clients',
               '1 revision included',
             ].map((badge) => (
               <span
