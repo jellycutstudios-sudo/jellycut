@@ -399,7 +399,7 @@ const faqs = [
   },
   {
     q: 'Do you work with clients outside India?',
-    a: 'Yes — most of our clients are in the US, UK, Australia, and Canada. We are a fully async-first studio built for remote collaboration across time zones. We cover US and UK working hours through async updates.',
+    a: 'Yes — we actively work with brands in the US, UK, UAE, Australia, and Canada alongside our Indian clients. We have shipped campaigns for fragrance brands, D2C e-commerce, SaaS startups, and medical platforms across these markets. Our studio is fully async-first — no calls required, and we cover all major time zones through structured async updates. Geography is never a blocker.',
   },
   {
     q: 'What platforms are your video ads optimised for?',
@@ -521,6 +521,29 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           <button onClick={() => setIsModalOpen(true)} className="rounded-full px-14 py-5 text-base mt-12 bg-[#000000] text-[#FFFFFF] hover:scale-[1.03] transition-transform animate-fade-rise-delay-2 cursor-pointer font-medium">
             Begin Journey
           </button>
+
+          {/* Global Markets Trust Strip */}
+          <div className="mt-10 animate-fade-rise-delay-2 flex flex-col items-center gap-3">
+            <p className="text-[10px] font-mono font-semibold tracking-widest text-[#9a9a9a] uppercase">Trusted by brands across</p>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+              {[
+                { flag: '🇮🇳', label: 'India' },
+                { flag: '🇺🇸', label: 'United States' },
+                { flag: '🇬🇧', label: 'United Kingdom' },
+                { flag: '🇦🇪', label: 'UAE' },
+                { flag: '🇦🇺', label: 'Australia' },
+                { flag: '🇨🇦', label: 'Canada' },
+              ].map(({ flag, label }) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm border border-black/8 rounded-full px-3.5 py-1.5 text-[11px] font-medium text-[#3a3a3a] shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200"
+                >
+                  <span className="text-sm leading-none">{flag}</span>
+                  <span>{label}</span>
+                </span>
+              ))}
+            </div>
+          </div>
         </section>
       </div>
 
@@ -880,7 +903,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               Built for async. Delivered&nbsp;fast.
             </h2>
             <p className="mt-5 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
-              We work with US & UK clients fully remote — no awkward time-zone calls, no chasing updates. Just clean creative, on time.
+              We work with clients across India, the US, UK, UAE & Australia — fully remote, fully async. No time-zone friction. Just clean creative, on time.
             </p>
           </motion.div>
 
@@ -936,7 +959,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               '48–72h first delivery',
               'No calls required',
               'Async-friendly',
-              'US & UK time zones covered',
+              '🇮🇳 🇺🇸 🇬🇧 🇦🇪 🇦🇺 time zones covered',
               '1 revision included',
             ].map((badge) => (
               <span
