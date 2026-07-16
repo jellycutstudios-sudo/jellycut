@@ -5,6 +5,7 @@ import DiorCaseStudyDetails from '../components/DiorCaseStudyDetails';
 import FawahCaseStudyDetails from '../components/FawahCaseStudyDetails';
 import CrimsonSilverCaseStudyDetails from '../components/CrimsonSilverCaseStudyDetails';
 import DineCaseStudyDetails from '../components/DineCaseStudyDetails';
+import FeeSyncCaseStudyDetails from '../components/FeeSyncCaseStudyDetails';
 
 
 
@@ -149,6 +150,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               />
             ) : project.isDineShowcase ? (
               <DineCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isFeeSyncShowcase ? (
+              <FeeSyncCaseStudyDetails
                 project={project}
                 onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}

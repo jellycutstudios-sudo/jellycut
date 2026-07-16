@@ -2,6 +2,49 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p21',
+    slug: 'feesync-website',
+    title: 'FeeSync — Automated Fee Collection Website',
+    category: 'Websites',
+    icon: Globe,
+    description: 'A premium, ultra-fast marketing site and onboarding experience designed for a modern automated recurring payment platform.',
+    longDescription: 'We designed, engineered, and shipped the official web platform for FeeSync, an automated billing and recurring fee collection engine. The platform is designed to convert visitors with sub-second page loads, interactive pricing calculators, and a seamless onboarding portal. Built with premium custom React architectures and custom CSS transitions, the site showcases how subscription-based businesses and local communities can automate weekly and monthly collections with zero manual intervention.',
+    timeline: '4 Days',
+    deliverables: [
+      'High-Fidelity Responsive Landing Page',
+      'Interactive Onboarding & Dashboard Mockups',
+      'Automated Collection Calculator',
+      'Premium CSS Glassmorphism Aesthetics'
+    ],
+    results: 'Created a highly engaging website driving premium conversion rates and seamless onboarding flows.',
+    image: '/feesync_website_hero.webp',
+    images: [
+      '/feesync_website_hero.webp',
+      '/feesync_fee_management.webp',
+      '/feesync_create_community.webp'
+    ],
+    projectUrl: 'https://feesync.com/',
+    color: 'from-[#0B1E36]/95 via-[#1E3A8A]/70 to-[#0F172A]/60',
+    isFeeSyncShowcase: true,
+    styleframes: [
+      {
+        url: '/feesync_website_hero.webp',
+        title: 'Hero Landing Experience',
+        desc: 'A premium, high-converting homepage featuring interactive SaaS pricing, modern typography, and a seamless visual presentation of FeeSync\'s value proposition.'
+      },
+      {
+        url: '/feesync_fee_management.webp',
+        title: 'Fee Management Dashboard',
+        desc: 'A clean, modern control panel showing customers, invoice history, payment statuses, and detailed recurring subscription controls.'
+      },
+      {
+        url: '/feesync_create_community.webp',
+        title: 'Community Creation Setup',
+        desc: 'A streamlined step-by-step interface for business owners and creators to establish branded subscription tiers and payment gateways.'
+      }
+    ]
+  },
+  {
     id: 'p20',
     slug: 'rupos-dine',
     title: 'RuPOS Dine — Restaurant POS',
