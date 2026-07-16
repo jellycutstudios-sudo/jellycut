@@ -6,6 +6,7 @@ import FawahCaseStudyDetails from '../components/FawahCaseStudyDetails';
 import CrimsonSilverCaseStudyDetails from '../components/CrimsonSilverCaseStudyDetails';
 import DineCaseStudyDetails from '../components/DineCaseStudyDetails';
 import FeeSyncCaseStudyDetails from '../components/FeeSyncCaseStudyDetails';
+import FilbeyCaseStudyDetails from '../components/FilbeyCaseStudyDetails';
 
 
 
@@ -107,8 +108,8 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
           
           {/* Main Column: Challenge & Solution + Video */}
           <div className="md:col-span-8 space-y-10">
-            {/* Video Embed */}
-            {project.youtubeId && (
+            {/* Video Embed — hidden for showcases that render their own video section */}
+            {project.youtubeId && !project.isFilbeyNeuralCrunchShowcase && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">Watch Campaign Video</h2>
                 <div className={`relative ${project.isVertical ? 'max-w-sm mx-auto aspect-[9/16]' : 'w-full aspect-video'} rounded-3xl overflow-hidden border border-line shadow-md bg-black`}>
@@ -124,13 +125,16 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               </div>
             )}
 
-            {/* Challenge & Solution */}
-            <div className="space-y-4">
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
-              <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
-                {project.longDescription}
-              </p>
-            </div>
+            {/* Challenge & Solution — hidden for showcases that own their own narrative */}
+            {!project.isFilbeyNeuralCrunchShowcase && (
+              <div className="space-y-4">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
+                <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
+                  {project.longDescription}
+                </p>
+              </div>
+            )}
+
             {/* Dior/Fawah Specific Content or General Gallery */}
             {project.isDiorShowcase ? (
               <DiorCaseStudyDetails 
@@ -156,6 +160,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               />
             ) : project.isFeeSyncShowcase ? (
               <FeeSyncCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isFilbeyNeuralCrunchShowcase ? (
+              <FilbeyCaseStudyDetails
                 project={project}
                 onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}

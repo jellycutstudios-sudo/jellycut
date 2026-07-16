@@ -2,6 +2,53 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p22',
+    slug: 'filbey-neural-crunch',
+    title: 'Case Study: Filbey – The Neural Crunch',
+    category: 'AI Video Ads',
+    icon: Video,
+    description: 'A 20-second "sensory assault" for Filbey, blending Neural Motion Synthesis with the "Midnight & Ember" aesthetic to redefine fast-food cinematography.',
+    longDescription: 'Filbey approached Jellycut Studio to create a 20-second "sensory assault" that would disrupt the traditional fast-food advertising landscape. The goal was to move away from flat, bright, commercial lighting and into "Midnight & Ember"—a moody, high-contrast aesthetic that emphasizes texture, heat, and the unbelievable crunch of their signature menu.',
+    timeline: '48 Hours',
+    deliverables: [
+      '20-Second Cinematic Campaign',
+      'Latent Space Physics & Sauce Simulations',
+      '8K Neural Upscaling Pipeline',
+      '"Midnight & Ember" Color Grade',
+    ],
+    results: 'Delivered a high-impact cinematic food ad using Neural Motion Synthesis — achieving "impossible" macro shots in 48 hours.',
+    image: '/filbey_f8_burger.jpg',
+    images: [
+      '/filbey_f1_crust.jpg',
+      '/filbey_f2_sauce.jpg',
+      '/filbey_f8_burger.jpg',
+      '/filbey_f3_pull.jpg',
+      '/filbey_f4_fries.jpg',
+      '/filbey_f9_spread.jpg',
+    ],
+    youtubeId: 'p5-DrSYbFGA',
+    color: 'from-[#0f0c08]/95 via-[#1a0f05]/80 to-[#0a0a0a]/60',
+    isFilbeyNeuralCrunchShowcase: true,
+    storyboard: '/filbey_storyboard.jpg',
+    styleframes: [
+      {
+        url: '/filbey_f1_crust.jpg',
+        title: 'F1 — The Crust Landscape',
+        desc: 'The Topography of Taste. Extreme macro reveals the cragged peaks of our signature breading — every grain a mountain range.',
+      },
+      {
+        url: '/filbey_f2_sauce.jpg',
+        title: 'F2 — The Sauce Crown',
+        desc: 'Viscous Impact. A study in fluid dynamics — capturing the exact millisecond the Filbey Wing hits the sauce pool.',
+      },
+      {
+        url: '/filbey_f8_burger.jpg',
+        title: 'F8 — The Filbey Burger',
+        desc: 'The reveal shot. Cheese melt cascades over the crispy chicken patty as the bun is lifted — the money frame.',
+      },
+    ],
+  },
+  {
     id: 'p21',
     slug: 'feesync-website',
     title: 'FeeSync — Automated Fee Collection Website',

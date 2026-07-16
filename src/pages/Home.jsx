@@ -494,20 +494,38 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
       <div className="relative min-h-screen w-full overflow-hidden bg-white">
         
-        {/* Background video layer (z-0) */}
+        {/* Background video — anchored to bottom 65% of hero */}
         <video 
           autoPlay
           muted
           loop
           playsInline
-          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '80vh', objectFit: 'cover' }}
+          poster="/hero_poster.webp"
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: '65%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+          }}
           className="z-0 pointer-events-none"
         >
           <source src="/hero-kerala.mp4" type="video/mp4" />
+          <source src="/hero.webm" type="video/webm" />
         </video>
 
-        {/* Gradient overlay to ensure white sky behind text */}
-        <div className="absolute top-0 left-0 right-0 h-[75vh] bg-gradient-to-b from-white via-white/90 to-transparent z-10 pointer-events-none" />
+        {/* White fade — blends the top edge of the video into the white background */}
+        <div
+          className="absolute left-0 right-0 z-10 pointer-events-none"
+          style={{
+            bottom: 0,
+            height: '72%',
+            background: 'linear-gradient(to bottom, white 0%, white 18%, rgba(255,255,255,0.75) 42%, rgba(255,255,255,0) 100%)',
+          }}
+        />
+
 
         {/* Hero Section (z-20) */}
         <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
@@ -523,6 +541,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           </button>
         </section>
       </div>
+
 
       {/* ── 2. WORK / SKY-GARDEN VIDEO PANEL ─────────────────────────────── */}
       <section id="work" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
