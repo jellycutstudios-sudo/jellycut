@@ -87,7 +87,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
         {/* Left: status label (Desktop) */}
         <div className={`flex items-center gap-2 text-[11px] font-medium tracking-wider uppercase font-mono ${mutedColorClass}`}>
           <span className="h-1.5 w-1.5 rounded-full bg-jelly animate-pulse" />
-          <span>US &amp; UK Clients // Open</span>
+          <span>🌍 Worldwide // Open</span>
         </div>
 
         {/* Center: Desktop Glass Nav Pill */}
@@ -342,7 +342,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
                   <span className="text-white/20">Availability</span>
                   <div className="flex items-center gap-1.5 text-white/60">
                     <span className="h-1.5 w-1.5 rounded-full bg-jelly animate-pulse" />
-                    <span>US &amp; UK // OPEN</span>
+                    <span>🌍 Worldwide // Open</span>
                   </div>
                 </div>
               </motion.div>
