@@ -3,22 +3,34 @@ import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Sparkles, User, Loader2 } from 'lucide-react';
 
+const getMessageText = (message) => {
+  if (message.parts) {
+    return message.parts
+      .filter(part => part.type === 'text')
+      .map(part => part.text)
+      .join('');
+  }
+  return message.content || '';
+};
+
 export default function AIChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
 
-  const { messages, append, isLoading } = useChat({
+  const { messages, sendMessage, status } = useChat({
     api: '/api/chat',
     initialMessages: [
       {
         id: '1',
         role: 'assistant',
-        content: "Hey there! 👋 I'm the Jellycut AI. How can I help you with your next cinematic project?"
+        parts: [{ type: 'text', text: "Hey there! 👋 I'm the Jellycut AI. How can I help you with your next project?" }]
       }
     ]
   });
+
+  const isLoading = status === 'streaming' || status === 'submitted';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,7 +46,7 @@ export default function AIChatWidget() {
     
     const lastMessage = messages[messages.length - 1];
     if (lastMessage.role === 'user') {
-      const text = lastMessage.content;
+      const text = getMessageText(lastMessage);
       const emailMatch = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
       const phoneMatch = text.match(/[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im);
       
@@ -48,7 +60,7 @@ export default function AIChatWidget() {
           body: JSON.stringify({
             name: 'Website Visitor', // You could instruct the AI to ask for name first and extract it, but visitor works fine as a default
             contactInfo: contactInfo,
-            summary: messages.map(m => `[${m.role}] ${m.content}`).join('\n')
+            summary: messages.map(m => `[${m.role}] ${getMessageText(m)}`).join('\n')
           })
         }).catch(err => console.error("Failed to send lead:", err));
       }
@@ -105,7 +117,7 @@ export default function AIChatWidget() {
                         : 'bg-white text-ink border border-black/5 rounded-[20px] rounded-tl-sm shadow-sm'
                     }`}
                   >
-                    {m.content}
+                    {getMessageText(m)}
                   </div>
                 </div>
               ))}
@@ -129,7 +141,7 @@ export default function AIChatWidget() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (!inputValue.trim() || isLoading) return;
-                append({ role: 'user', content: inputValue });
+                sendMessage({ text: inputValue });
                 setInputValue('');
               }}
               className="p-4 bg-white/80 border-t border-black/5 backdrop-blur-md"
