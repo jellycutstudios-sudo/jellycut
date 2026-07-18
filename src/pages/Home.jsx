@@ -512,8 +512,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           }}
           className="z-0 pointer-events-none"
         >
-          <source src="/hero.webm" type="video/webm" />
           <source src="/hero-kerala.mp4" type="video/mp4" />
+          <source src="/hero.webm" type="video/webm" />
         </video>
 
         {/* White fade — blends the top edge of the video into the white background */}
