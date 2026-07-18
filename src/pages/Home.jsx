@@ -529,9 +529,9 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         {/* Hero Section (z-20) */}
         <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:whitespace-nowrap max-w-7xl font-normal font-serif text-[#000000] animate-fade-rise" style={{ lineHeight: '0.95', letterSpacing: '-2.46px' }}>
-            We build <em className="text-[#6F6F6F] not-italic">the unforgettable.</em>
+            We build <em className="text-[#4A4A4A] not-italic">the unforgettable.</em>
           </h1>
-          <p className="text-base sm:text-lg max-w-4xl mt-8 leading-relaxed text-[#6F6F6F] animate-fade-rise-delay font-sans">
+          <p className="text-base sm:text-lg max-w-4xl mt-8 leading-relaxed text-[#4A4A4A] animate-fade-rise-delay font-sans">
             Blending cinematic AI storytelling with flawless engineering.<br />
             We craft bold brand identities, video campaigns, and immersive digital platforms.
           </p>
@@ -648,7 +648,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                   </p>
                 </div>
                 <div className="md:col-span-5 md:text-right">
-                  <p className="text-xs md:text-sm text-white/80 max-w-xs md:ml-auto font-light leading-relaxed font-sans">
+                  <p className="text-sm md:text-sm text-white/90 max-w-xs md:ml-auto font-normal leading-relaxed font-sans">
                     We work async across time zones, deliver in 48–72 hours, and communicate in plain English. No agency bloat. No retainer traps.
                   </p>
                 </div>
@@ -690,13 +690,13 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               viewport={{ once: true, margin: '-100px' }}
               variants={getRevealSection()}
             >
-              <span className="text-muted text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              <span className="text-[#4A4A4A] text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
                 Why We Exist
               </span>
               <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-ink font-normal leading-tight mb-8 tracking-tight max-w-2xl">
                 Cinema-grade creative, shipped at the speed of culture.
               </h3>
-              <div className="space-y-6 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
+              <div className="space-y-6 text-[#4A4A4A] text-sm md:text-base font-normal leading-relaxed max-w-xl">
                 <p>
                   We believe every ambitious brand deserves cinematic-quality creative — not just the ones who can afford a 20-person agency on retainer.
                 </p>
@@ -804,7 +804,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                       <h3 className="text-xl font-bold font-sans text-ink group-hover:text-jelly-deep transition-colors duration-300 mb-2">
                         {project.title}
                       </h3>
-                      <p className="text-muted text-xs md:text-sm font-light leading-relaxed line-clamp-2">
+                      <p className="text-[#4A4A4A] text-xs md:text-sm font-normal leading-relaxed line-clamp-2">
                         {project.description}
                       </p>
                     </div>
@@ -866,7 +866,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                       <span className="text-xs font-mono font-bold text-muted/60">{svc.id}</span>
                     </div>
                     <h3 className="text-lg font-bold font-sans text-ink mb-2">{svc.title}</h3>
-                    <p className="text-muted text-xs md:text-sm font-light leading-relaxed">
+                    <p className="text-[#4A4A4A] text-xs md:text-sm font-normal leading-relaxed">
                       {svc.description}
                     </p>
                   </div>
@@ -897,7 +897,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
               Built for async. Delivered&nbsp;fast.
             </h2>
-            <p className="mt-5 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
+            <p className="mt-5 text-[#4A4A4A] text-sm md:text-base font-normal leading-relaxed max-w-xl">
               We work with clients across India, the US, UK, UAE & Australia — fully remote, fully async. No time-zone friction. Just clean creative, on time.
             </p>
           </motion.div>
@@ -935,7 +935,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                   <div className="h-px bg-line w-full" />
                   <div>
                     <h3 className="text-base font-bold font-sans text-ink mb-2">{step.title}</h3>
-                    <p className="text-muted text-sm font-light leading-relaxed">{step.description}</p>
+                    <p className="text-[#4A4A4A] text-sm font-normal leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               );
@@ -1016,7 +1016,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 } border-t border-line`}
               >
                 <div className="px-5 py-4 text-ink font-medium font-sans text-xs md:text-sm">{row.label}</div>
-                <div className="px-5 py-4 border-l border-line text-muted font-light text-xs md:text-sm">{row.agency}</div>
+                <div className="px-5 py-4 border-l border-line text-[#4A4A4A] font-normal text-xs md:text-sm">{row.agency}</div>
                 <div className="px-5 py-4 border-l border-line text-ink font-semibold text-xs md:text-sm flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-jelly shrink-0" />
                   {row.jellycut}
