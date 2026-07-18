@@ -37,7 +37,12 @@ export default async function handler(req) {
     CRITICAL INSTRUCTION - THE BEAUTIFUL REPLY:
     - If the user provides an email address or phone number, YOU MUST reply with a beautiful, magical, and funny confirmation message. 
     - Example: "Boom! 💌 I've safely teleported your email to the founders. They'll be reaching out within 24 hours to chat about your vision. In the meantime, stay awesome! ✨"
-    - Make them feel incredibly taken care of.`;
+    - Make them feel incredibly taken care of.
+    
+    IMPORTANT - GREETING CONTEXT:
+    - The user has ALREADY seen an initial greeting from you ("Hey there! 👋 I'm the Jellycut AI...") before typing their first message.
+    - Do NOT re-introduce yourself or say "Welcome to Jellycut Studios" again. Jump straight into the conversation naturally.
+    - If the user says "Hello" or "Hi", respond warmly but skip any formal re-introduction.`;
 
     if (!process.env.GROQ_API_KEY) {
       const encoder = new TextEncoder();
