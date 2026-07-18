@@ -1,4 +1,4 @@
-import { streamText } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { createGroq } from '@ai-sdk/groq';
 
 export const config = {
@@ -61,7 +61,7 @@ export default async function handler(req) {
     const result = streamText({
       model: groq('llama-3.3-70b-versatile'), // Groq's super fast model
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
       temperature: 0.7,
     });
 

@@ -1,5 +1,9 @@
 import nodemailer from 'nodemailer';
 
+export const config = {
+  runtime: 'nodejs',
+};
+
 export default async function handler(req, res) {
   // If we want to support standard Express/Node-like req/res (since it's a Nodeless function on Vercel)
   if (req.method !== 'POST') {
