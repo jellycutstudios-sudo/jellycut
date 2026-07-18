@@ -131,14 +131,14 @@ export default function AIChatWidget() {
               <div className="relative flex items-center bg-black/5 rounded-full px-4 py-2 hover:bg-black/10 transition-colors focus-within:bg-white focus-within:ring-1 focus-within:ring-black/20 focus-within:shadow-sm">
                 <input
                   type="text"
-                  value={input}
+                  value={input || ''}
                   onChange={handleInputChange}
                   placeholder="Ask me anything..."
                   className="flex-1 bg-transparent border-none outline-none text-sm text-ink placeholder:text-ink/40 py-2"
                 />
                 <button
                   type="submit"
-                  disabled={!input.trim() || isLoading}
+                  disabled={!(input || '').trim() || isLoading}
                   className="w-8 h-8 flex items-center justify-center rounded-full bg-ink text-white disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5 ml-0.5" />
