@@ -500,7 +500,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           muted
           loop
           playsInline
-          poster="/hero_poster.webp"
+          preload="auto"
           style={{
             position: 'absolute',
             bottom: 0,
@@ -512,8 +512,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           }}
           className="z-0 pointer-events-none"
         >
-          <source src="/hero-kerala.mp4" type="video/mp4" />
           <source src="/hero.webm" type="video/webm" />
+          <source src="/hero-kerala.mp4" type="video/mp4" />
         </video>
 
         {/* White fade — blends the top edge of the video into the white background */}
@@ -525,7 +525,6 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             background: 'linear-gradient(to bottom, white 0%, white 18%, rgba(255,255,255,0.75) 42%, rgba(255,255,255,0) 100%)',
           }}
         />
-
 
         {/* Hero Section (z-20) */}
         <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
