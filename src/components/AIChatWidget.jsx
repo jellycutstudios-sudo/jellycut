@@ -21,7 +21,7 @@ export default function AIChatWidget() {
 
   const { messages, sendMessage, status } = useChat({
     api: '/api/chat',
-    initialMessages: [
+    messages: [
       {
         id: '1',
         role: 'assistant',
