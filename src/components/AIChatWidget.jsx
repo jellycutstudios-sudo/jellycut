@@ -81,8 +81,12 @@ export default function AIChatWidget() {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-black/5 bg-white/50 backdrop-blur-md">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-jelly/10 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-jelly-deep" />
+                <div className="w-8 h-8 rounded-full bg-jelly/5 overflow-hidden flex items-center justify-center">
+                  <img 
+                    src="/favicon.svg" 
+                    alt="Jellycut Logo" 
+                    className="w-5 h-5 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm text-ink">Jellycut Studio AI</h3>
