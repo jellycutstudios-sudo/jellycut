@@ -6,9 +6,10 @@ import { MessageCircle, X, Send, Sparkles, User, Loader2 } from 'lucide-react';
 export default function AIChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, append, isLoading } = useChat({
     api: '/api/chat',
     initialMessages: [
       {
@@ -125,20 +126,25 @@ export default function AIChatWidget() {
 
             {/* Input Area */}
             <form
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!inputValue.trim() || isLoading) return;
+                append({ role: 'user', content: inputValue });
+                setInputValue('');
+              }}
               className="p-4 bg-white/80 border-t border-black/5 backdrop-blur-md"
             >
               <div className="relative flex items-center bg-black/5 rounded-full px-4 py-2 hover:bg-black/10 transition-colors focus-within:bg-white focus-within:ring-1 focus-within:ring-black/20 focus-within:shadow-sm">
                 <input
                   type="text"
-                  value={input || ''}
-                  onChange={handleInputChange}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Ask me anything..."
                   className="flex-1 bg-transparent border-none outline-none text-sm text-ink placeholder:text-ink/40 py-2"
                 />
                 <button
                   type="submit"
-                  disabled={!(input || '').trim() || isLoading}
+                  disabled={!inputValue.trim() || isLoading}
                   className="w-8 h-8 flex items-center justify-center rounded-full bg-ink text-white disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5 ml-0.5" />
