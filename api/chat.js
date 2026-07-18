@@ -65,7 +65,7 @@ export default async function handler(req) {
       temperature: 0.7,
     });
 
-    return result.toDataStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (e) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
