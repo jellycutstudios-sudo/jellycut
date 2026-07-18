@@ -16,7 +16,7 @@ import BlogPostDetail from './pages/BlogPostDetail';
 import Editor from './pages/Editor';
 import { projects } from './data/projects';
 import { posts } from './data/posts';
-
+import AIChatWidget from './components/AIChatWidget';
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -375,6 +375,7 @@ function App() {
         )}
       </AnimatePresence>
 
+      <AIChatWidget />
     </div>
   );
 }
