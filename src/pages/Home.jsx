@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
