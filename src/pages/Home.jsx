@@ -461,6 +461,16 @@ const steps = [
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
   const [loadVideo, setLoadVideo] = useState(false);
+  const manifestoRef = useRef(null);
+
+  const handleManifestoMove = (e) => {
+    if (!manifestoRef.current) return;
+    const { left, top, width, height } = manifestoRef.current.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    manifestoRef.current.style.setProperty('--mouse-x', `${x}%`);
+    manifestoRef.current.style.setProperty('--mouse-y', `${y}%`);
+  };
 
   // Native Vimeo background loop is used, so custom fade logic is removed
 
@@ -663,20 +673,35 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               viewport={{ once: true, margin: '-100px' }}
               variants={getRevealSection()}
             >
-              <div className="relative group w-full max-w-[320px] md:max-w-[460px] aspect-square mx-auto cursor-pointer overflow-hidden">
-                {/* Bottom Image (Golden 02) */}
-                <img
-                  src="/02.jpg"
-                  alt="Jellycut Studios — Golden Statue"
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply opacity-0 transition-all duration-[1200ms] ease-out group-hover:opacity-100 group-hover:scale-105"
-                />
-                {/* Top Image (Green 01) */}
+              <div 
+                ref={manifestoRef}
+                onMouseMove={handleManifestoMove}
+                onMouseEnter={() => {
+                  if(manifestoRef.current) manifestoRef.current.style.setProperty('--mask-opacity', '1');
+                }}
+                onMouseLeave={() => {
+                  if(manifestoRef.current) manifestoRef.current.style.setProperty('--mask-opacity', '0');
+                }}
+                className="relative w-full max-w-[320px] md:max-w-[460px] aspect-square mx-auto cursor-crosshair overflow-hidden"
+              >
+                {/* Base Image (Green 01) */}
                 <img
                   src="/01.jpg"
                   alt="Jellycut Studios — Green Statue"
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply transition-all duration-[1200ms] ease-out opacity-100 group-hover:opacity-0 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply pointer-events-none"
+                />
+                {/* Reveal Image (Golden 02) */}
+                <img
+                  src="/02.jpg"
+                  alt="Jellycut Studios — Golden Statue"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply pointer-events-none transition-opacity duration-300 ease-out"
+                  style={{
+                    opacity: 'var(--mask-opacity, 0)',
+                    WebkitMaskImage: 'radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)',
+                    maskImage: 'radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)'
+                  }}
                 />
               </div>
             </motion.div>
