@@ -468,8 +468,15 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
     const { left, top, width, height } = manifestoRef.current.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
+    
+    // Calculate 3D tilt (-8 to +8 degrees)
+    const rotateX = ((y - 50) / 50) * -8;
+    const rotateY = ((x - 50) / 50) * 8;
+    
     manifestoRef.current.style.setProperty('--mouse-x', `${x}%`);
     manifestoRef.current.style.setProperty('--mouse-y', `${y}%`);
+    manifestoRef.current.style.setProperty('--rotate-x', `${rotateX}deg`);
+    manifestoRef.current.style.setProperty('--rotate-y', `${rotateY}deg`);
   };
 
   // Native Vimeo background loop is used, so custom fade logic is removed
@@ -680,10 +687,15 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                   if(manifestoRef.current) manifestoRef.current.style.setProperty('--mask-opacity', '1');
                 }}
                 onMouseLeave={() => {
-                  if(manifestoRef.current) manifestoRef.current.style.setProperty('--mask-opacity', '0');
+                  if(manifestoRef.current) {
+                    manifestoRef.current.style.setProperty('--mask-opacity', '0');
+                    manifestoRef.current.style.setProperty('--rotate-x', '0deg');
+                    manifestoRef.current.style.setProperty('--rotate-y', '0deg');
+                  }
                 }}
-                className="relative w-full max-w-[420px] md:max-w-[620px] aspect-square mx-auto cursor-crosshair overflow-hidden"
+                className="relative w-full max-w-[420px] md:max-w-[620px] aspect-square mx-auto cursor-crosshair overflow-hidden transition-transform duration-200 ease-out hover:duration-0"
                 style={{
+                  transform: 'perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg))',
                   WebkitMaskImage: 'radial-gradient(circle closest-side, black 70%, transparent 98%)',
                   maskImage: 'radial-gradient(circle closest-side, black 70%, transparent 98%)'
                 }}
