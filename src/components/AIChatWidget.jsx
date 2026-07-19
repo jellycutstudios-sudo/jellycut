@@ -14,13 +14,14 @@ const getMessageText = (message) => {
 };
 
 // Custom Jellycut chat icon — brand squiggle mark
-function JellycutChatIcon({ className = "w-7 h-7" }) {
+function JellycutChatIcon({ className = "w-7 h-7", ...props }) {
   return (
     <svg
       viewBox="0 0 1080 1080"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      {...props}
     >
       <path
         d="M591.327 651.044C714.225 637.483 898.09 353.896 974.66 213.797C987.931 184.599 1022.87 110.004 1056.46 45.2008C1098.44 -35.8027 1293.54 2.24993 1332.47 151.573C1371.4 300.896 1292.26 344.462 1010.24 672.419C728.228 1000.38 462.337 952.449 341.938 883.975C221.54 815.501 80.4885 572.275 184.351 368.666C288.214 165.056 478.924 203.092 562.038 269.226C588.754 290.484 601.967 311.218 607.119 329.597C618.356 369.68 571.079 391.205 532.501 406.847C500.033 420.011 467.189 441.197 453.788 472.819C425.017 540.712 437.705 667.996 591.327 651.044Z"
@@ -246,7 +247,7 @@ export default function AIChatWidget() {
                 // Mobile: bottom-sheet
                 'fixed bottom-0 left-0 right-0 rounded-t-[28px] h-[75dvh]',
                 // Desktop: floating card
-                'md:absolute md:bottom-20 md:right-0 md:left-auto md:rounded-3xl',
+                'md:absolute md:bottom-0 md:right-0 md:left-auto md:rounded-3xl',
                 'md:w-[400px] md:h-[560px] md:max-h-[80vh]',
                 'shadow-[0_-8px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(111,214,42,0.15)]',
                 'md:shadow-[0_30px_70px_rgba(0,0,0,0.5),0_0_0_1px_rgba(111,214,42,0.18)]',
@@ -265,7 +266,7 @@ export default function AIChatWidget() {
                     className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'rgba(111,214,42,0.12)', border: '1px solid rgba(111,214,42,0.2)' }}
                   >
-                    <JellycutChatIcon className="w-5 h-5" style={{ color: '#6fd62a' }} />
+                    <JellycutChatIcon className="w-5 h-5" style={{ color: '#ffffff' }} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm leading-tight" style={{ color: '#ffffff' }}>Jellycut Studio AI</h3>
@@ -414,53 +415,31 @@ export default function AIChatWidget() {
         </AnimatePresence>
 
         {/* FAB — absolute positioned so it always appears above the chat panel */}
-        <div className="relative z-[100]">
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-shadow"
-            style={{
-              backgroundColor: '#0f1a0d',
-              border: '1px solid rgba(111,214,42,0.3)',
-              color: '#6fd62a',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(111,214,42,0.12)',
-            }}
-            aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
-          >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="open"
-                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <JellycutChatIcon className="w-7 h-7" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+        {!isOpen && (
+          <div className="relative z-[100]">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setIsOpen(true)}
+              className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-shadow"
+              style={{
+                backgroundColor: '#0f1a0d',
+                border: '1px solid rgba(111,214,42,0.3)',
+                color: '#6fd62a',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(111,214,42,0.12)',
+              }}
+              aria-label="Open AI chat"
+            >
+              <JellycutChatIcon className="w-7 h-7" />
 
-            {/* Pinging indicator dot */}
-            {!isOpen && (
+              {/* Pinging indicator dot */}
               <span className="absolute top-0.5 right-0.5 flex">
                 <span className="animate-ping absolute w-3 h-3 rounded-full opacity-60" style={{ backgroundColor: '#6fd62a' }} />
                 <span className="relative w-3 h-3 rounded-full" style={{ backgroundColor: '#6fd62a', border: '2px solid #0f1a0d' }} />
               </span>
-            )}
-          </motion.button>
-        </div>
+            </motion.button>
+          </div>
+        )}
       </div>
     </>
   );
