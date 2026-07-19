@@ -1,0 +1,207 @@
+
+/Users/JELLYCUT/.vercel/output/static/assets/index-BSFG539N.js
+   1:5527    error  'process' is not defined                                                   no-undef
+   1:5553    error  'process' is not defined                                                   no-undef
+   1:9909    error  'setImmediate' is not defined                                              no-undef
+   1:10751   error  Unreachable code                                                           no-unreachable
+   1:15832   error  '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            no-undef
+   1:15889   error  '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            no-undef
+   1:19201   error  Empty block statement                                                      no-empty
+   6:202     error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:547     error  Empty block statement                                                      no-empty
+   8:4206    error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:4304    error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:4386    error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:5202    error  Unexpected combined character in character class                           no-misleading-character-class
+   8:6351    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:8570    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:10679   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:10709   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:10828   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:10889   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:13852   error  Unexpected control character(s) in regular expression: \x00, \x1f          no-control-regex
+   8:15879   error  Expected to return a value in method 'get'                                 getter-return
+   8:16569   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:16911   error  Invalid typeof comparison value                                            valid-typeof
+   8:17085   error  Invalid typeof comparison value                                            valid-typeof
+   8:18920   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:25182   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:26485   error  'process' is not defined                                                   no-undef
+   8:26511   error  'process' is not defined                                                   no-undef
+   8:40409   error  The value assigned to 'g' is not used in subsequent statements             no-useless-assignment
+   8:41065   error  The value assigned to '_' is not used in subsequent statements             no-useless-assignment
+   8:45260   error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:45719   error  Unexpected constant condition                                              no-constant-condition
+   8:58578   error  Empty block statement                                                      no-empty
+   8:64068   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:68938   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:71808   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:72909   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:74583   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:81192   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:86144   error  Unnecessary escape character: \/                                           no-useless-escape
+   8:95646   error  The value assigned to 'e' is not used in subsequent statements             no-useless-assignment
+   8:96801   error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:97752   error  Empty block statement                                                      no-empty
+   8:98028   error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:101196  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:103563  error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   8:105357  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:106026  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:111748  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:112080  error  Unexpected constant condition                                              no-constant-condition
+   8:114355  error  The value assigned to 'o' is not used in subsequent statements             no-useless-assignment
+   8:114626  error  Unexpected constant condition                                              no-constant-condition
+   8:115223  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:115535  error  Unexpected constant condition                                              no-constant-condition
+   8:115925  error  Expected a 'break' statement before 'default'                              no-fallthrough
+   8:118335  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:119123  error  Empty block statement                                                      no-empty
+   8:119848  error  Empty block statement                                                      no-empty
+   8:123682  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:127425  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:127612  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:128819  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:129896  error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   8:130299  error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   8:131813  error  Unexpected control character(s) in regular expression: \x00                no-control-regex
+   9:475     error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   9:5062    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:5631    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:5966    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:6359    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:6475    error  Expected a 'break' statement before 'default'                              no-fallthrough
+   9:6635    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:6897    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:7379    error  Expected a 'break' statement before 'case'                                 no-fallthrough
+   9:7518    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:7695    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:7777    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8037    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8135    error  Expected a 'break' statement before 'default'                              no-fallthrough
+   9:8145    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8222    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8609    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8683    error  Expected a 'break' statement before 'default'                              no-fallthrough
+   9:8693    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8760    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:8878    error  Expected a 'break' statement before 'default'                              no-fallthrough
+   9:9053    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9084    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9207    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9480    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9511    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9630    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:9984    error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10015   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10082   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10293   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10327   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10395   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10493   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10524   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:10589   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:18620   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   9:19691   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   9:22224   error  Expected a conditional expression and instead saw an assignment            no-cond-assign
+   9:35777   error  '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            no-undef
+   9:35876   error  Empty block statement                                                      no-empty
+   9:36378   error  '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            no-undef
+   9:36435   error  '__REACT_DEVTOOLS_GLOBAL_HOOK__' is not defined                            no-undef
+   9:41635   error  The value assigned to 't' is not used in subsequent statements             no-useless-assignment
+   9:41640   error  The value assigned to 'n' is not used in subsequent statements             no-useless-assignment
+   9:41645   error  The value assigned to 'r' is not used in subsequent statements             no-useless-assignment
+   9:41650   error  The value assigned to 'i' is not used in subsequent statements             no-useless-assignment
+   9:42606   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:44269   error  The value assigned to 'i' is not used in subsequent statements             no-useless-assignment
+   9:44273   error  The value assigned to 'a' is not used in subsequent statements             no-useless-assignment
+   9:44277   error  The value assigned to 'o' is not used in subsequent statements             no-useless-assignment
+   9:62501   error  Empty block statement                                                      no-empty
+   9:64185   error  'n' is assigned a value but never used                                     no-unused-vars
+   9:64198   error  'r' is assigned a value but never used                                     no-unused-vars
+   9:67083   error  't' is defined but never used                                              no-unused-vars
+   9:70603   error  'n' is assigned a value but never used                                     no-unused-vars
+   9:72179   error  Unexpected comma in middle of array                                        no-sparse-arrays
+   9:73075   error  'r' is assigned a value but never used                                     no-unused-vars
+   9:73574   error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:79897   error  'Bi' is assigned a value but never used                                    no-unused-vars
+   9:84906   error  'e' is defined but never used                                              no-unused-vars
+   9:84908   error  't' is defined but never used                                              no-unused-vars
+   9:84910   error  'n' is defined but never used                                              no-unused-vars
+   9:86220   error  'u' is assigned a value but never used                                     no-unused-vars
+   9:94238   error  The value assigned to 'c' is not used in subsequent statements             no-useless-assignment
+   9:99369   error  'e' is assigned a value but never used                                     no-unused-vars
+   9:100224  error  Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins
+   9:100255  error  The value assigned to 'r' is not used in subsequent statements             no-useless-assignment
+  17:3920    error  Empty block statement                                                      no-empty
+  17:6419    error  't' is assigned a value but never used                                     no-unused-vars
+  17:9700    error  'e' is defined but never used                                              no-unused-vars
+  17:9702    error  't' is defined but never used                                              no-unused-vars
+  17:11163   error  'e' is assigned a value but never used                                     no-unused-vars
+  17:11179   error  't' is assigned a value but never used                                     no-unused-vars
+  17:27263   error  The value assigned to 'e' is not used in subsequent statements             no-useless-assignment
+
+/Users/JELLYCUT/api/chat.js
+  48:10  error  'process' is not defined  no-undef
+  64:15  error  'process' is not defined  no-undef
+
+/Users/JELLYCUT/api/send-lead.js
+   15:13  error  'isAI' is assigned a value but never used  no-unused-vars
+  247:10  error  'process' is not defined                   no-undef
+  247:37  error  'process' is not defined                   no-undef
+  259:15  error  'process' is not defined                   no-undef
+  260:15  error  'process' is not defined                   no-undef
+  264:24  error  'process' is not defined                   no-undef
+  268:37  error  'process' is not defined                   no-undef
+  278:38  error  'process' is not defined                   no-undef
+
+/Users/JELLYCUT/server.js
+   25:16  error  'process' is not defined  no-undef
+  102:12  error  'process' is not defined  no-undef
+  113:41  error  'process' is not defined  no-undef
+  128:19  error  'Buffer' is not defined   no-undef
+
+/Users/JELLYCUT/src/components/AIChatWidget.jsx
+    1:8   error  'React' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       no-unused-vars
+   41:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  39 |   useEffect(() => {
+  40 |     if (!text) {
+> 41 |       setDisplayedText('');
+     |       ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  42 |       textRef.current = '';
+  43 |       return;
+  44 |     }                                                                                                                                          react-hooks/set-state-in-effect
+  101:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   99 |   useEffect(() => {
+  100 |     if (status === 'submitted') {
+> 101 |       setIsThinking(true);
+      |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  102 |       if (thinkingTimeoutRef.current) clearTimeout(thinkingTimeoutRef.current);
+  103 |       thinkingTimeoutRef.current = setTimeout(() => {
+  104 |         setIsThinking(false);  react-hooks/set-state-in-effect
+  160:33  error  Unnecessary escape character: \+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+  160:57  error  Unnecessary escape character: \.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+  160:73  error  Unnecessary escape character: \.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+  179:20  error  Unnecessary escape character: \.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+  179:22  error  Unnecessary escape character: \!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+  179:24  error  Unnecessary escape character: \?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+
+/Users/JELLYCUT/src/components/Footer.jsx
+  6:9  error  'footerMarginClass' is assigned a value but never used  no-unused-vars
+
+✖ 164 problems (164 errors, 0 warnings)
+

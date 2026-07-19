@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Footer({ setIsModalOpen, hideCTA }) {
   const sectionPaddingClass = hideCTA ? 'py-12 md:py-16' : 'py-28 md:py-36';
-  const footerMarginClass = hideCTA ? 'mt-0' : 'mt-28 md:mt-36';
+
 
   if (hideCTA) {
     return (

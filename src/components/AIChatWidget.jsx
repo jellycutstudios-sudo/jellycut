@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, User, Loader2 } from 'lucide-react';
@@ -38,6 +38,7 @@ function TypewriterText({ text, speed = 15, isStreaming = false }) {
 
   useEffect(() => {
     if (!text) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplayedText('');
       textRef.current = '';
       return;
@@ -98,6 +99,7 @@ export default function AIChatWidget() {
 
   useEffect(() => {
     if (status === 'submitted') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsThinking(true);
       if (thinkingTimeoutRef.current) clearTimeout(thinkingTimeoutRef.current);
       thinkingTimeoutRef.current = setTimeout(() => {
@@ -157,7 +159,7 @@ export default function AIChatWidget() {
     // 2. Extract phone
     let phone = null;
     for (const msg of userMessages) {
-      const match = msg.match(/[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im) || msg.match(/\b\d{8,14}\b/);
+      const match = msg.match(/[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}/im) || msg.match(/\b\d{8,14}\b/);
       if (match) {
         phone = match[0].trim();
         break;
@@ -176,7 +178,7 @@ export default function AIChatWidget() {
       const reply = getMessageText(messages[nameAskIndex + 1]).trim();
       name = reply
         .replace(/^(my name is|i am|i'm|this is|call me|name is|i am called)\s+/i, '')
-        .replace(/[\.\!\?]+$/, '')
+        .replace(/[.!?]+$/, '')
         .trim();
       
       if (name.split(/\s+/).length > 3) {
