@@ -667,7 +667,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
             {/* Left — image */}
             <motion.div
-              className="md:col-span-5 flex justify-center items-center order-last md:order-first"
+              className="md:col-span-6 flex justify-center items-center order-last md:order-first"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
@@ -703,8 +703,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                   className="absolute inset-0 w-full h-full object-contain pointer-events-none transition-opacity duration-300 ease-out"
                   style={{
                     opacity: 'var(--mask-opacity, 0)',
-                    WebkitMaskImage: 'radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)',
-                    maskImage: 'radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)'
+                    WebkitMaskImage: 'radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)',
+                    maskImage: 'radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)'
                   }}
                 />
               </div>
@@ -712,7 +712,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
 
             {/* Right — copy */}
             <motion.div
-              className="md:col-span-7 flex flex-col justify-center text-left order-first md:order-none"
+              className="md:col-span-6 flex flex-col justify-center text-left order-first md:order-none md:pl-8 lg:pl-12"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
