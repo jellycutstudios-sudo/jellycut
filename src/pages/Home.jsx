@@ -663,14 +663,20 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               viewport={{ once: true, margin: '-100px' }}
               variants={getRevealSection()}
             >
-              <div className="relative group max-w-[320px] md:max-w-full">
-              <img
-                  src="/jelly.avif"
-                  alt="Jellycut Studios mascot — bold, creative, AI-powered"
-                  width="460"
-                  height="460"
+              <div className="relative group w-full max-w-[320px] md:max-w-[460px] aspect-square mx-auto cursor-pointer overflow-hidden">
+                {/* Bottom Image (Golden 02) */}
+                <img
+                  src="/02.jpg"
+                  alt="Jellycut Studios — Golden Statue"
                   loading="lazy"
-                  className="max-h-[380px] md:max-h-[460px] object-contain opacity-95 transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply opacity-0 transition-all duration-[1200ms] ease-out group-hover:opacity-100 group-hover:scale-105"
+                />
+                {/* Top Image (Green 01) */}
+                <img
+                  src="/01.jpg"
+                  alt="Jellycut Studios — Green Statue"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply transition-all duration-[1200ms] ease-out opacity-100 group-hover:opacity-0 group-hover:scale-105"
                 />
               </div>
             </motion.div>
