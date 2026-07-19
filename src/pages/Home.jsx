@@ -460,7 +460,7 @@ const steps = [
 ];
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
-  const [loadYoutube, setLoadYoutube] = useState(false);
+  const [loadVideo, setLoadVideo] = useState(false);
 
   // Native Vimeo background loop is used, so custom fade logic is removed
 
@@ -568,30 +568,22 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
             variants={getRevealSection()}
-            onViewportEnter={() => setLoadYoutube(true)}
+            onViewportEnter={() => setLoadVideo(true)}
           >
-            {/* YouTube background — Starbucks AI Ad */}
+            {/* Background video — Red Bull Ad */}
             <div className="skyVideo" style={{ pointerEvents: 'none' }}>
-              {loadYoutube && (
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/TLmlYZSDTMw?autoplay=1&mute=1&loop=1&playlist=TLmlYZSDTMw&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen={false}
-                  loading="lazy"
-                  title="Jellycut Studios — Starbucks AI Ad Background"
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: '100vw',
-                    height: '56.25vw',
-                    minHeight: '100%',
-                    minWidth: '177.77vh',
-                    transform: 'translate(-50%, -50%) scale(1.15)',
-                    border: 'none',
-                    pointerEvents: 'none',
-                  }}
-                />
+              {loadVideo && (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="absolute inset-0 w-full h-full object-cover z-0"
+                >
+                  <source src="/hero.webm" type="video/webm" />
+                  <source src="/hero.mp4" type="video/mp4" />
+                </video>
               )}
             </div>
 
