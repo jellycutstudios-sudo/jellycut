@@ -682,21 +682,25 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 onMouseLeave={() => {
                   if(manifestoRef.current) manifestoRef.current.style.setProperty('--mask-opacity', '0');
                 }}
-                className="relative w-full max-w-[320px] md:max-w-[460px] aspect-square mx-auto cursor-crosshair overflow-hidden"
+                className="relative w-full max-w-[420px] md:max-w-[620px] aspect-square mx-auto cursor-crosshair overflow-hidden"
+                style={{
+                  WebkitMaskImage: 'radial-gradient(circle closest-side, black 70%, transparent 98%)',
+                  maskImage: 'radial-gradient(circle closest-side, black 70%, transparent 98%)'
+                }}
               >
                 {/* Base Image (Green 01) */}
                 <img
                   src="/01.jpg"
                   alt="Jellycut Studios — Green Statue"
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-contain pointer-events-none"
                 />
                 {/* Reveal Image (Golden 02) */}
                 <img
                   src="/02.jpg"
                   alt="Jellycut Studios — Golden Statue"
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-contain mix-blend-multiply pointer-events-none transition-opacity duration-300 ease-out"
+                  className="absolute inset-0 w-full h-full object-contain pointer-events-none transition-opacity duration-300 ease-out"
                   style={{
                     opacity: 'var(--mask-opacity, 0)',
                     WebkitMaskImage: 'radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)',
