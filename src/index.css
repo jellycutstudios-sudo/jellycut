@@ -88,12 +88,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Glass Components ───────────────────────────────────────────────────── */
 .glass-effect {
-  background: rgba(15, 40, 8, 0.36);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  border: 1px solid rgba(111, 214, 42, 0.25);
-  box-shadow: 0 12px 40px -10px rgba(15, 40, 8, 0.22),
-              inset 0 1px 0 rgba(111, 214, 42, 0.12);
+  background: rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .glass-nav {

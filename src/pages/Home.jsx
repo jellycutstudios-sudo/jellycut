@@ -587,8 +587,9 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
               )}
             </div>
 
-            <div className="absolute inset-0 bg-[#0f3d08]/25 mix-blend-multiply z-5 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a2806]/55 via-transparent to-black/15 z-5 pointer-events-none" />
+            <div className="absolute inset-0 bg-black/10 mix-blend-multiply z-5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent z-5 pointer-events-none" />
 
             <div className="relative z-10 flex flex-col justify-between h-full w-full">
               {/* Floating status card + Explore button */}
@@ -600,7 +601,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, duration: 0.8, ease }}
                 >
-                  <div className="bg-jelly/20 p-2.5 rounded-xl text-jelly">
+                  <div className="bg-white/10 p-2.5 rounded-xl text-white">
                     <CheckCircle className="w-5 h-5" />
                   </div>
                   <div>
@@ -611,8 +612,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                     <p className="text-xs text-white/80 mt-1 font-light leading-snug">
                       Creative brief compiled. Final video rendered and exported across all formats.
                     </p>
-                    <div className="mt-2.5 flex items-center gap-1.5 text-[9px] font-mono text-jelly">
-                      <span className="h-1.5 w-1.5 bg-jelly rounded-full animate-pulse" />
+                    <div className="mt-2.5 flex items-center gap-1.5 text-[9px] font-mono text-white/90">
+                      <span className="h-1.5 w-1.5 bg-white/90 rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
                       Delivered in 2 days
                     </div>
                   </div>
