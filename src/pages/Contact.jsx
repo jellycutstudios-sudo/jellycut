@@ -218,7 +218,7 @@ export default function Contact() {
               <h3 className="font-serif text-2xl text-ink font-normal">Coordinates</h3>
               <div className="space-y-4">
                 <a 
-                  href="mailto:jellycutstudios@gmail.com" 
+                  href="mailto:team@jellycutstudio.com" 
                   className="flex items-center gap-3 p-3 bg-white border border-line rounded-2xl hover:border-jelly transition-colors group cursor-pointer"
                 >
                   <div className="bg-cream text-jelly-deep p-2 rounded-xl group-hover:bg-jelly/10">
@@ -226,7 +226,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[9px] font-semibold uppercase tracking-wider text-muted font-mono">Email Address</div>
-                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">jellycutstudios@gmail.com</div>
+                    <div className="text-xs font-bold text-ink group-hover:text-jelly-deep transition-colors">team@jellycutstudio.com</div>
                   </div>
                 </a>
 

@@ -49,7 +49,7 @@ export default async function handler(req) {
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
         async start(controller) {
-          const text = "Hi there! I'd love to chat, but my Groq API key isn't configured yet. If you need to reach us, just email jellycutstudios@gmail.com directly!";
+          const text = "Hi there! I'd love to chat, but my Groq API key isn't configured yet. If you need to reach us, just email team@jellycutstudio.com directly!";
           const chunk = encoder.encode(`0:"${text}"\n`);
           controller.enqueue(chunk);
           controller.close();

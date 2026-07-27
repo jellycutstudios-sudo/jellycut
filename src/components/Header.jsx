@@ -335,7 +335,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
               >
                 <div className="flex flex-col gap-1.5 text-left">
                   <span className="text-white/20">Connect</span>
-                  <a href="mailto:jellycutstudios@gmail.com" className="hover:text-jelly transition-colors normal-case text-white/60">jellycutstudios@gmail.com</a>
+                  <a href="mailto:team@jellycutstudio.com" className="hover:text-jelly transition-colors normal-case text-white/60">team@jellycutstudio.com</a>
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-jelly transition-colors normal-case text-white/60">@jellycutstudios</a>
                 </div>
                 <div className="flex flex-col gap-1.5 items-end text-right">

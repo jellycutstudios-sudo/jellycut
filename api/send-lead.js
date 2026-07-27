@@ -261,7 +261,7 @@ export default async function handler(req, res) {
       },
     });
 
-    const adminEmail = process.env.ADMIN_EMAIL || 'jellycutstudios@gmail.com';
+    const adminEmail = process.env.ADMIN_EMAIL || 'team@jellycutstudio.com';
 
     // ── 1. Admin notification ─────────────────────────────────────────────
     await transporter.sendMail({

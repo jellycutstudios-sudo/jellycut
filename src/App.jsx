@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, Sparkles, ChevronDown, ArrowRight } from 'lucide-react';
 
@@ -7,13 +7,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
-import Works from './pages/Works';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import ProjectDetail from './pages/ProjectDetail';
-import Blog from './pages/Blog';
-import BlogPostDetail from './pages/BlogPostDetail';
-import Editor from './pages/Editor';
+const Works = lazy(() => import('./pages/Works'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPostDetail = lazy(() => import('./pages/BlogPostDetail'));
+const Editor = lazy(() => import('./pages/Editor'));
 import { projects } from './data/projects';
 import { posts } from './data/posts';
 import AIChatWidget from './components/AIChatWidget';
@@ -214,7 +214,9 @@ function App() {
             transition={{ duration: 0.35, ease }}
             className="w-full"
           >
-            {renderActivePage()}
+            <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center"><div className="w-6 h-6 border-2 border-jelly border-t-transparent rounded-full animate-spin" /></div>}>
+              {renderActivePage()}
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>
