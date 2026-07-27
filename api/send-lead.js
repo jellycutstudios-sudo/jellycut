@@ -46,7 +46,7 @@ function adminEmailHTML({ name, email, phone, summary, timestamp }) {
               <td>
                 <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:2px;color:#6fd62a;text-transform:uppercase;">Jellycut Studios</p>
                 <h1 style="margin:8px 0 0;font-size:22px;font-weight:700;color:#ffffff;line-height:1.3;">🔔 New Chat Lead</h1>
-                <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.5);">${timestamp}</p>
+                <p style="margin:6px 0 0;font-size:13px;color:#b3cbb0;">${timestamp}</p>
               </td>
               <td align="right" style="vertical-align:top;">
                 <div style="width:48px;height:48px;background:rgba(111,214,42,0.15);border:1px solid rgba(111,214,42,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;">
@@ -103,8 +103,8 @@ function adminEmailHTML({ name, email, phone, summary, timestamp }) {
 
         <!-- Footer -->
         <tr><td style="background:#0f1a0d;border-radius:0 0 16px 16px;padding:20px 36px;">
-          <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);text-align:center;">
-            Jellycut Studios · Kerala, India · <a href="https://jellycutstudio.com" style="color:#6fd62a;text-decoration:none;">jellycutstudio.com</a>
+          <p style="margin:0;font-size:13px;color:#b3cbb0;text-align:center;">
+            Jellycut Studios · Kerala, India · <a href="https://jellycutstudio.com" style="color:#6fd62a;font-weight:600;text-decoration:underline;">jellycutstudio.com</a>
           </p>
         </td></tr>
 
@@ -135,7 +135,7 @@ function customerEmailHTML({ name, contactInfo }) {
           <h1 style="margin:0 0 12px;font-size:28px;font-weight:700;color:#ffffff;line-height:1.25;">
             We got your message,<br>${firstName}! 🎉
           </h1>
-          <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:420px;margin:0 auto;">
+          <p style="margin:0;font-size:15px;color:#d4e6d2;line-height:1.6;max-width:420px;margin:0 auto;">
             Our team will review your brief and get back to you within <strong style="color:#ffffff;">24 hours</strong> — no calls required.
           </p>
         </td></tr>
@@ -202,7 +202,7 @@ function customerEmailHTML({ name, contactInfo }) {
             <tr>
               <td>
                 <p style="margin:0;font-size:13px;font-weight:600;color:#ffffff;">Jellycut Studios</p>
-                <p style="margin:4px 0 0;font-size:12px;color:rgba(255,255,255,0.4);">Kerala, India · AI-first creative studio</p>
+                <p style="margin:4px 0 0;font-size:13px;color:#b3cbb0;">Kerala, India · AI-first creative studio</p>
               </td>
               <td align="right">
                 <a href="https://jellycutstudio.com" style="display:inline-block;background:rgba(111,214,42,0.12);border:1px solid rgba(111,214,42,0.25);color:#6fd62a;text-decoration:none;font-size:12px;font-weight:700;padding:8px 16px;border-radius:20px;letter-spacing:.5px;">
@@ -211,7 +211,7 @@ function customerEmailHTML({ name, contactInfo }) {
               </td>
             </tr>
           </table>
-          <p style="margin:16px 0 0;font-size:11px;color:rgba(255,255,255,0.25);text-align:center;">
+          <p style="margin:16px 0 0;font-size:12px;color:#95af92;text-align:center;">
             You received this because you chatted with our AI assistant. We respect your privacy — no spam, ever.
           </p>
         </td></tr>
