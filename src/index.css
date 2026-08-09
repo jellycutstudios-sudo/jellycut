@@ -81,6 +81,16 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hide native cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* Restore native cursor on touch/mobile devices */
+@media (pointer: coarse) {
+  * { cursor: auto !important; }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   letter-spacing: -0.015em;

@@ -2,462 +2,15 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
+import { services, steps, faqs, comparisonRows } from '../data/homeData.jsx';
+import StudioStatusTicker from '../components/StudioStatusTicker';
+import BrandQuiz from '../components/BrandQuiz';
+import PriceEstimator from '../components/PriceEstimator';
+import TransformationReel from '../components/TransformationReel';
 
 const ease = [0.16, 1, 0.3, 1];
 
-// ─── Custom Animated Icons (Framer Motion Path Drawings) ───────────────────
-function AnimatedVideoIcon() {
-  return (
-    <motion.svg
-      width="20"
-      height="20"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.rect
-        width="14"
-        height="12"
-        x="2"
-        y="6"
-        rx="2"
-        ry="2"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.5, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.path
-        d="m22 8-6 4 6 4V8Z"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
 
-function AnimatedPaletteIcon() {
-  return (
-    <motion.svg
-      width="20"
-      height="20"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.path
-        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.63-.77 1.63-1.7 0-.43-.16-.83-.41-1.16a.81.81 0 0 1-.16-.5c0-.44.36-.8 1.8-.8h2.14c4.42 0 8-3.58 8-8 0-5.5-4.5-10-10-10Z"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.6, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.circle
-        cx="13.5"
-        cy="6.5"
-        r=".5"
-        fill="currentColor"
-        variants={{
-          normal: { scale: 1, opacity: 1 },
-          hover: {
-            scale: [0, 1.2, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.2 }
-          }
-        }}
-      />
-      <motion.circle
-        cx="17.5"
-        cy="10.5"
-        r=".5"
-        fill="currentColor"
-        variants={{
-          normal: { scale: 1, opacity: 1 },
-          hover: {
-            scale: [0, 1.2, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.3 }
-          }
-        }}
-      />
-      <motion.circle
-        cx="8.5"
-        cy="7.5"
-        r=".5"
-        fill="currentColor"
-        variants={{
-          normal: { scale: 1, opacity: 1 },
-          hover: {
-            scale: [0, 1.2, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.4 }
-          }
-        }}
-      />
-      <motion.circle
-        cx="6.5"
-        cy="12.5"
-        r=".5"
-        fill="currentColor"
-        variants={{
-          normal: { scale: 1, opacity: 1 },
-          hover: {
-            scale: [0, 1.2, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.5 }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-function AnimatedCodeIcon() {
-  return (
-    <motion.svg
-      width="20"
-      height="20"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.polyline
-        points="16 18 22 12 16 6"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.4, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.polyline
-        points="8 6 2 12 8 18"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-function AnimatedGlobeIcon() {
-  return (
-    <motion.svg
-      width="20"
-      height="20"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.circle
-        cx="12"
-        cy="12"
-        r="10"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.5, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.path
-        d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.path
-        d="M2 12h20"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.4, ease: 'easeInOut' }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-// ─── Custom Animated Process Icons ─────────────────────────────────────────
-function AnimatedFileTextIcon() {
-  return (
-    <motion.svg
-      width="24"
-      height="24"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.path
-        d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.6, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.path
-        d="M14 2v4a2 2 0 0 0 2 2h4"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' }
-          }
-        }}
-      />
-      <motion.path
-        d="M10 9H8"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.4 }
-          }
-        }}
-      />
-      <motion.path
-        d="M16 13H8"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.5 }
-          }
-        }}
-      />
-      <motion.path
-        d="M16 17H8"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.3, delay: 0.6 }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-function AnimatedZapIcon() {
-  return (
-    <motion.svg
-      width="24"
-      height="24"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.path
-        d="M13 2 L3 14h9l-1 8 10-12h-9l1-8Z"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.6, ease: 'easeInOut' }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-function AnimatedStarIcon() {
-  return (
-    <motion.svg
-      width="24"
-      height="24"
-      viewBox="-1.5 -1.5 27 27"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <motion.polygon
-        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-        variants={{
-          normal: { pathLength: 1, opacity: 1 },
-          hover: {
-            pathLength: [0, 1],
-            opacity: [0, 1],
-            transition: { duration: 0.7, ease: 'easeInOut' }
-          }
-        }}
-      />
-    </motion.svg>
-  );
-}
-
-// ─── Services data ─────────────────────────────────────────────────────────
-const services = [
-  {
-    id: '01',
-    icon: AnimatedVideoIcon,
-    title: 'AI Video Ads',
-    description:
-      'Scroll-stopping ad creative for Meta, TikTok, YouTube, and LinkedIn — produced with AI and refined by real creative direction.',
-    cta: 'See Ad Samples',
-    path: '/works'
-  },
-  {
-    id: '02',
-    icon: AnimatedPaletteIcon,
-    title: 'Brand Identity',
-    description:
-      'Logo, colour system, typography, and brand guidelines built for a digital-first world. Built to last and scale.',
-    cta: 'View Brand Work',
-    path: '/works'
-  },
-  {
-    id: '03',
-    icon: AnimatedCodeIcon,
-    title: 'Vibe-Coded Apps',
-    description:
-      'Fast, beautiful web apps and interactive experiences — built with AI-assisted coding that ships in weeks, not months.',
-    cta: 'View App Builds',
-    path: '/works'
-  },
-  {
-    id: '04',
-    icon: AnimatedGlobeIcon,
-    title: 'Website Design',
-    description:
-      'Cinematic, conversion-optimised websites that make your first impression your best impression. Always.',
-    cta: 'See Site Examples',
-    path: '/works'
-  },
-];
-
-// ─── FAQ data ──────────────────────────────────────────────────────────────
-const faqs = [
-  {
-    q: 'How fast do you deliver projects?',
-    a: 'Most projects ship within 48–72 hours of receiving your creative brief. AI video ads and brand identity projects have a 48-hour first-draft turnaround, with one revision round included. Web apps are scoped individually but ship in weeks, not months.',
-  },
-  {
-    q: 'Do I need to get on a call to start?',
-    a: 'Never. You fill a 15-minute intake form, we produce your first draft, and you review it on a shared preview link. All async. No scheduling. No calls — unless you specifically want one.',
-  },
-  {
-    q: 'Do you work with clients outside India?',
-    a: 'Yes — we actively work with brands in the US, UK, UAE, Australia, and Canada alongside our Indian clients. We have shipped campaigns for fragrance brands, D2C e-commerce, SaaS startups, and medical platforms across these markets. Our studio is fully async-first — no calls required, and we cover all major time zones through structured async updates. Geography is never a blocker.',
-  },
-  {
-    q: 'What platforms are your video ads optimised for?',
-    a: 'We produce for Meta (Facebook & Instagram Reels), TikTok, YouTube, and LinkedIn. Every project is delivered in all required aspect ratios — 9:16 vertical, 16:9 landscape, and 1:1 square — ready to publish immediately.',
-  },
-  {
-    q: 'What is vibe-coding?',
-    a: 'Vibe-coding is AI-assisted software development where large language models handle repetitive code, letting human designers focus on creative decisions and user experience. We use it to ship beautiful web apps in weeks instead of months.',
-  },
-  {
-    q: 'How is Jellycut different from a traditional agency?',
-    a: 'Traditional agencies take 2–6 weeks, charge $5k+ retainers, and require multiple calls. Jellycut delivers in 48–72 hours, charges per project with no retainer traps, and works fully async. Same cinematic quality — none of the bloat.',
-  },
-  {
-    q: 'How much does a project cost?',
-    a: 'We offer per-project pricing — no monthly retainers. AI video ads and brand identity packages start at a fraction of traditional agency rates because AI production removes overhead without sacrificing quality. Contact us for a custom quote.',
-  },
-  {
-    q: 'Can I see work samples before committing?',
-    a: 'Absolutely. Our full portfolio — video ads, brand identity case studies, and app builds — is available on the Works page, no sign-up required.',
-  },
-];
-
-// ─── Comparison table data ─────────────────────────────────────────────────
-const comparisonRows = [
-  { label: 'Delivery time',         agency: '2–6 weeks',          jellycut: '48–72 hours' },
-  { label: 'Pricing model',         agency: '$5k+/mo retainer',   jellycut: 'Per-project, no lock-in' },
-  { label: 'Calls required',        agency: 'Yes — many',         jellycut: 'Never' },
-  { label: 'AI-enhanced quality',   agency: 'Rarely',             jellycut: 'Always' },
-  { label: 'Revision cost',         agency: 'Extra charge',       jellycut: '1 round included' },
-  { label: 'Timezone flexibility',  agency: 'Fixed hours',        jellycut: 'Async across all zones' },
-  { label: 'Onboarding time',       agency: '1–2 weeks',          jellycut: '15-min brief form' },
-];
-
-// ─── Process steps data ────────────────────────────────────────────────────
-const steps = [
-  {
-    num: '01',
-    icon: AnimatedFileTextIcon,
-    title: 'Brief in 15 minutes',
-    description:
-      'Fill a short intake form. Tell us your brand, goal, and any references. No calls required to get started.',
-  },
-  {
-    num: '02',
-    icon: AnimatedZapIcon,
-    title: 'We build in 48–72h',
-    description:
-      'Our AI-assisted studio produces your first draft. You review it async on a shared preview link — no scheduling needed.',
-  },
-  {
-    num: '03',
-    icon: AnimatedStarIcon,
-    title: 'Revise, approve, ship',
-    description:
-      'One revision round included. Final files delivered in every format you need, ready to publish immediately.',
-  },
-];
 
 export default function Home({ setIsModalOpen, setRoute, isMobile }) {
   const [loadVideo, setLoadVideo] = useState(false);
@@ -545,6 +98,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
 
         {/* Hero Section (z-20) */}
         <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
+          <StudioStatusTicker />
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:whitespace-nowrap max-w-7xl font-normal font-serif text-[#000000] animate-fade-rise" style={{ lineHeight: '0.95', letterSpacing: '-2.46px' }}>
             We build <em className="text-[#4A4A4A] not-italic">the unforgettable.</em>
           </h1>
@@ -668,8 +222,35 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         </div>
       </section>
 
+      {/* ── 2.5 QUIZ SECTION ─────────────────────────────────────────────── */}
+      <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-b border-line overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[60vw] h-[60vw] bg-jelly/8 rounded-full blur-3xl -z-10 -translate-y-1/2" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 items-center">
+          {/* Left — context copy */}
+          <div className="space-y-5">
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase font-mono block">
+              Not sure where to start?
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-[1.05] font-normal tracking-tight">
+              Tell us what you need. We'll tell you how.
+            </h2>
+            <p className="text-muted text-base md:text-lg font-light leading-relaxed max-w-md">
+              Answer 3 quick questions and we'll point you to the exact service that will move the needle for your business — with a direct way to get started.
+            </p>
+            <div className="flex items-center gap-3 pt-2">
+              <span className="text-xs font-mono text-muted bg-cream rounded-full px-3 py-1.5 border border-line">⏱ Takes 30 seconds</span>
+              <span className="text-xs font-mono text-muted bg-cream rounded-full px-3 py-1.5 border border-line">📬 No email required</span>
+            </div>
+          </div>
+          {/* Right — quiz */}
+          <div className="bg-white rounded-[2.5rem] border border-line/60 p-8 md:p-10 shadow-sm">
+            <BrandQuiz setIsModalOpen={setIsModalOpen} />
+          </div>
+        </div>
+      </section>
+
       {/* ── 3. MANIFESTO ─────────────────────────────────────────────────── */}
-      <section id="about" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-paper border-b border-line">
+      <section id="about" className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-b border-line">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
             {/* Left — image */}
@@ -758,7 +339,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       </section>
 
       {/* ── LATEST PROJECTS ─────────────────────────────────────────────── */}
-      <section className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
+      <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-white border-b border-line">
         <div className="max-w-7xl mx-auto">
           
           {/* Header */}
@@ -863,7 +444,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       </section>
 
       {/* ── 4. SERVICES ──────────────────────────────────────────────────── */}
-      <section id="services" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-cream">
+      <section id="services" className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-cream">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mb-16">
             <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
@@ -922,7 +503,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       </section>
 
       {/* ── 5. HOW WE WORK ───────────────────────────────────────────────── */}
-      <section id="process" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-t border-b border-line">
+      <section id="process" className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-b border-line">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="max-w-3xl mb-16 md:mb-20"
@@ -1009,8 +590,8 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         </div>
       </section>
       {/* ── 6. COMPARISON TABLE ───────────────────────────────────────────── */}
-      <section aria-label="Jellycut vs Traditional Agency comparison" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-cream border-t border-line">
-        <div className="max-w-5xl mx-auto">
+      <section aria-label="Jellycut vs Traditional Agency comparison" className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-cream border-t border-line">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             className="max-w-2xl mb-12"
             initial="hidden"
@@ -1067,9 +648,31 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
         </div>
       </section>
 
+      {/* ── 6.4 TRANSFORMATION REEL ─────────────────────────────────────── */}
+      <TransformationReel />
+
+      {/* ── 6.5 PRICE ESTIMATOR ─────────────────────────────────────────── */}
+      <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-t border-line overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-[50vw] h-[50vw] bg-jelly-deep/5 rounded-full blur-3xl -z-10 translate-x-1/4 translate-y-1/4" />
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="max-w-2xl">
+            <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase mb-4 block font-mono">
+              Transparent Pricing
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-ink font-normal tracking-tight leading-tight">
+              Estimate your project in 10 seconds.
+            </h2>
+            <p className="mt-4 text-muted text-base md:text-lg font-light leading-relaxed max-w-xl">
+              No hidden fees. No retainer traps. Pick your service, scope, and timeline — and we'll give you an honest starting figure before you ever send a message.
+            </p>
+          </div>
+          <PriceEstimator setIsModalOpen={setIsModalOpen} />
+        </div>
+      </section>
+
       {/* ── 7. FAQ ───────────────────────────────────────────────────────── */}
-      <section aria-label="Frequently asked questions" className="relative py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-[#100f0f] border-t border-white/10">
-        <div className="max-w-3xl mx-auto">
+      <section aria-label="Frequently asked questions" className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-[#100f0f] border-t border-white/10">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             className="mb-14"
             initial={{ opacity: 0, y: 24 }}

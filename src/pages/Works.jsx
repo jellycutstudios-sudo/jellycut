@@ -64,81 +64,106 @@ export default function Works({ setRoute }) {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
-              const Icon = project.icon;
-              return (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, ease, delay: index * 0.05 }}
-                  onClick={() => {
-                    setRoute('/works/' + project.slug);
-                  }}
-                  className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
-                >
-                  {/* Top image/pattern container */}
-                  <div className={`h-60 w-full bg-gradient-to-br ${project.color} relative p-6 flex flex-col justify-between overflow-hidden`}>
-                    {/* Project Thumbnail Image */}
-                    {project.image && (
-                      <>
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
-                        />
-                        <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-500 z-0" />
-                      </>
-                    )}
-
-                    {/* Background Overlay */}
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-                    
-                    {/* Category tag & Video Badge */}
-                    <div className="flex justify-between items-start relative z-10 w-full">
-                      <span className="bg-white/95 text-ink backdrop-blur-md rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider font-mono shadow-sm">
-                        {project.category}
-                      </span>
-                      {project.youtubeId ? (
-                        <span className="bg-jelly text-ink backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider font-mono shadow-sm flex items-center gap-1">
-                          <span className="h-1.5 w-1.5 rounded-full bg-ink animate-pulse" />
-                          Watch Ad
-                        </span>
-                      ) : (
-                        <div className="bg-white/90 backdrop-blur-md text-ink p-2 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </div>
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project, index) => {
+                const Icon = project.icon;
+                return (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                    transition={{ duration: 0.5, ease, delay: index * 0.05 }}
+                    onClick={() => {
+                      setRoute('/works/' + project.slug);
+                    }}
+                    className="group bg-white rounded-3xl overflow-hidden border border-line flex flex-col justify-between cursor-pointer hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500 h-[420px]"
+                  >
+                    {/* Top image/pattern container */}
+                    <div className={`h-60 w-full bg-gradient-to-br ${project.color} relative p-6 flex flex-col justify-between overflow-hidden`}>
+                      {/* Project Thumbnail Image */}
+                      {project.image && (
+                        <>
+                          <img 
+                            src={project.image} 
+                            alt={project.title} 
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
+                          />
+                          <div className="absolute inset-0 bg-black/15 group-hover:bg-black/30 transition-colors duration-500 z-0" />
+                        </>
                       )}
+
+                      {/* Background Overlay */}
+                      <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+                      
+                      {/* Category tag & Video Badge */}
+                      <div className="flex justify-between items-start relative z-10 w-full">
+                        <span className="bg-white/95 text-ink backdrop-blur-md rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider font-mono shadow-sm">
+                          {project.category}
+                        </span>
+                        {project.youtubeId ? (
+                          <span className="bg-jelly text-ink backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider font-mono shadow-sm flex items-center gap-1">
+                            <span className="h-1.5 w-1.5 rounded-full bg-ink animate-pulse" />
+                            Watch Ad
+                          </span>
+                        ) : (
+                          <div className="bg-white/90 backdrop-blur-md text-ink p-2 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Logo/Icon placeholder style */}
+                      <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-md flex items-center justify-center text-jelly-deep shadow-sm self-start mt-4 relative z-10">
+                        <Icon className="w-6 h-6" />
+                      </div>
                     </div>
 
-                    {/* Logo/Icon placeholder style */}
-                    <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur-md flex items-center justify-center text-jelly-deep shadow-sm self-start mt-4 relative z-10">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                  </div>
+                    {/* Copy info */}
+                    <div className="p-6 flex-grow flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold font-sans text-ink group-hover:text-jelly-deep transition-colors duration-300 mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-muted text-xs md:text-sm font-light leading-relaxed line-clamp-2">
+                          {project.description}
+                        </p>
+                      </div>
 
-                  {/* Copy info */}
-                  <div className="p-6 flex-grow flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold font-sans text-ink group-hover:text-jelly-deep transition-colors duration-300 mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted text-xs md:text-sm font-light leading-relaxed line-clamp-2">
-                        {project.description}
-                      </p>
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-jelly-deep mt-4">
+                        <span>View Case Study</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                      </div>
                     </div>
-
-                    <div className="flex items-center gap-1.5 text-xs font-semibold text-jelly-deep mt-4">
-                      <span>View Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })
+            ) : (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="col-span-full py-20 flex flex-col items-center justify-center text-center space-y-4"
+              >
+                <div className="w-20 h-20 bg-cream rounded-full flex items-center justify-center text-3xl mb-2 animate-bounce">
+                  👻
+                </div>
+                <h3 className="text-2xl font-serif text-ink">Nothing to see here... yet.</h3>
+                <p className="text-muted text-sm max-w-md font-light leading-relaxed">
+                  We're cooking up something special in this category. In the meantime, check out our other work or reach out to start a project!
+                </p>
+                <button 
+                  onClick={() => setSelectedCategory('All')}
+                  className="mt-4 px-6 py-2 bg-ink text-white rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-jelly-deep transition-colors"
+                >
+                  View All Projects
+                </button>
+              </motion.div>
+            )}
           </AnimatePresence>
         </motion.div>
 

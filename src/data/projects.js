@@ -2,6 +2,31 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p23',
+    slug: 'mapto-brand-identity',
+    title: 'Mapto — Brand Identity',
+    category: 'Branding',
+    icon: Globe,
+    description: 'A modern, premium brand identity designed to position Mapto alongside global urban mobility giants.',
+    longDescription: 'Mapto is a modern taxi service firm designed to revolutionize urban mobility by providing fast, reliable, and affordable rides for every need. Inspired by industry leaders like Uber and Ola, Mapto offers versatile transportation options, including cars, auto-rickshaws, and bikes, catering to a wide range of commuters.',
+    timeline: '1 Week',
+    deliverables: [
+      'Premium Logo & Wordmark',
+      'App-First Design System',
+      'Typography & Color Guidelines',
+      'Brand Positioning'
+    ],
+    results: 'Established a premium, "Uber-level" brand authority that instantly builds trust with commuters and corporate clients.',
+    image: '/mapto_cover.png',
+    images: [
+      '/mapto_cover.png',
+      '/mapto_logo_white.png'
+    ],
+    color: 'from-[#111111]/95 via-[#1a1a1a]/80 to-[#0a0a0a]/60',
+    imageFit: 'object-cover',
+    isMaptoShowcase: true
+  },
+  {
     id: 'p22',
     slug: 'filbey-neural-crunch',
     title: 'Case Study: Filbey – The Neural Crunch',
@@ -452,13 +477,15 @@ export const projects = [
       'WhatsApp Daily Sales Engine'
     ],
     results: 'Trusted by 100+ textile shops. Bill in seconds, prevent staff leakage, and monitor inventory live.',
-    image: '/rupos_checkout.webp',
+    image: '/rupos_textile_1.jpg',
     images: [
-      '/rupos_checkout.webp',
-      '/rupos_tablet.webp',
-      '/rupos_lifestyle.webp'
+      '/rupos_textile_1.jpg',
+      '/rupos_textile_2.jpg',
+      '/rupos_textile_3.jpg',
+      '/rupos_textile_4.jpg'
     ],
     projectUrl: 'https://rupos.in/',
-    color: 'from-[#0A120E]/40 to-jelly/10'
+    color: 'from-[#0A120E]/40 to-jelly/10',
+    isRuposBillingShowcase: true
   }
 ];

@@ -7,6 +7,8 @@ import CrimsonSilverCaseStudyDetails from '../components/CrimsonSilverCaseStudyD
 import DineCaseStudyDetails from '../components/DineCaseStudyDetails';
 import FeeSyncCaseStudyDetails from '../components/FeeSyncCaseStudyDetails';
 import FilbeyCaseStudyDetails from '../components/FilbeyCaseStudyDetails';
+import MaptoCaseStudyDetails from '../components/MaptoCaseStudyDetails';
+import RuposBillingCaseStudyDetails from '../components/RuposBillingCaseStudyDetails';
 
 
 
@@ -82,7 +84,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               <img 
                 src={(project.images && project.images[activeImageIndex]) || project.image} 
                 alt={project.title} 
-                className="absolute inset-0 w-full h-full object-cover z-0 transition-all duration-750 group-hover/header:scale-[1.02]" 
+                className={`absolute inset-0 w-full h-full z-0 transition-all duration-750 group-hover/header:scale-[1.02] ${project.imageFit || 'object-cover'}`} 
               />
               <div className="absolute inset-0 bg-black/25 group-hover/header:bg-black/40 transition-colors duration-300 z-0" />
             </>
@@ -126,7 +128,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             )}
 
             {/* Challenge & Solution — hidden for showcases that own their own narrative */}
-            {!project.isFilbeyNeuralCrunchShowcase && (
+            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase) && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
                 <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
@@ -136,7 +138,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             )}
 
             {/* Dior/Fawah Specific Content or General Gallery */}
-            {project.isDiorShowcase ? (
+            {project.isMaptoShowcase ? (
+              <MaptoCaseStudyDetails 
+                project={project} 
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isDiorShowcase ? (
               <DiorCaseStudyDetails 
                 project={project} 
                 onZoomIndex={setLightboxImageIndex} 
@@ -166,6 +173,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               />
             ) : project.isFilbeyNeuralCrunchShowcase ? (
               <FilbeyCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isRuposBillingShowcase || project.slug === 'rupos-billing-software' ? (
+              <RuposBillingCaseStudyDetails
                 project={project}
                 onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}

@@ -5,6 +5,7 @@ import { X, CheckCircle, Sparkles, ChevronDown, ArrowRight } from 'lucide-react'
 // Import components and pages
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 import Home from './pages/Home';
 const Works = lazy(() => import('./pages/Works'));
@@ -185,8 +186,10 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-paper text-ink overflow-x-hidden font-sans selection:bg-jelly/20 selection:text-ink">
+    <div className={`relative min-h-screen bg-paper text-ink overflow-x-hidden font-sans selection:bg-jelly/20 selection:text-ink ${isModalOpen ? 'overflow-hidden' : ''}`}>
       
+      <CustomCursor />
+
       {/* Dynamic Navigation Header */}
       <Header 
         currentRoute={route.split('?')[0]} 
@@ -263,12 +266,25 @@ function App() {
                       </span>
                     </div>
 
-                    <h3 className="font-serif text-2xl md:text-3xl text-ink font-normal leading-snug mb-2">
-                      Tell us about your project
-                    </h3>
-                    <p className="text-muted text-xs md:text-sm font-light leading-relaxed mb-7">
-                      We'll review your brief and get back within 24 hours. No calls needed to get started.
-                    </p>
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
+                      <div>
+                        <h3 className="font-serif text-2xl md:text-3xl text-ink font-normal leading-snug mb-2">
+                          Tell us about your project
+                        </h3>
+                        <p className="text-muted text-xs md:text-sm font-light leading-relaxed">
+                          We'll review your brief and get back within 24 hours. No calls needed to get started.
+                        </p>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setIsModalOpen(false);
+                          handleNavigate('/contact');
+                        }}
+                        className="text-xs font-semibold text-jelly-deep hover:text-jelly underline decoration-jelly/30 underline-offset-4 shrink-0"
+                      >
+                        Prefer a step-by-step brief? →
+                      </button>
+                    </div>
 
                     <form onSubmit={handleFormSubmit} className="space-y-4">
                       {/* Name */}
