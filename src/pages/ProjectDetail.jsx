@@ -9,6 +9,7 @@ import FeeSyncCaseStudyDetails from '../components/FeeSyncCaseStudyDetails';
 import FilbeyCaseStudyDetails from '../components/FilbeyCaseStudyDetails';
 import MaptoCaseStudyDetails from '../components/MaptoCaseStudyDetails';
 import RuposBillingCaseStudyDetails from '../components/RuposBillingCaseStudyDetails';
+import MandiManzilCaseStudyDetails from '../components/MandiManzilCaseStudyDetails';
 
 
 
@@ -48,8 +49,8 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
   if (!project) return null;
 
   return (
-    <section className="relative min-h-screen bg-paper text-ink pt-32 pb-24 px-6 md:px-12 lg:px-24">
-      <div className="max-w-4xl mx-auto">
+    <section className="relative min-h-screen bg-paper text-ink pt-32 pb-24 px-6 md:px-12 lg:px-20">
+      <div className="max-w-6xl mx-auto">
         
         {/* Back Link */}
         <button
@@ -77,7 +78,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               setLightboxImageIndex(activeImageIndex);
             }
           }}
-          className={`h-[350px] md:h-[480px] bg-gradient-to-br ${project.color} rounded-[32px] relative overflow-hidden cursor-zoom-in group/header border border-line shadow-lg mb-12`}
+          className={`w-full aspect-[16/9] sm:h-[480px] md:h-[600px] bg-gradient-to-br ${project.color} rounded-[32px] relative overflow-hidden cursor-zoom-in group/header border border-line shadow-xl mb-14`}
         >
           {((project.images && project.images[activeImageIndex]) || project.image) && (
             <>
@@ -86,7 +87,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
                 alt={project.title} 
                 className={`absolute inset-0 w-full h-full z-0 transition-all duration-750 group-hover/header:scale-[1.02] ${project.imageFit || 'object-cover'}`} 
               />
-              <div className="absolute inset-0 bg-black/25 group-hover/header:bg-black/40 transition-colors duration-300 z-0" />
+              <div className="absolute inset-0 bg-black/20 group-hover/header:bg-black/35 transition-colors duration-300 z-0" />
             </>
           )}
 
@@ -106,10 +107,10 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
         </div>
 
         {/* Case Study Details Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Main Column: Challenge & Solution + Video */}
-          <div className="md:col-span-8 space-y-10">
+          <div className="md:col-span-8 space-y-12">
             {/* Video Embed — hidden for showcases that render their own video section */}
             {project.youtubeId && !project.isFilbeyNeuralCrunchShowcase && (
               <div className="space-y-4">
@@ -141,6 +142,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             {project.isMaptoShowcase ? (
               <MaptoCaseStudyDetails 
                 project={project} 
+                onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}
               />
             ) : project.isDiorShowcase ? (
@@ -179,6 +181,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               />
             ) : project.isRuposBillingShowcase || project.slug === 'rupos-billing-software' ? (
               <RuposBillingCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isMandiManzilShowcase ? (
+              <MandiManzilCaseStudyDetails
                 project={project}
                 onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}

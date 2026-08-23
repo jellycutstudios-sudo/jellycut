@@ -1,65 +1,70 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, RefreshCcw, Sparkles } from 'lucide-react';
+import { ArrowRight, RefreshCcw, Sparkles, Check } from 'lucide-react';
 
 const questions = [
   {
     id: 'goal',
-    question: "What's your biggest goal right now?",
-    hint: "This helps us recommend the right service",
+    stepLabel: '01 // Objective',
+    question: "What's your primary focus right now?",
+    hint: "We'll match your priority to the highest-leverage deliverable.",
     options: [
-      { text: "Get more customers", icon: "📈", value: "growth", sub: "Reach new buyers, fast" },
-      { text: "Launch a new product", icon: "🚀", value: "launch", sub: "Make a bold first impression" },
-      { text: "Build credibility & trust", icon: "🏆", value: "trust", sub: "Look like the best in your space" }
+      { text: "Acquire new customers", value: "growth", sub: "High-converting video creative & performance assets" },
+      { text: "Launch a new product", value: "launch", sub: "Cinematic launch video & digital flagship presence" },
+      { text: "Build market authority", value: "trust", sub: "World-class brand identity & high-trust positioning" }
     ]
   },
   {
     id: 'audience',
-    question: "Where does your audience spend time?",
-    hint: "We'll tailor your deliverables for the right platform",
+    stepLabel: '02 // Channel',
+    question: "Where do your buyers discover you?",
+    hint: "Every asset is engineered specifically for its target platform.",
     options: [
-      { text: "Instagram / TikTok", icon: "📱", value: "social", sub: "Short-form, vertical content" },
-      { text: "LinkedIn / B2B", icon: "💼", value: "professional", sub: "Authority-first content" },
-      { text: "Google / Website", icon: "🌐", value: "search", sub: "Search-driven discovery" }
+      { text: "Instagram, TikTok & Meta", value: "social", sub: "Fast-paced, 9:16 vertical storytelling" },
+      { text: "LinkedIn & B2B Networks", value: "professional", sub: "Authority-driven carousels & executive video" },
+      { text: "Search & Web Direct", value: "search", sub: "High-speed landing pages & interactive experiences" }
     ]
   },
   {
     id: 'timeline',
-    question: "What's your timeline?",
-    hint: "Helps us set the right expectations",
+    stepLabel: '03 // Timeline',
+    question: "When do you need to go live?",
+    hint: "Standard production is 1–2 weeks; rush delivery available.",
     options: [
-      { text: "This week", icon: "⚡", value: "fast", sub: "We can do 48h rush delivery" },
-      { text: "This month", icon: "📅", value: "medium", sub: "Standard delivery window" },
-      { text: "Just exploring", icon: "🔍", value: "slow", sub: "No pressure — we'll be ready" }
+      { text: "Urgent (Within 48–72 hours)", value: "fast", sub: "Fast-track sprint pipeline" },
+      { text: "This month (1–2 weeks)", value: "medium", sub: "Standard studio development cycle" },
+      { text: "Planning next quarter", value: "slow", sub: "Strategic scoping & creative prep" }
     ]
   }
 ];
 
 const recommendations = {
-  growth_social:       { title: "AI Video Ad Campaign", tag: "Highest ROI", desc: "Scroll-stopping creative for Meta & TikTok. First draft in 48 hours." },
-  growth_professional: { title: "LinkedIn Creative Pack", tag: "B2B Growth", desc: "Authority-building video + carousel ads tuned for LinkedIn's algorithm." },
-  growth_search:       { title: "Cinematic Website", tag: "Convert Traffic", desc: "A high-speed, conversion-optimised site that turns visitors into leads." },
-  launch_social:       { title: "Product Launch Ad", tag: "Go Viral", desc: "A cinematic launch video that stops the scroll and drives Day-1 sales." },
-  launch_professional: { title: "Brand Identity System", tag: "Look Legit", desc: "Logo, typography, and brand guidelines that make you look like a $10M company." },
-  launch_search:       { title: "Launch Website", tag: "Digital Flagship", desc: "A full product landing page with animations, CTA flows, and SEO structure built in." },
-  trust_social:        { title: "Brand Identity + Content", tag: "Authority First", desc: "Consistent visual language across your brand and social presence." },
-  trust_professional:  { title: "Premium Brand Identity", tag: "High Trust", desc: "A cohesive identity package that earns instant credibility with decision-makers." },
-  trust_search:        { title: "Professional Website", tag: "Credibility Engine", desc: "A polished, fast website that signals you're the obvious choice in your category." },
+  growth_social:       { title: "AI Video Ad Campaign", tag: "Highest ROI", desc: "Scroll-stopping, cinematic 9:16 ads for Meta and TikTok with first cuts ready in 48 hours." },
+  growth_professional: { title: "B2B Authority Video Pack", tag: "Enterprise Growth", desc: "Executive-grade motion assets and visual case studies tuned for high-value B2B pipeline." },
+  growth_search:       { title: "High-Speed Web App & Site", tag: "Max Conversion", desc: "A bespoke, sub-second interactive website engineered to convert paid & organic traffic." },
+  launch_social:       { title: "Cinematic Launch Campaign", tag: "Product Debut", desc: "A show-stopping 3D/AI hero commercial that commands attention and drives Day-1 demand." },
+  launch_professional: { title: "Complete Brand Identity", tag: "Category Leader", desc: "Logo architecture, design system, and brand guidelines that position you as an established leader." },
+  launch_search:       { title: "Digital Flagship Website", tag: "Product Launch", desc: "A complete launch landing page with 3D elements, interactive brief flows, and SEO foundations." },
+  trust_social:        { title: "Identity & Social Content", tag: "Visual Authority", desc: "Cohesive visual language bridging high-end brand guidelines with ongoing social assets." },
+  trust_professional:  { title: "Executive Brand Identity", tag: "Enterprise Trust", desc: "A meticulous identity package that earns immediate buy-in from decision-makers and investors." },
+  trust_search:        { title: "Authority Web Flagship", tag: "Market Leadership", desc: "A polished, ultra-responsive website that clearly signals why you're the leader in your space." },
 };
 
 const getRecommendation = (answers) => {
   const key = `${answers.goal}_${answers.audience}`;
   return recommendations[key] || {
-    title: "Custom Creative Strategy",
-    tag: "Bespoke",
-    desc: "Let's talk. We'll outline exactly what assets you need to hit your goals this quarter."
+    title: "Bespoke Creative Strategy",
+    tag: "Custom Scope",
+    desc: "Let's align directly. We'll map out the exact creative, motion, and digital assets needed to achieve your targets."
   };
 };
+
+const ease = [0.16, 1, 0.3, 1];
 
 export default function BrandQuiz({ setIsModalOpen }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [selected, setSelected] = useState(null); // selected value for current step
+  const [selected, setSelected] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [direction, setDirection] = useState(1);
 
@@ -103,153 +108,172 @@ export default function BrandQuiz({ setIsModalOpen }) {
   };
 
   const result = showResult ? getRecommendation(answers) : null;
-  const progress = showResult ? 100 : ((currentStep) / questions.length) * 100;
 
   return (
-    <div className="w-full max-w-xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center gap-2 mb-6">
-        <Sparkles className="w-4 h-4 text-jelly-deep" />
-        <span className="text-xs font-mono uppercase tracking-widest text-jelly-deep font-semibold">
-          Find Your Perfect Service
-        </span>
+    <div className="w-full max-w-xl mx-auto relative">
+      
+      {/* Subtle top decoration */}
+      <div className="flex items-center justify-between pb-6 border-b border-line/50">
+        <div className="flex items-center gap-2.5">
+          <div className="w-2 h-2 rounded-full bg-jelly animate-pulse" />
+          <span className="text-[11px] font-mono uppercase tracking-widest text-muted font-bold">
+            Interactive Brief
+          </span>
+        </div>
+
+        {!showResult && (
+          <span className="text-xs font-mono font-bold text-jelly-deep bg-cream px-3 py-1 rounded-full border border-line">
+            Step {currentStep + 1} of {questions.length}
+          </span>
+        )}
       </div>
 
-      {/* Progress Steps */}
+      {/* Progress Bar */}
       {!showResult && (
-        <div className="flex items-center gap-2 mb-8">
-          {questions.map((_, i) => (
-            <div key={i} className="flex items-center gap-2 flex-1">
-              <div
-                className={`h-1.5 w-full rounded-full transition-all duration-500 ${
-                  i < currentStep ? 'bg-jelly-deep' : i === currentStep ? 'bg-jelly' : 'bg-line/50'
-                }`}
-              />
-            </div>
-          ))}
-          <span className="text-xs font-mono text-muted shrink-0 ml-1">
-            {currentStep + 1} / {questions.length}
-          </span>
+        <div className="h-[2px] w-full bg-line rounded-full overflow-hidden mt-6 mb-8">
+          <motion.div
+            className="h-full bg-jelly-deep rounded-full"
+            initial={{ width: '33.33%' }}
+            animate={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
+            transition={{ ease, duration: 0.4 }}
+          />
         </div>
       )}
 
       {/* Question / Result Area */}
-      <div className="relative min-h-[320px]">
+      <div className="relative min-h-[340px]">
         <AnimatePresence mode="wait">
           {!showResult ? (
             <motion.div
               key={currentStep}
-              initial={{ opacity: 0, x: direction * 30 }}
+              initial={{ opacity: 0, x: direction * 24 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -30 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              exit={{ opacity: 0, x: direction * -24 }}
+              transition={{ ease, duration: 0.3 }}
               className="w-full"
             >
-              {/* Question */}
-              <div className="mb-1">
-                <h4 className="text-xl md:text-2xl text-ink font-medium leading-snug mb-1">
+              {/* Question Header */}
+              <div className="mb-6">
+                <span className="text-[11px] font-mono text-muted tracking-wider uppercase font-semibold block mb-1.5">
+                  {currentQuestion.stepLabel}
+                </span>
+                <h4 className="font-serif text-2xl md:text-3xl text-ink font-normal leading-snug tracking-tight mb-2">
                   {currentQuestion.question}
                 </h4>
-                <p className="text-xs text-muted font-light">{currentQuestion.hint}</p>
+                <p className="text-xs md:text-sm text-muted font-light leading-relaxed">
+                  {currentQuestion.hint}
+                </p>
               </div>
 
-              {/* Options */}
-              <div className="mt-5 grid gap-3">
-                {currentQuestion.options.map((opt) => {
+              {/* Options Stack */}
+              <div className="space-y-3">
+                {currentQuestion.options.map((opt, i) => {
                   const isSelected = selected === opt.value;
                   return (
                     <button
                       key={opt.value}
                       onClick={() => handleSelect(opt.value)}
-                      className={`w-full text-left px-5 py-4 rounded-2xl border-2 transition-all duration-200 flex items-center gap-4 group ${
+                      className={`w-full text-left px-5 py-4 rounded-2xl border transition-all duration-300 flex items-center gap-4 group cursor-pointer active:scale-[0.99] ${
                         isSelected
-                          ? 'border-jelly-deep bg-jelly/10 shadow-sm'
-                          : 'border-line/50 bg-white hover:border-jelly/50 hover:bg-cream/60'
+                          ? 'border-jelly-deep bg-cream shadow-sm ring-1 ring-jelly-deep/30'
+                          : 'border-line bg-white hover:border-jelly-deep/50 hover:bg-cream/40 shadow-xs'
                       }`}
                     >
-                      {/* Icon */}
-                      <span className="text-2xl shrink-0 leading-none" aria-hidden="true">
-                        {opt.icon}
+                      {/* Number Prefix */}
+                      <span className={`text-xs font-mono font-bold w-6 shrink-0 transition-colors ${
+                        isSelected ? 'text-jelly-deep' : 'text-muted/50 group-hover:text-jelly-deep'
+                      }`}>
+                        {String(i + 1).padStart(2, '0')}
                       </span>
-                      {/* Text */}
+
+                      {/* Content */}
                       <div className="flex-grow min-w-0">
-                        <p className={`text-sm font-semibold leading-snug transition-colors ${isSelected ? 'text-ink' : 'text-ink'}`}>
+                        <p className={`text-sm font-semibold leading-snug transition-colors ${
+                          isSelected ? 'text-jelly-deep' : 'text-ink'
+                        }`}>
                           {opt.text}
                         </p>
-                        <p className="text-xs text-muted font-light mt-0.5">{opt.sub}</p>
+                        <p className="text-xs text-muted font-light mt-0.5 leading-relaxed">
+                          {opt.sub}
+                        </p>
                       </div>
-                      {/* Radio indicator */}
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
-                        isSelected ? 'border-jelly-deep bg-jelly-deep' : 'border-line/60 group-hover:border-jelly/50'
+
+                      {/* Selection Check Indicator */}
+                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all ${
+                        isSelected
+                          ? 'border-jelly-deep bg-jelly-deep text-white shadow-xs'
+                          : 'border-line/80 group-hover:border-jelly-deep/40'
                       }`}>
-                        {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                        {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                       </div>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Navigation */}
-              <div className="mt-6 flex items-center justify-between">
+              {/* Navigation Bar */}
+              <div className="mt-8 pt-5 border-t border-line/40 flex items-center justify-between">
                 <button
                   onClick={handleBack}
                   disabled={currentStep === 0}
-                  className="text-xs text-muted hover:text-ink transition-colors disabled:opacity-30 disabled:pointer-events-none font-medium"
+                  className="text-xs font-semibold text-muted hover:text-ink transition-colors disabled:opacity-0 disabled:pointer-events-none font-mono uppercase tracking-wider cursor-pointer"
                 >
-                  ← Back
+                  ← Previous
                 </button>
 
                 <button
                   onClick={handleNext}
                   disabled={!selected}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all ${
+                  className={`flex items-center gap-2 px-7 py-3 rounded-full text-xs font-bold font-mono uppercase tracking-widest transition-all ${
                     selected
-                      ? 'bg-ink text-white hover:bg-jelly-deep hover:scale-[1.02] shadow-sm cursor-pointer'
-                      : 'bg-line/30 text-muted cursor-not-allowed'
+                      ? 'bg-ink text-white hover:bg-jelly-deep shadow-md hover:scale-[1.02] cursor-pointer'
+                      : 'bg-line/40 text-muted/50 cursor-not-allowed'
                   }`}
                 >
-                  <span>{currentStep === questions.length - 1 ? 'See Results' : 'Next'}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{currentStep === questions.length - 1 ? 'View Recommendation' : 'Continue'}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </motion.div>
           ) : (
             <motion.div
               key="result"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="w-full"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ ease, duration: 0.35 }}
+              className="w-full pt-2"
             >
-              {/* Result Card */}
-              <div className="bg-ink text-white rounded-3xl p-8 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-jelly/15 rounded-full blur-3xl" />
+              {/* Recommendation Card */}
+              <div className="bg-ink text-white rounded-[1.75rem] p-8 relative overflow-hidden shadow-2xl space-y-6">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-jelly/20 rounded-full blur-3xl pointer-events-none" />
 
-                <span className="inline-block bg-jelly text-ink text-[10px] font-bold font-mono uppercase tracking-widest px-3 py-1 rounded-full mb-4">
-                  {result.tag}
-                </span>
+                <div>
+                  <span className="inline-block bg-jelly/20 text-jelly border border-jelly/30 text-[10px] font-bold font-mono uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                    Recommended Path // {result.tag}
+                  </span>
+                  <h4 className="font-serif text-2xl md:text-3xl text-white font-normal leading-tight">
+                    {result.title}
+                  </h4>
+                </div>
 
-                <h4 className="font-serif text-2xl md:text-3xl text-white mb-3">
-                  {result.title}
-                </h4>
-                <p className="text-white/70 text-sm leading-relaxed mb-8">
+                <p className="text-white/70 text-sm font-light leading-relaxed">
                   {result.desc}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
                     onClick={() => setIsModalOpen && setIsModalOpen(true)}
-                    className="flex-1 bg-jelly hover:bg-jelly/90 text-ink rounded-full px-6 py-3.5 text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-lg shadow-jelly/20"
+                    className="flex-1 bg-jelly hover:bg-jelly-mid text-ink rounded-full px-6 py-4 text-xs font-bold tracking-wider font-mono uppercase transition-all flex items-center justify-center gap-2 shadow-lg shadow-jelly/10 hover:scale-[1.02] cursor-pointer"
                   >
                     <span>Start This Project</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                   <button
                     onClick={handleReset}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3.5 rounded-full border border-white/15 hover:border-white/30 text-white/60 hover:text-white text-xs font-medium transition-all"
+                    className="flex items-center justify-center gap-1.5 px-5 py-4 rounded-full border border-white/20 hover:border-white/40 text-white/70 hover:text-white text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
                   >
                     <RefreshCcw className="w-3.5 h-3.5" />
-                    <span>Retake</span>
+                    <span>Reset</span>
                   </button>
                 </div>
               </div>

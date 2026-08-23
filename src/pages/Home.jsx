@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { projects } from '../data/projects';
 import { services, steps, faqs, comparisonRows } from '../data/homeData.jsx';
-import StudioStatusTicker from '../components/StudioStatusTicker';
+
 import BrandQuiz from '../components/BrandQuiz';
 import PriceEstimator from '../components/PriceEstimator';
 import TransformationReel from '../components/TransformationReel';
@@ -98,7 +98,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
 
         {/* Hero Section (z-20) */}
         <section style={{ paddingTop: 'calc(8rem - 75px)' }} className="relative z-20 pb-40 h-full flex flex-col items-center justify-center text-center px-6 min-h-screen">
-          <StudioStatusTicker />
+
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:whitespace-nowrap max-w-7xl font-normal font-serif text-[#000000] animate-fade-rise" style={{ lineHeight: '0.95', letterSpacing: '-2.46px' }}>
             We build <em className="text-[#4A4A4A] not-italic">the unforgettable.</em>
           </h1>

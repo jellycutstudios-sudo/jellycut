@@ -2,6 +2,32 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p25',
+    slug: 'mandi-manzil-website',
+    title: 'Mandi Manzil — Restaurant Website',
+    category: 'Websites',
+    icon: Globe,
+    description: 'A premium dark-gold restaurant website for Mandi Manzil — Kerala\'s leading authentic Arabian Mandi chain, since 2016.',
+    longDescription: 'We designed and built the full digital identity for Mandi Manzil, Kerala\'s beloved Arabian Mandi restaurant chain. The website captures the brand\'s warmth and culinary heritage through a cinematic dark-gold aesthetic, a structured digital menu for all 8 Mandi varieties, a photo gallery, multi-branch locator, and a catering enquiry flow — all built on WordPress with a bespoke theme.',
+    timeline: '1 Week',
+    deliverables: [
+      'Full Restaurant Website (WordPress)',
+      'Digital Menu — 8 Mandi Varieties',
+      'Photo Gallery & Branch Locator',
+      'SEO-Optimised Content & Structure',
+    ],
+    results: 'Launched a premium digital presence that positions Mandi Manzil as the go-to authentic Arabian dining destination in Kerala.',
+    image: '/mandi_desktop.jpg',
+    images: [
+      '/mandi_desktop.jpg',
+      '/mandi_phone.jpg',
+      '/mandi_tablet.jpg',
+    ],
+    projectUrl: 'https://mandimanzil.com/',
+    color: 'from-[#2c2926]/95 via-[#1a1008]/80 to-[#0a0502]/60',
+    isMandiManzilShowcase: true,
+  },
+  {
     id: 'p23',
     slug: 'mapto-brand-identity',
     title: 'Mapto — Brand Identity',
@@ -17,10 +43,13 @@ export const projects = [
       'Brand Positioning'
     ],
     results: 'Established a premium, "Uber-level" brand authority that instantly builds trust with commuters and corporate clients.',
-    image: '/mapto_cover.png',
+    image: '/mapto_night_taxi.jpg',
     images: [
-      '/mapto_cover.png',
-      '/mapto_logo_white.png'
+      '/mapto_night_taxi.jpg',
+      '/mapto_lobby_kiosk.jpg',
+      '/mapto_driver.jpg',
+      '/mapto_team.jpg',
+      '/mapto_airport.jpg',
     ],
     color: 'from-[#111111]/95 via-[#1a1a1a]/80 to-[#0a0a0a]/60',
     imageFit: 'object-cover',

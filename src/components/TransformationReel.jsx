@@ -112,19 +112,19 @@ const transformations = [
   {
     id: 3,
     title: "Mapto Brand Identity",
-    description: "Raw brand strategy document → polished app identity mockup.",
+    description: "Brand guidelines & positioning → unified ground crew & fleet presence.",
     tag: "Brand Identity",
     before: "/mapto_brand_aim.png",
     beforeLabel: "Strategy Brief",
-    after: "/mapto_mockup.png",
-    afterLabel: "Final Brand",
+    after: "/mapto_team.jpg",
+    afterLabel: "Final Fleet & Crew",
   },
 ];
 
 export default function TransformationReel() {
   return (
-    <div className="w-full bg-cream py-16 md:py-24 border-t border-line overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+    <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-t border-line overflow-hidden">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header — Aligned directly with section grid matching Latest Projects */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
@@ -178,6 +178,6 @@ export default function TransformationReel() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
