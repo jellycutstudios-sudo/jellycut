@@ -1,4 +1,4 @@
-import { Layers, ShieldCheck, Zap, ArrowRight, Sparkles, Smartphone, Printer, Cpu, FileText, CheckCircle2, HelpCircle } from 'lucide-react';
+import { Layers, ShieldCheck, Zap, ArrowRight, Sparkles, Printer, Cpu, FileText, CheckCircle2, HelpCircle } from 'lucide-react';
 
 export default function RuposBillingCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
   if (!project) return null;

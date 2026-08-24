@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, RefreshCcw, Sparkles, Check } from 'lucide-react';
+import { ArrowRight, RefreshCcw, Check } from 'lucide-react';
 
 const questions = [
   {

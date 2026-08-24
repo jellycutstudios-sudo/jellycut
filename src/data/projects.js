@@ -2,6 +2,64 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p26',
+    slug: 'skylight-travel-website',
+    title: 'Skylight Travel — UAE Tourism & Visa Platform',
+    category: 'Websites',
+    icon: Globe,
+    description: 'A bespoke, high-converting digital platform and booking experience for Skylight Travel — Sharjah\'s premier family tourism and visa agency.',
+    longDescription: 'We designed, engineered, and shipped the comprehensive digital platform for Skylight Travel (formerly Highsky Travels since 2020), a premier travel agency based in Sharjah, UAE. The new web experience combines deep emerald luxury aesthetics, intuitive holiday package discovery, transparent multi-country visa guidance, real-time UAE timezone sync, and direct WhatsApp concierge pipelines — crafted to turn casual dreamers into confirmed travelers.',
+    timeline: '1 Week',
+    deliverables: [
+      'Full Multi-Page Travel & Tourism Web Platform',
+      'Curated Holiday Packages Catalog & Itinerary Breakdowns',
+      'Comprehensive Visa Intelligence & Requirement Engine',
+      'Direct WhatsApp Concierge & Instant Lead Pipelines',
+      'Mobile-First Responsive Interface with UAE Timezone Sync',
+      'Bespoke Emerald & Gold Brand Identity & Style System'
+    ],
+    results: 'Elevated a 6-year-old Sharjah family travel agency into a modern digital powerhouse, providing seamless package browsing and zero-friction visa inquiries across the UAE.',
+    image: '/skylight_lounge_hero.webp',
+    images: [
+      '/skylight_lounge_hero.webp',
+      '/skylight_packages_desktop.webp',
+      '/skylight_about_desktop.webp',
+      '/skylight_hero_mobile.webp',
+      '/skylight_nav_mobile.webp',
+    ],
+    projectUrl: 'https://www.skylighttourism.com/',
+    color: 'from-[#06180f]/95 via-[#0d2818]/85 to-[#04110a]/75',
+    imageFit: 'object-cover',
+    isSkylightShowcase: true,
+    styleframes: [
+      {
+        url: '/skylight_lounge_hero.webp',
+        title: 'VIP Lounge Experience',
+        desc: 'Desktop landing experience framed in a luxury airport departure suite, conveying prestige and seamless international travel.'
+      },
+      {
+        url: '/skylight_packages_desktop.webp',
+        title: 'Holiday Packages Catalog',
+        desc: 'Curated international destinations with transparent AED pricing, day-by-day itineraries, and highlight badges.'
+      },
+      {
+        url: '/skylight_hero_mobile.webp',
+        title: 'Mobile-First Discovery',
+        desc: 'High-converting mobile hero designed for UAE commuters, featuring quick stat counters, social proof, and one-tap WhatsApp.'
+      },
+      {
+        url: '/skylight_about_desktop.webp',
+        title: 'Brand Heritage & Trust',
+        desc: 'A dedicated trust section commemorating 6+ years serving UAE families since 2020, with official tourism licenses.'
+      },
+      {
+        url: '/skylight_nav_mobile.webp',
+        title: 'Fluid Mobile Navigation',
+        desc: 'A sleek drawer menu featuring direct phone/email triggers, branch office locations, and live UAE local time sync.'
+      }
+    ]
+  },
+  {
     id: 'p25',
     slug: 'mandi-manzil-website',
     title: 'Mandi Manzil — Restaurant Website',

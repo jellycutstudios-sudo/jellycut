@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck, Download, Smartphone, MapPin, Users, Award, Car, ZoomIn } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Download, Smartphone, MapPin, Award, Car, ZoomIn } from 'lucide-react';
 
 export default function MaptoCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
   if (!project) return null;

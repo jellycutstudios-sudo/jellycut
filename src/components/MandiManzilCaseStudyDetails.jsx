@@ -29,7 +29,7 @@ const menuItems = [
   { name: 'Green Chilly Mandi',desc: 'A fresh, herbaceous green chilli marinade for the bold' },
 ];
 
-export default function MandiManzilCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
+export default function MandiManzilCaseStudyDetails({ project, onZoomIndex }) {
   if (!project) return null;
 
   return (

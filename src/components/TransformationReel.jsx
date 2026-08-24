@@ -49,19 +49,14 @@ function BeforeAfterSlider({ before, beforeLabel, after, afterLabel }) {
         draggable={false}
       />
 
-      {/* BEFORE (clipped left portion) */}
-      <div
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-        style={{ width: `${position}%` }}
-      >
-        <img
-          src={before}
-          alt={beforeLabel}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ width: containerRef.current?.offsetWidth || '100%' }}
-          draggable={false}
-        />
-      </div>
+      {/* BEFORE (clipped left portion via native clipPath) */}
+      <img
+        src={before}
+        alt={beforeLabel}
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+        draggable={false}
+      />
 
       {/* Divider line */}
       <div

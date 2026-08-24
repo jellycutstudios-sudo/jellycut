@@ -10,6 +10,7 @@ import FilbeyCaseStudyDetails from '../components/FilbeyCaseStudyDetails';
 import MaptoCaseStudyDetails from '../components/MaptoCaseStudyDetails';
 import RuposBillingCaseStudyDetails from '../components/RuposBillingCaseStudyDetails';
 import MandiManzilCaseStudyDetails from '../components/MandiManzilCaseStudyDetails';
+import SkylightCaseStudyDetails from '../components/SkylightCaseStudyDetails';
 
 
 
@@ -129,7 +130,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             )}
 
             {/* Challenge & Solution — hidden for showcases that own their own narrative */}
-            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase) && (
+            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase || project.isSkylightShowcase) && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
                 <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
@@ -187,6 +188,12 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               />
             ) : project.isMandiManzilShowcase ? (
               <MandiManzilCaseStudyDetails
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isSkylightShowcase || project.slug === 'skylight-travel-website' || project.slug === 'skylight-tourism-website' || project.slug === 'skylight-tourism' ? (
+              <SkylightCaseStudyDetails
                 project={project}
                 onZoomIndex={setLightboxImageIndex}
                 setIsModalOpen={setIsModalOpen}

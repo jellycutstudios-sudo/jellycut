@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * homeData.js — All static content data for the Home page.
  * Separated from Home.jsx for maintainability.
