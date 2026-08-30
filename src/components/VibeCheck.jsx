@@ -57,14 +57,14 @@ export default function VibeCheck({ setRoute }) {
             transition={{ ...snap, layout: { duration: 0.35 } }}
             className="pointer-events-auto relative"
             style={{
-              background:   'rgba(255,255,255,0.72)',
-              backdropFilter: 'blur(22px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(22px) saturate(180%)',
-              borderRadius: 999,                         /* always pill-shaped */
+              background:   'rgba(255,255,255,0.82)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              borderRadius: phase === 'open' ? 24 : 999,
               boxShadow: [
-                '0 4px 28px rgba(0,0,0,0.07)',
-                '0 0  0  1px rgba(195,245,60,0.22)',     /* jelly ring */
-                '0 0 40px rgba(195,245,60,0.10)',         /* jelly glow */
+                '0 8px 40px rgba(0,0,0,0.10)',
+                '0 0  0  1px rgba(195,245,60,0.25)',
+                '0 0 40px rgba(195,245,60,0.08)',
               ].join(','),
             }}
           >
@@ -108,9 +108,7 @@ export default function VibeCheck({ setRoute }) {
                   animate={{ opacity: 1 }}
                   exit={{   opacity: 0 }}
                   transition={{ duration: 0.18 }}
-                  /* override pill radius for the content box */
-                  style={{ borderRadius: 20 }}
-                  className="px-5 pt-4 pb-5 w-[min(88vw,360px)]"
+                  className="px-5 pt-5 pb-5 w-[min(88vw,340px)]"
                 >
                   {/* dismiss */}
                   <button
@@ -135,28 +133,28 @@ export default function VibeCheck({ setRoute }) {
                     </p>
                   </div>
 
-                  {/* staggered chips */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* staggered chips — 2-column grid for consistent shape */}
+                  <div className="grid grid-cols-2 gap-2">
                     {options.map((opt, i) => (
                       <motion.button
                         key={opt.label}
                         initial={{ opacity: 0, y: 8, scale: 0.88 }}
                         animate={{ opacity: 1, y: 0, scale: 1    }}
                         transition={{ ...snap, delay: 0.08 + i * 0.07 }}
-                        whileHover={{ scale: 1.04 }}
-                        whileTap={{   scale: 0.94 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{   scale: 0.95 }}
                         onClick={() => handlePick(opt)}
                         className={`
-                          flex items-center gap-1.5 text-[13px] font-medium rounded-full
-                          px-3.5 py-1.5 border transition-colors cursor-pointer
+                          flex items-center gap-2 text-[13px] font-medium rounded-2xl
+                          px-4 py-3 border transition-colors cursor-pointer text-left
                           ${picked?.label === opt.label
                             ? 'bg-jelly border-transparent text-ink'
-                            : 'bg-white/60 border-line/50 text-ink hover:bg-jelly/15 hover:border-jelly/40'
+                            : 'bg-white/70 border-line/60 text-ink hover:bg-jelly/15 hover:border-jelly/40'
                           }
                         `}
                       >
-                        <span>{opt.emoji}</span>
-                        {opt.label}
+                        <span className="text-base leading-none">{opt.emoji}</span>
+                        <span>{opt.label}</span>
                       </motion.button>
                     ))}
                   </div>
