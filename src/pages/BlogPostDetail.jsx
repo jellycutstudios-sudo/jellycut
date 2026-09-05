@@ -9,31 +9,53 @@ export default function BlogPostDetail({ post, setRoute, setIsModalOpen }) {
 
     if (!post) return;
 
-    // Create JSON-LD schema object
+    // Create JSON-LD schema object with @graph for BlogPosting and FAQPage
+    const schemaGraph = [
+      {
+        "@type": "BlogPosting",
+        "@id": `https://www.jellycutstudio.com/blog/${post.slug}#article`,
+        "headline": post.title,
+        "description": post.summary,
+        "image": `https://www.jellycutstudio.com${post.image}`,
+        "datePublished": new Date(post.date).toISOString().split('T')[0],
+        "author": {
+          "@type": "Organization",
+          "name": "Jellycut Studios",
+          "url": "https://www.jellycutstudio.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Jellycut Studios",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.jellycutstudio.com/logo.svg"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `https://www.jellycutstudio.com/blog/${post.slug}`
+        }
+      }
+    ];
+
+    if (post.faqs && post.faqs.length > 0) {
+      schemaGraph.push({
+        "@type": "FAQPage",
+        "@id": `https://www.jellycutstudio.com/blog/${post.slug}#faq`,
+        "mainEntity": post.faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      });
+    }
+
     const schema = {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": post.title,
-      "description": post.summary,
-      "image": `https://www.jellycutstudio.com${post.image}`,
-      "datePublished": new Date(post.date).toISOString().split('T')[0],
-      "author": {
-        "@type": "Organization",
-        "name": "Jellycut Studios",
-        "url": "https://www.jellycutstudio.com/"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Jellycut Studios",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.jellycutstudio.com/logo.svg"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://www.jellycutstudio.com/blog/${post.slug}`
-      }
+      "@graph": schemaGraph
     };
 
     // Inject script tag
@@ -129,6 +151,52 @@ export default function BlogPostDetail({ post, setRoute, setIsModalOpen }) {
                 <h3 key={idx} className="font-serif text-xl md:text-2xl text-ink leading-snug font-normal tracking-tight pt-2">
                   {block.text}
                 </h3>
+              );
+            }
+            if (block.type === 'ul') {
+              return (
+                <ul key={idx} className="space-y-2.5 list-disc pl-6 text-base md:text-lg font-light leading-relaxed marker:text-jelly">
+                  {block.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+            if (block.type === 'callout') {
+              return (
+                <div key={idx} className="p-6 rounded-2xl bg-cream border border-line shadow-xs my-4">
+                  <p className="text-base md:text-lg font-medium text-ink leading-relaxed">{block.text}</p>
+                </div>
+              );
+            }
+            if (block.type === 'table') {
+              return (
+                <div key={idx} className="overflow-x-auto my-6 rounded-2xl border border-line bg-white shadow-xs">
+                  <table className="w-full text-left border-collapse text-sm md:text-base">
+                    {block.headers && (
+                      <thead className="bg-cream border-b border-line">
+                        <tr>
+                          {block.headers.map((h, i) => (
+                            <th key={i} className="p-3.5 md:p-4 font-mono font-semibold text-xs tracking-wider uppercase text-ink">
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                    )}
+                    <tbody className="divide-y divide-line/40">
+                      {block.rows.map((row, rIdx) => (
+                        <tr key={rIdx} className="hover:bg-cream/40 transition-colors">
+                          {row.map((cell, cIdx) => (
+                            <td key={cIdx} className="p-3.5 md:p-4 text-ink font-light">
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               );
             }
             return (
