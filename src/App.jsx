@@ -69,6 +69,7 @@ function App() {
       const slug = mainRoute.substring(7);
       const project = projects.find(p => 
         p.slug === slug || 
+        (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||
         (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
         (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
       );
@@ -120,6 +121,7 @@ function App() {
       const slug = mainRoute.substring(7);
       const project = projects.find(p => 
         p.slug === slug || 
+        (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||
         (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
         (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
       );

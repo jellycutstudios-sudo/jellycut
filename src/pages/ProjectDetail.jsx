@@ -12,6 +12,7 @@ import RuposBillingCaseStudyDetails from '../components/RuposBillingCaseStudyDet
 import MandiManzilCaseStudyDetails from '../components/MandiManzilCaseStudyDetails';
 import SkylightCaseStudyDetails from '../components/SkylightCaseStudyDetails';
 import AstyCaseStudyDetails from '../components/AstyCaseStudyDetails';
+import ShowaiterCaseStudyDetails from '../components/ShowaiterCaseStudyDetails';
 
 
 
@@ -131,7 +132,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             )}
 
             {/* Challenge & Solution — hidden for showcases that own their own narrative */}
-            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase || project.isSkylightShowcase || project.isAstyShowcase || project.slug === 'asty-construction-branding') && (
+            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase || project.isSkylightShowcase || project.isAstyShowcase || project.slug === 'asty-construction-branding' || project.isShowaiterShowcase || project.slug === 'showaiter-plus-halwa-branding') && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
                 <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
@@ -140,8 +141,14 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               </div>
             )}
 
-            {/* Dior/Fawah/Asty Specific Content or General Gallery */}
-            {project.isAstyShowcase || project.slug === 'asty-construction-branding' ? (
+            {/* Showcase Specific Content or General Gallery */}
+            {project.isShowaiterShowcase || project.slug === 'showaiter-plus-halwa-branding' ? (
+              <ShowaiterCaseStudyDetails 
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isAstyShowcase || project.slug === 'asty-construction-branding' ? (
               <AstyCaseStudyDetails 
                 project={project}
                 onZoomIndex={setLightboxImageIndex}

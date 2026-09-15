@@ -2,6 +2,99 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p28',
+    slug: 'showaiter-plus-halwa-branding',
+    title: 'Showaiter Plus — Bahraini Halwa Luxury Branding',
+    category: 'Branding',
+    icon: Globe,
+    description: 'A contemporary brand experience for Showaiter Plus, translating the heritage of Bahraini halwa into a refined world of premium packaging, gifting, retail and hospitality.',
+    longDescription: 'Showaiter Plus is a traditional Bahraini confectionery brand specializing in premium halwa. The challenge was to create a visual world that respected its cultural heritage while positioning the brand for a more contemporary and premium audience. We developed a distinctive brand experience built around deep red, turquoise, warm ivory and subtle brass, creating a balance between cultural familiarity and modern sophistication.',
+    timeline: '2 Weeks',
+    deliverables: [
+      'Bilingual Brand Identity & Modern Arabic Logomark',
+      'Rigid Sweet Box & Halwa Packaging System',
+      'Luxury Retail Gifting & Uncoated Shopping Bags',
+      'Executive Stationery, Wax Seals & Thank-You Cards',
+      'Flagship Retail Facade & Wayfinding Signage',
+      'Hospitality Serving Trays & Bespoke Menus'
+    ],
+    results: 'Reimagined generations of Bahraini confectionery craft into a distinguished luxury identity spanning packaging, flagship retail, and royal hospitality.',
+    image: '/showaiter_gifting_bag.jpg',
+    images: [
+      '/showaiter_gifting_bag.jpg',
+      '/showaiter_tasting_box.jpg',
+      '/showaiter_ceramic_bowl.jpg',
+      '/showaiter_halwa_jar.jpg',
+      '/showaiter_luxury_box.jpg',
+      '/showaiter_gift_hamper.jpg',
+      '/showaiter_interior_counter.jpg',
+      '/showaiter_hospitality_tray.jpg',
+      '/showaiter_retail_facade.jpg',
+      '/showaiter_stationery_suite.jpg',
+      '/showaiter_majlis_gifting.jpg',
+    ],
+    color: 'from-[#4a0d14]/95 via-[#6e151e]/85 to-[#0b2420]/75',
+    imageFit: 'object-cover',
+    isShowaiterShowcase: true,
+    styleframes: [
+      {
+        url: '/showaiter_gifting_bag.jpg',
+        title: 'Luxury Packaging & Gifting Bags',
+        desc: 'Tactile uncoated ivory bags with grosgrain ribbon handles, deep red and turquoise bilingual brandmark, paired with rigid sweet boxes.'
+      },
+      {
+        url: '/showaiter_tasting_box.jpg',
+        title: '9-Compartment Halwa Tasting Box',
+        desc: 'Rigid luxury tasting box showcasing nine artisanal Bahraini halwa varieties garnished with saffron strands, pistachios, and roasted nuts.'
+      },
+      {
+        url: '/showaiter_ceramic_bowl.jpg',
+        title: 'Ceramic Presentation Bowl',
+        desc: 'Custom porcelain serving vessel featuring a crimson dome lid with solid brass finial and turquoise rim detailing.'
+      },
+      {
+        url: '/showaiter_halwa_jar.jpg',
+        title: 'Artisanal Halwa Glass Jar',
+        desc: 'Wide-mouth luxury glass jar with glossy crimson lacquer lid, debossed gold palm seal, and textured ivory label.'
+      },
+      {
+        url: '/showaiter_luxury_box.jpg',
+        title: 'Confectionery Rigid Gift Box',
+        desc: 'Premium two-piece gift box with ribbon seal opening to showcase assorted authentic Bahraini halwa varieties.'
+      },
+      {
+        url: '/showaiter_gift_hamper.jpg',
+        title: 'Grand Gifting Hamper & Royal Scroll',
+        desc: 'Deep crimson gift hamper housing three bespoke halwa volumes and a gold wax-sealed parchment message.'
+      },
+      {
+        url: '/showaiter_interior_counter.jpg',
+        title: 'Flagship Boutique Experience Counter',
+        desc: 'Fluted crimson walnut, warm marble counters, illuminated brass display vitrines, and dimensional brand identity.'
+      },
+      {
+        url: '/showaiter_hospitality_tray.jpg',
+        title: 'Bespoke Hospitality Service',
+        desc: 'Dark walnut serving tray with brushed brass handles and laser-engraved Showaiter emblem, paired with finjan coffee service.'
+      },
+      {
+        url: '/showaiter_retail_facade.jpg',
+        title: 'Flagship Retail Store & Signage',
+        desc: 'Warm limestone facade with illuminated red & turquoise 3D bilingual logomark and arched wooden portal.'
+      },
+      {
+        url: '/showaiter_stationery_suite.jpg',
+        title: 'Executive Stationery Suite',
+        desc: 'Warm ivory cotton letterhead, wax-finish envelopes with gold palm emblem, corporate cards, and greeting collateral.'
+      },
+      {
+        url: '/showaiter_majlis_gifting.jpg',
+        title: 'Majlis Hospitality Setting',
+        desc: 'Deep crimson and cream confectionery box presented alongside traditional Arabic coffee and dates in a luxury salon setting.'
+      }
+    ]
+  },
+  {
     id: 'p27',
     slug: 'asty-construction-branding',
     title: 'asty — Construction • Interiors • Steel Fab',
