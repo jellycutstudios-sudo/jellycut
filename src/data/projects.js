@@ -19,76 +19,76 @@ export const projects = [
       'Hospitality Serving Trays & Bespoke Menus'
     ],
     results: 'Reimagined generations of Bahraini confectionery craft into a distinguished luxury identity spanning packaging, flagship retail, and royal hospitality.',
-    image: '/showaiter_gifting_bag.jpg',
+    image: '/showaiter_gifting_bag.webp',
     images: [
-      '/showaiter_gifting_bag.jpg',
-      '/showaiter_tasting_box.jpg',
-      '/showaiter_ceramic_bowl.jpg',
-      '/showaiter_halwa_jar.jpg',
-      '/showaiter_luxury_box.jpg',
-      '/showaiter_gift_hamper.jpg',
-      '/showaiter_interior_counter.jpg',
-      '/showaiter_hospitality_tray.jpg',
-      '/showaiter_retail_facade.jpg',
-      '/showaiter_stationery_suite.jpg',
-      '/showaiter_majlis_gifting.jpg',
+      '/showaiter_gifting_bag.webp',
+      '/showaiter_tasting_box.webp',
+      '/showaiter_ceramic_bowl.webp',
+      '/showaiter_halwa_jar.webp',
+      '/showaiter_luxury_box.webp',
+      '/showaiter_gift_hamper.webp',
+      '/showaiter_interior_counter.webp',
+      '/showaiter_hospitality_tray.webp',
+      '/showaiter_retail_facade.webp',
+      '/showaiter_stationery_suite.webp',
+      '/showaiter_majlis_gifting.webp',
     ],
     color: 'from-[#4a0d14]/95 via-[#6e151e]/85 to-[#0b2420]/75',
     imageFit: 'object-cover',
     isShowaiterShowcase: true,
     styleframes: [
       {
-        url: '/showaiter_gifting_bag.jpg',
+        url: '/showaiter_gifting_bag.webp',
         title: 'Luxury Packaging & Gifting Bags',
         desc: 'Tactile uncoated ivory bags with grosgrain ribbon handles, deep red and turquoise bilingual brandmark, paired with rigid sweet boxes.'
       },
       {
-        url: '/showaiter_tasting_box.jpg',
+        url: '/showaiter_tasting_box.webp',
         title: '9-Compartment Halwa Tasting Box',
         desc: 'Rigid luxury tasting box showcasing nine artisanal Bahraini halwa varieties garnished with saffron strands, pistachios, and roasted nuts.'
       },
       {
-        url: '/showaiter_ceramic_bowl.jpg',
+        url: '/showaiter_ceramic_bowl.webp',
         title: 'Ceramic Presentation Bowl',
         desc: 'Custom porcelain serving vessel featuring a crimson dome lid with solid brass finial and turquoise rim detailing.'
       },
       {
-        url: '/showaiter_halwa_jar.jpg',
+        url: '/showaiter_halwa_jar.webp',
         title: 'Artisanal Halwa Glass Jar',
         desc: 'Wide-mouth luxury glass jar with glossy crimson lacquer lid, debossed gold palm seal, and textured ivory label.'
       },
       {
-        url: '/showaiter_luxury_box.jpg',
+        url: '/showaiter_luxury_box.webp',
         title: 'Confectionery Rigid Gift Box',
         desc: 'Premium two-piece gift box with ribbon seal opening to showcase assorted authentic Bahraini halwa varieties.'
       },
       {
-        url: '/showaiter_gift_hamper.jpg',
+        url: '/showaiter_gift_hamper.webp',
         title: 'Grand Gifting Hamper & Royal Scroll',
         desc: 'Deep crimson gift hamper housing three bespoke halwa volumes and a gold wax-sealed parchment message.'
       },
       {
-        url: '/showaiter_interior_counter.jpg',
+        url: '/showaiter_interior_counter.webp',
         title: 'Flagship Boutique Experience Counter',
         desc: 'Fluted crimson walnut, warm marble counters, illuminated brass display vitrines, and dimensional brand identity.'
       },
       {
-        url: '/showaiter_hospitality_tray.jpg',
+        url: '/showaiter_hospitality_tray.webp',
         title: 'Bespoke Hospitality Service',
         desc: 'Dark walnut serving tray with brushed brass handles and laser-engraved Showaiter emblem, paired with finjan coffee service.'
       },
       {
-        url: '/showaiter_retail_facade.jpg',
+        url: '/showaiter_retail_facade.webp',
         title: 'Flagship Retail Store & Signage',
         desc: 'Warm limestone facade with illuminated red & turquoise 3D bilingual logomark and arched wooden portal.'
       },
       {
-        url: '/showaiter_stationery_suite.jpg',
+        url: '/showaiter_stationery_suite.webp',
         title: 'Executive Stationery Suite',
         desc: 'Warm ivory cotton letterhead, wax-finish envelopes with gold palm emblem, corporate cards, and greeting collateral.'
       },
       {
-        url: '/showaiter_majlis_gifting.jpg',
+        url: '/showaiter_majlis_gifting.webp',
         title: 'Majlis Hospitality Setting',
         desc: 'Deep crimson and cream confectionery box presented alongside traditional Arabic coffee and dates in a luxury salon setting.'
       }

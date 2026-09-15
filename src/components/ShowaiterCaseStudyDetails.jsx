@@ -19,7 +19,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
   const mockups = [
     {
       index: 0,
-      url: '/showaiter_gifting_bag.jpg',
+      url: '/showaiter_gifting_bag.webp',
       tag: '01 // Packaging & Gifting',
       title: 'Luxury Confectionery Bag & Rigid Box Suite',
       description: 'Tactile uncoated ivory gift bag with grosgrain ribbon handles, deep crimson and turquoise bilingual typography, paired with authentic halwa tasting portions.',
@@ -27,7 +27,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 1,
-      url: '/showaiter_tasting_box.jpg',
+      url: '/showaiter_tasting_box.webp',
       tag: '02 // Tasting Experience',
       title: '9-Compartment Artisanal Halwa Box',
       description: 'Rigid confectionery gift box revealing nine delicately garnished halwa variations featuring authentic saffron strands, roasted pistachios, and almonds.',
@@ -35,7 +35,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 2,
-      url: '/showaiter_ceramic_bowl.jpg',
+      url: '/showaiter_ceramic_bowl.webp',
       tag: '03 // Heritage Tableware',
       title: 'Ceramic Halwa Presentation Bowl',
       description: 'Custom porcelain serving vessel featuring a crimson domed lid with solid brass finial, turquoise rim detailing, and warm gold service spoon.',
@@ -43,7 +43,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 3,
-      url: '/showaiter_halwa_jar.jpg',
+      url: '/showaiter_halwa_jar.webp',
       tag: '04 // Artisanal Packaging',
       title: 'Luxury Glass Jar & Wax Medallion',
       description: 'Wide-mouth preserve jar capped with a crimson lacquer lid, signature turquoise ribbon, and embossed gold foil palm seal.',
@@ -51,7 +51,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 4,
-      url: '/showaiter_luxury_box.jpg',
+      url: '/showaiter_luxury_box.webp',
       tag: '05 // Product Packaging',
       title: 'Two-Piece Confectionery Box',
       description: 'Tactile rigid gift box with turquoise color-block band, opening to reveal assorted freshly prepared Bahraini halwa squares.',
@@ -59,7 +59,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 5,
-      url: '/showaiter_gift_hamper.jpg',
+      url: '/showaiter_gift_hamper.webp',
       tag: '06 // Royal Gifting Hamper',
       title: 'Grand Gifting Hamper & Wax-Sealed Scroll',
       description: 'Deep crimson presentation hamper containing individual halwa volumes, paired with a custom thank-you scroll secured by a gold wax palm seal.',
@@ -67,7 +67,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 6,
-      url: '/showaiter_interior_counter.jpg',
+      url: '/showaiter_interior_counter.webp',
       tag: '07 // Flagship Retail Interior',
       title: 'Boutique Experience Counter & Display Vitrines',
       description: 'Warm limestone, fluted crimson walnut paneling, brushed brass vitrines, and halo-lit Arabic brandmark creating an inviting luxury retail sanctuary.',
@@ -75,7 +75,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 7,
-      url: '/showaiter_hospitality_tray.jpg',
+      url: '/showaiter_hospitality_tray.webp',
       tag: '08 // Hospitality Presentation',
       title: 'Bespoke Walnut & Brass Serving Tray',
       description: 'Dark walnut serving tray with brushed brass handles and laser-engraved emblem, accompanied by traditional finjan coffee service against the Manama skyline.',
@@ -83,7 +83,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 8,
-      url: '/showaiter_retail_facade.jpg',
+      url: '/showaiter_retail_facade.webp',
       tag: '09 // Retail Architecture',
       title: 'Flagship Boutique Exterior & Signage',
       description: 'Warm limestone facade with halo-illuminated dimensional Arabic mark, arched timber portal, and illuminated interior halwa displays.',
@@ -91,7 +91,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 9,
-      url: '/showaiter_stationery_suite.jpg',
+      url: '/showaiter_stationery_suite.webp',
       tag: '10 // Brand Collateral',
       title: 'Executive Stationery & Monogram Suite',
       description: 'Tactile cotton letterheads, thank-you cards, deep crimson envelopes with gold foil palm emblem, and bilingual executive cards.',
@@ -99,7 +99,7 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
     },
     {
       index: 10,
-      url: '/showaiter_majlis_gifting.jpg',
+      url: '/showaiter_majlis_gifting.webp',
       tag: '11 // Cultural Hospitality',
       title: 'Majlis Tabletop & Traditional Hospitality',
       description: 'Crimson and cream luxury confectionery box presented on a carved wooden majlis table alongside Arabic coffee cups and gourmet dates.',
