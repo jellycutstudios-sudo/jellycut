@@ -2,6 +2,89 @@ import { Globe, Video, Code } from 'lucide-react';
 
 export const projects = [
   {
+    id: 'p27',
+    slug: 'asty-construction-branding',
+    title: 'asty — Construction • Interiors • Steel Fab',
+    category: 'Branding',
+    icon: Globe,
+    description: 'A monolithic, modern architectural brand identity and environmental wayfinding system for asty — Kerala\'s premier construction, interiors, steel fab and PMC firm.',
+    longDescription: 'We crafted the comprehensive brand identity, environmental signage, and spatial design system for asty (Construction • Interiors • Steel Fab • Project Management Consultation). Engineered around the ethos "We build and deliver with engineering discipline," the visual identity bridges brutalist material honesty with tropical Kerala modernism — spanning monolithic entrance monuments, reception interiors, commercial fleet livery, and luxury editorial lookbooks.',
+    timeline: '1 Week',
+    deliverables: [
+      'Architectural Logomark & Wordmark System',
+      'Environmental Signage & Directional Wayfinding',
+      'Corporate Experience Center Spatial Branding',
+      'Heavy Fleet Livery & Scaffolding Mesh Graphics',
+      'Project Portfolio Monograph & Editorial Print Design',
+      'Material & Brand Guidelines Standard'
+    ],
+    results: 'Forged a disciplined, authoritative brand universe establishing asty as the vanguard of modern turnkey construction and project management across South India.',
+    image: '/asty_reception_lobby.webp',
+    images: [
+      '/asty_reception_lobby.webp',
+      '/asty_granite_entrance_wall.webp',
+      '/asty_site_perimeter_wall.webp',
+      '/asty_helmet_workwear.webp',
+      '/asty_villa_gateway.webp',
+      '/asty_sandstone_stele.webp',
+      '/asty_collateral_grid.webp',
+      '/asty_fleet_truck.webp',
+      '/asty_signage_grid.webp',
+    ],
+    color: 'from-[#121c16]/95 via-[#1a2e22]/85 to-[#0d1711]/75',
+    imageFit: 'object-cover',
+    isAstyShowcase: true,
+    clientPhone: '+91 81293 55721',
+    instagramUrl: 'https://www.instagram.com/asty_constructions/',
+    styleframes: [
+      {
+        url: '/asty_reception_lobby.webp',
+        title: 'Corporate Experience Center',
+        desc: 'Monolithic chiseled basalt reception desk with dimensional black architectural wall logo and warm indirect lighting.'
+      },
+      {
+        url: '/asty_granite_entrance_wall.webp',
+        title: 'Brutalist Granite Monument',
+        desc: 'Textured stone perimeter wall with silver dimensional logomark and architectural villa driveway.'
+      },
+      {
+        url: '/asty_site_perimeter_wall.webp',
+        title: 'Active Jobsite Perimeter Facade',
+        desc: 'White rendered compound wall featuring "Crafting Lasting Spaces / Built With Purpose" brand typography.'
+      },
+      {
+        url: '/asty_helmet_workwear.webp',
+        title: 'On-Site Gear & Workwear Uniforms',
+        desc: 'Heavy-duty safety helmet and deep forest green embroidered crew shirts for engineering staff.'
+      },
+      {
+        url: '/asty_villa_gateway.webp',
+        title: 'Architectural Gateway Monument',
+        desc: 'Cast concrete entrance wall with black metal asty logomark, set against lush Kerala tropical landscape.'
+      },
+      {
+        url: '/asty_sandstone_stele.webp',
+        title: 'Sandstone Wayfinding Stele',
+        desc: 'Illuminated stone monolithic pillar integrated with tropical vegetation and slate pathway.'
+      },
+      {
+        url: '/asty_collateral_grid.webp',
+        title: 'Complete Identity Collateral',
+        desc: 'Stationery suite, tote bags, site banners, vehicle liveries, and safety apparel.'
+      },
+      {
+        url: '/asty_fleet_truck.webp',
+        title: 'Heavy Fleet & Scaffolding Signage',
+        desc: 'Branded 4x4 commercial utility pickup vehicle with dark green accent stripe and on-site scaffolding mesh banner.'
+      },
+      {
+        url: '/asty_signage_grid.webp',
+        title: 'Environmental Wayfinding System',
+        desc: 'Directional bollards, brass room identification plaques, and suspended exterior blade signage.'
+      }
+    ]
+  },
+  {
     id: 'p26',
     slug: 'skylight-travel-website',
     title: 'Skylight Travel — UAE Tourism & Visa Platform',

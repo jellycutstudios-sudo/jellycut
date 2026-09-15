@@ -67,7 +67,11 @@ function App() {
       description = 'Browse Jellycut Studios\' portfolio — cinematic AI video ads, brand identities, vibe-coded apps, and website designs for global clients. See real results.';
     } else if (mainRoute.startsWith('/works/')) {
       const slug = mainRoute.substring(7);
-      const project = projects.find(p => p.slug === slug || (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel')));
+      const project = projects.find(p => 
+        p.slug === slug || 
+        (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
+        (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
+      );
       if (project) {
         title = `${project.title} Case Study — AI Video Ads & Brand Design | Jellycut Studios`;
         description = project.description;
@@ -114,7 +118,11 @@ function App() {
       return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} setRoute={handleNavigate} />;
     } else if (mainRoute.startsWith('/works/')) {
       const slug = mainRoute.substring(7);
-      const project = projects.find(p => p.slug === slug || (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel')));
+      const project = projects.find(p => 
+        p.slug === slug || 
+        (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
+        (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
+      );
       if (project) {
         return (
           <ProjectDetail 

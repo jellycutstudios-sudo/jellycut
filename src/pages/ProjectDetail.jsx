@@ -11,6 +11,7 @@ import MaptoCaseStudyDetails from '../components/MaptoCaseStudyDetails';
 import RuposBillingCaseStudyDetails from '../components/RuposBillingCaseStudyDetails';
 import MandiManzilCaseStudyDetails from '../components/MandiManzilCaseStudyDetails';
 import SkylightCaseStudyDetails from '../components/SkylightCaseStudyDetails';
+import AstyCaseStudyDetails from '../components/AstyCaseStudyDetails';
 
 
 
@@ -130,7 +131,7 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
             )}
 
             {/* Challenge & Solution — hidden for showcases that own their own narrative */}
-            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase || project.isSkylightShowcase) && (
+            {!(project.isFilbeyNeuralCrunchShowcase || project.isMaptoShowcase || project.isSkylightShowcase || project.isAstyShowcase || project.slug === 'asty-construction-branding') && (
               <div className="space-y-4">
                 <h2 className="text-xs font-semibold uppercase tracking-widest text-muted font-mono">The Challenge &amp; Solution</h2>
                 <p className="text-ink text-base md:text-lg font-light leading-relaxed font-sans">
@@ -139,8 +140,14 @@ export default function ProjectDetail({ project, setRoute, setIsModalOpen }) {
               </div>
             )}
 
-            {/* Dior/Fawah Specific Content or General Gallery */}
-            {project.isMaptoShowcase ? (
+            {/* Dior/Fawah/Asty Specific Content or General Gallery */}
+            {project.isAstyShowcase || project.slug === 'asty-construction-branding' ? (
+              <AstyCaseStudyDetails 
+                project={project}
+                onZoomIndex={setLightboxImageIndex}
+                setIsModalOpen={setIsModalOpen}
+              />
+            ) : project.isMaptoShowcase ? (
               <MaptoCaseStudyDetails 
                 project={project} 
                 onZoomIndex={setLightboxImageIndex}

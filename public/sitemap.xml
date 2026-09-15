@@ -9,6 +9,38 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- asty Construction Case Study -->
+  <url>
+    <loc>https://www.jellycutstudio.com/works/asty-construction-branding</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Skylight Travel Case Study -->
+  <url>
+    <loc>https://www.jellycutstudio.com/works/skylight-travel-website</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Mandi Manzil Case Study -->
+  <url>
+    <loc>https://www.jellycutstudio.com/works/mandi-manzil-website</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Mapto Case Study -->
+  <url>
+    <loc>https://www.jellycutstudio.com/works/mapto-brand-identity</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- FAWAH Case Study -->
   <url>
     <loc>https://www.jellycutstudio.com/works/fawah-fragrances</loc>
