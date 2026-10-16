@@ -65,8 +65,8 @@ function App() {
     if (mainRoute === '/works') {
       title = 'Portfolio & Case Studies — AI Video Ads & Brand Design | Jellycut Studios';
       description = 'Browse Jellycut Studios\' portfolio — cinematic AI video ads, brand identities, vibe-coded apps, and website designs for global clients. See real results.';
-    } else if (mainRoute.startsWith('/works/')) {
-      const slug = mainRoute.substring(7);
+    } else if (mainRoute.startsWith('/works/') || mainRoute.startsWith('/project/')) {
+      const slug = mainRoute.startsWith('/works/') ? mainRoute.substring(7) : mainRoute.substring(9);
       const project = projects.find(p => 
         p.slug === slug || 
         (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||
@@ -117,8 +117,8 @@ function App() {
     const mainRoute = route.split('?')[0];
     if (mainRoute === '/works') {
       return <Works setIsModalOpen={setIsModalOpen} currentRoute={route} setRoute={handleNavigate} />;
-    } else if (mainRoute.startsWith('/works/')) {
-      const slug = mainRoute.substring(7);
+    } else if (mainRoute.startsWith('/works/') || mainRoute.startsWith('/project/')) {
+      const slug = mainRoute.startsWith('/works/') ? mainRoute.substring(7) : mainRoute.substring(9);
       const project = projects.find(p => 
         p.slug === slug || 
         (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||

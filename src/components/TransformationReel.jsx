@@ -35,10 +35,11 @@ const cards = [
 
 export default function TransformationReel({ setRoute }) {
   const handleCardClick = (slug) => {
+    const targetPath = `/works/${slug}`;
     if (setRoute) {
-      setRoute(`/project/${slug}`);
+      setRoute(targetPath);
     } else {
-      window.history.pushState({}, '', `/project/${slug}`);
+      window.history.pushState({}, '', targetPath);
       window.dispatchEvent(new PopStateEvent('popstate'));
       window.scrollTo(0, 0);
     }
