@@ -1,5 +1,6 @@
 import { streamText, convertToModelMessages } from 'ai';
 import { createGroq } from '@ai-sdk/groq';
+import { generateFallbackReply, createFallbackStreamResponse, wrapStreamWithFallback } from './fallbackAgent.js';
 
 export const config = {
   runtime: 'edge',
@@ -9,9 +10,21 @@ export default async function handler(req) {
   if (req.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
   }
-  
+
+  let messages = [];
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    messages = body.messages || [];
+
+    const normalizedMessages = messages.map(m => {
+      if (!m.parts && typeof m.content === 'string') {
+        return {
+          ...m,
+          parts: [{ type: 'text', text: m.content }]
+        };
+      }
+      return m;
+    });
 
     // The system prompt teaches the AI about Jellycut Studios
     const systemPrompt = `You are the official conversational assistant for Jellycut Studios, a premium AI-first creative agency based in Kerala, India.
@@ -46,18 +59,8 @@ export default async function handler(req) {
     - If the user says "Hello" or "Hi", respond warmly but skip any formal re-introduction.`;
 
     if (!process.env.GROQ_API_KEY) {
-      const encoder = new TextEncoder();
-      const stream = new ReadableStream({
-        async start(controller) {
-          const text = "Hi there! I'd love to chat, but my Groq API key isn't configured yet. If you need to reach us, just email team@jellycutstudio.com directly!";
-          const chunk = encoder.encode(`0:"${text}"\n`);
-          controller.enqueue(chunk);
-          controller.close();
-        },
-      });
-      return new Response(stream, {
-        headers: { 'Content-Type': 'text/plain; charset=utf-8', 'x-vercel-ai-data-stream': 'v1' },
-      });
+      console.warn('⚠️  GROQ_API_KEY not configured — serving response via Plan B fallback agent');
+      return createFallbackStreamResponse(generateFallbackReply(normalizedMessages));
     }
 
     const groq = createGroq({
@@ -65,14 +68,17 @@ export default async function handler(req) {
     });
 
     const result = streamText({
-      model: groq('llama-3.3-70b-versatile'), // Groq's super fast model
+      model: groq('qwen/qwen3.8-27b'), // Groq fast model
       system: systemPrompt,
-      messages: await convertToModelMessages(messages),
+      messages: await convertToModelMessages(normalizedMessages),
       temperature: 0.7,
     });
 
-    return result.toUIMessageStreamResponse();
+    const rawWebResponse = result.toUIMessageStreamResponse();
+    return wrapStreamWithFallback(rawWebResponse, normalizedMessages);
   } catch (e) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500 });
+    console.warn('⚠️  [/api/chat error - Plan B fallback agent activated]:', e.message);
+    const reply = generateFallbackReply(messages);
+    return createFallbackStreamResponse(reply);
   }
 }

@@ -84,8 +84,23 @@ export default function AIChatWidget() {
   const lastSentLeadKeyRef = useRef('');
   const thinkingTimeoutRef = useRef(null);
 
-  const { messages, sendMessage, status } = useChat({
+  const { messages, setMessages, sendMessage, status } = useChat({
     api: '/api/chat',
+    onError: (err) => {
+      console.warn('Chat network error, Plan B client fallback active:', err);
+      setIsThinking(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          role: 'assistant',
+          parts: [{
+            type: 'text',
+            text: "Hey! Our cloud connection hiccuped for a second ⚡ But our studio team is on standby! Drop your name and email or WhatsApp number here, and our founders will personally reach out within 24 hours!"
+          }]
+        }
+      ]);
+    },
     messages: [
       {
         id: '1',
@@ -99,7 +114,6 @@ export default function AIChatWidget() {
 
   useEffect(() => {
     if (status === 'submitted') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsThinking(true);
       if (thinkingTimeoutRef.current) clearTimeout(thinkingTimeoutRef.current);
       thinkingTimeoutRef.current = setTimeout(() => {
@@ -341,6 +355,43 @@ export default function AIChatWidget() {
                     </div>
                   );
                 })}
+
+                {visibleMessages.length <= 1 && (
+                  <div className="flex flex-wrap gap-1.5 pt-1 pl-9">
+                    {[
+                      '💰 Pricing & rates?',
+                      '⚡ Turnaround time?',
+                      '🎬 AI video ads',
+                      '💻 Web apps',
+                      '✦ Case studies'
+                    ].map((promptText) => (
+                      <button
+                        key={promptText}
+                        type="button"
+                        disabled={isLoading}
+                        onClick={() => sendMessage({ text: promptText })}
+                        className="text-[11px] px-2.5 py-1 rounded-full cursor-pointer transition-all border text-left"
+                        style={{
+                          backgroundColor: 'rgba(255,255,255,0.04)',
+                          borderColor: 'rgba(111,214,42,0.2)',
+                          color: 'rgba(255,255,255,0.8)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(111,214,42,0.12)';
+                          e.currentTarget.style.borderColor = 'rgba(111,214,42,0.4)';
+                          e.currentTarget.style.color = '#6fd62a';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.04)';
+                          e.currentTarget.style.borderColor = 'rgba(111,214,42,0.2)';
+                          e.currentTarget.style.color = 'rgba(255,255,255,0.8)';
+                        }}
+                      >
+                        {promptText}
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {/* Typing indicator */}
                 {showTypingIndicator && (

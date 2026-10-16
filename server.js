@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 import sendLeadHandler from './api/send-lead.js';
+import { generateFallbackReply, extractLeadInfo, createFallbackStreamResponse, wrapStreamWithFallback } from './api/fallbackAgent.js';
 
 const PORT = 3001;
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -95,31 +96,83 @@ const server = http.createServer(async (req, res) => {
 
   // ── POST /api/chat ────────────────────────────────────────────────────
   if (url.pathname === '/api/chat' && req.method === 'POST') {
+    let normalizedMessages = [];
     try {
       const body = await readBody(req);
       const { messages } = body;
 
+      normalizedMessages = (messages || []).map(m => {
+        if (!m.parts && typeof m.content === 'string') {
+          return {
+            ...m,
+            parts: [{ type: 'text', text: m.content }]
+          };
+        }
+        return m;
+      });
+
+      // Stream helper for Plan B fallback response
+      const streamFallback = (messagesList) => {
+        const lead = extractLeadInfo(messagesList);
+        if (lead.email || lead.phone) {
+          const mockReq = {
+            method: 'POST',
+            body: {
+              name: lead.name || 'Website Visitor (via Plan B Auto-Responder)',
+              email: lead.email,
+              phone: lead.phone,
+              summary: messagesList.map(m => `[${m.role}] ${m.content || (m.parts && m.parts.map(p => p.text).join(' ')) || ''}`).join('\n')
+            }
+          };
+          const mockRes = {
+            status() { return this; },
+            json() { return this; }
+          };
+          sendLeadHandler(mockReq, mockRes).catch(err => console.error('[Plan B Lead Send Error]:', err));
+        }
+
+        const reply = generateFallbackReply(messagesList);
+        const webResponse = createFallbackStreamResponse(reply);
+        res.writeHead(webResponse.status, Object.fromEntries(webResponse.headers.entries()));
+        const reader = webResponse.body.getReader();
+        const pump = async () => {
+          const { done, value } = await reader.read();
+          if (done) { res.end(); return; }
+          res.write(Buffer.from(value));
+          pump();
+        };
+        pump();
+      };
+
       if (!process.env.GROQ_API_KEY) {
-        res.writeHead(200, {
-          'Content-Type': 'text/plain; charset=utf-8',
-          'x-vercel-ai-data-stream': 'v1',
-          'Transfer-Encoding': 'chunked',
-        });
-        res.write('0:"Hi! The GROQ_API_KEY isn\'t set locally. Add it to a .env.local file to enable AI chat.\\n\\nTo get a free key: https://console.groq.com"\\n');
-        res.end();
+        console.warn('⚠️  GROQ_API_KEY not set — serving response via Plan B fallback agent');
+        streamFallback(normalizedMessages);
         return;
       }
 
       const groq = createGroq({ apiKey: process.env.GROQ_API_KEY });
       const result = streamText({
-        model: groq('llama-3.3-70b-versatile'),
+        model: groq('qwen/qwen3.8-27b'),
         system: SYSTEM_PROMPT,
-        messages: await convertToModelMessages(messages),
+        messages: await convertToModelMessages(normalizedMessages),
         temperature: 0.7,
       });
 
-      // Stream the AI SDK response directly into the http response
-      const webResponse = result.toUIMessageStreamResponse();
+      // Stream the AI SDK response through Plan B safety wrapper
+      const rawWebResponse = result.toUIMessageStreamResponse();
+      const webResponse = wrapStreamWithFallback(rawWebResponse, normalizedMessages, (lead) => {
+        const mockReq = {
+          method: 'POST',
+          body: {
+            name: lead.name || 'Website Visitor (via Plan B Auto-Responder)',
+            email: lead.email,
+            phone: lead.phone,
+            summary: normalizedMessages.map(m => `[${m.role}] ${m.content || (m.parts && m.parts.map(p => p.text).join(' ')) || ''}`).join('\n')
+          }
+        };
+        const mockRes = { status() { return this; }, json() { return this; } };
+        sendLeadHandler(mockReq, mockRes).catch(err => console.error('[Plan B Lead Send Error]:', err));
+      });
       res.writeHead(webResponse.status, Object.fromEntries(webResponse.headers.entries()));
       const reader = webResponse.body.getReader();
       const pump = async () => {
@@ -130,9 +183,40 @@ const server = http.createServer(async (req, res) => {
       };
       pump();
     } catch (e) {
-      console.error('[/api/chat]', e);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: e.message }));
+      console.warn('⚠️  [/api/chat error - Plan B fallback agent activated]:', e.message);
+      // Fallback seamlessly to the Plan B agent
+      try {
+        const lead = extractLeadInfo(normalizedMessages);
+        if (lead.email || lead.phone) {
+          const mockReq = {
+            method: 'POST',
+            body: {
+              name: lead.name || 'Website Visitor (via Plan B Auto-Responder)',
+              email: lead.email,
+              phone: lead.phone,
+              summary: normalizedMessages.map(m => `[${m.role}] ${m.content || (m.parts && m.parts.map(p => p.text).join(' ')) || ''}`).join('\n')
+            }
+          };
+          const mockRes = { status() { return this; }, json() { return this; } };
+          sendLeadHandler(mockReq, mockRes).catch(err => console.error('[Plan B Lead Send Error]:', err));
+        }
+
+        const reply = generateFallbackReply(normalizedMessages);
+        const webResponse = createFallbackStreamResponse(reply);
+        res.writeHead(webResponse.status, Object.fromEntries(webResponse.headers.entries()));
+        const reader = webResponse.body.getReader();
+        const pump = async () => {
+          const { done, value } = await reader.read();
+          if (done) { res.end(); return; }
+          res.write(Buffer.from(value));
+          pump();
+        };
+        pump();
+      } catch (fallbackError) {
+        console.error('Critical fallback error:', fallbackError);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: fallbackError.message }));
+      }
     }
     return;
   }

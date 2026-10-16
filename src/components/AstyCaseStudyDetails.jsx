@@ -7,8 +7,7 @@ import {
   Box, 
   Phone, 
   ExternalLink,
-  CheckCircle2,
-  Maximize2
+  CheckCircle2
 } from 'lucide-react';
 
 function InstagramIcon({ className = "w-4 h-4" }) {

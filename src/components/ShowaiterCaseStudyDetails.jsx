@@ -2,15 +2,11 @@ import {
   ArrowRight, 
   ZoomIn, 
   Sparkles, 
-  Layers, 
-  Compass, 
   Box, 
   Coffee,
   Store,
   Gift,
-  CheckCircle2,
-  UtensilsCrossed,
-  Crown
+  CheckCircle2
 } from 'lucide-react';
 
 export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
