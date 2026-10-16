@@ -649,7 +649,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
       </section>
 
       {/* ── 6.4 TRANSFORMATION REEL ─────────────────────────────────────── */}
-      <TransformationReel />
+      <TransformationReel setRoute={setRoute} />
 
       {/* ── 6.5 PRICE ESTIMATOR ─────────────────────────────────────────── */}
       <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-t border-line overflow-hidden">

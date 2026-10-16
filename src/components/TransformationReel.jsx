@@ -1,167 +1,93 @@
-import { useRef, useState } from 'react';
-import { Layers, ArrowLeftRight, ArrowRight } from 'lucide-react';
-
-// A standalone before/after slider — for CGI and video work
-function BeforeAfterSlider({ before, beforeLabel, after, afterLabel }) {
-  const [position, setPosition] = useState(50);
-  const containerRef = useRef(null);
-  const isDragging = useRef(false);
-
-  const updatePosition = (clientX) => {
-    if (!containerRef.current) return;
-    const { left, width } = containerRef.current.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(100, ((clientX - left) / width) * 100));
-    setPosition(pct);
-  };
-
-  const handleMouseDown = (e) => {
-    e.stopPropagation();
-    isDragging.current = true;
-    updatePosition(e.clientX);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    updatePosition(e.clientX);
-  };
-
-  const handleMouseUp = () => { isDragging.current = false; };
-
-  const handleTouchMove = (e) => {
-    if (e.touches[0]) updatePosition(e.touches[0].clientX);
-  };
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative w-full aspect-video rounded-2xl overflow-hidden border border-line select-none bg-ink cursor-ew-resize shadow-sm"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchMove={handleTouchMove}
-    >
-      <img src={after} alt={afterLabel} className="absolute inset-0 w-full h-full object-cover pointer-events-none" draggable={false} />
-      <img src={before} alt={beforeLabel} className="absolute inset-0 w-full h-full object-cover pointer-events-none" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }} draggable={false} />
-      <div className="absolute top-0 bottom-0 w-[2px] bg-white pointer-events-none z-20 shadow-[0_0_8px_rgba(0,0,0,0.4)]" style={{ left: `${position}%`, transform: 'translateX(-50%)' }}>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center z-30">
-          <ArrowLeftRight className="w-4 h-4 text-ink" strokeWidth={2.5} />
-        </div>
-      </div>
-      <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold font-mono px-2.5 py-1 rounded-md z-10 pointer-events-none">
-        {beforeLabel}
-      </div>
-      <div className="absolute top-3 bg-jelly/90 text-ink text-[10px] font-bold font-mono px-2.5 py-1 rounded-md z-10 pointer-events-none transition-all" style={{ left: `calc(${position}% + 10px)`, opacity: position < 80 ? 1 : 0 }}>
-        {afterLabel}
-      </div>
-    </div>
-  );
-}
-
-// A brand showcase carousel — for identity/packaging projects with no "before" state
-function BrandShowcaseCard({ images }) {
-  const [active, setActive] = useState(0);
-  return (
-    <div
-      className="relative w-full aspect-video rounded-2xl overflow-hidden border border-line shadow-sm cursor-pointer select-none"
-      onClick={() => setActive((p) => (p + 1) % images.length)}
-    >
-      {images.map((img, i) => (
-        <img
-          key={i}
-          src={img}
-          alt={`Brand showcase ${i + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === active ? 'opacity-100' : 'opacity-0'}`}
-        />
-      ))}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-      <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-sm text-white text-[10px] font-mono px-2.5 py-1 rounded-md z-10 flex items-center gap-1.5">
-        <ArrowRight className="w-3 h-3" />
-        <span>Tap to browse</span>
-      </div>
-      <div className="absolute bottom-3 left-3 flex gap-1.5 z-10">
-        {images.map((_, i) => (
-          <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === active ? 'bg-white scale-125' : 'bg-white/40'}`} />
-        ))}
-      </div>
-    </div>
-  );
-}
+import { Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
 
 const cards = [
   {
     id: 1,
-    type: 'slider',
     title: "Dior Chessboard CGI",
-    description: "Untextured 3D clay render → fully lit, cinematic CGI product shot.",
+    description: "Fully lit, cinematic CGI visualization showcasing refractive luxury materials and dramatic studio chiaroscuro.",
     tag: "3D Animation",
-    before: "/dior_chessboard_clay.webp",
-    beforeLabel: "Clay Render",
-    after: "/dior_chessboard_final.webp",
-    afterLabel: "Final CGI",
+    badge: "Final CGI Master",
+    image: "/dior_chessboard_final.webp",
+    slug: "dior-chessboard-concept",
+    meta: "Photorealistic 3D · 4K Master",
   },
   {
     id: 2,
-    type: 'slider',
     title: "Filbey's Food Campaign",
-    description: "Storyboard concept frame → live-action food photography composite.",
+    description: "Mouth-watering live-action food cinematography composited for dynamic product advertising and high-impact social campaigns.",
     tag: "AI Video Ad",
-    before: "/filbey_storyboard.jpg",
-    beforeLabel: "Storyboard",
-    after: "/filbey_detail.webp",
-    afterLabel: "Final Shot",
+    badge: "Final Film Frame",
+    image: "/filbey_detail.webp",
+    slug: "filbey-neural-crunch",
+    meta: "Cinematic Grade · Social Campaign",
   },
   {
     id: 3,
-    type: 'showcase',
     title: "Showaiter Plus",
-    description: "Traditional Bahraini confectionery heritage → a contemporary luxury brand universe spanning packaging, gifting and retail.",
+    description: "Traditional Bahraini confectionery heritage translated into a contemporary luxury packaging and retail experience.",
     tag: "Brand Identity",
-    images: [
-      "/showaiter_gifting_bag.webp",
-      "/showaiter_tasting_box.webp",
-      "/showaiter_interior_counter.webp",
-      "/showaiter_halwa_jar.webp",
-    ],
+    badge: "Luxury Brand Suite",
+    image: "/showaiter_gifting_bag.webp",
+    slug: "showaiter-plus-halwa-branding",
+    meta: "Packaging · Retail · Gifting",
   },
 ];
 
-export default function TransformationReel() {
+export default function TransformationReel({ setRoute }) {
+  const handleCardClick = (slug) => {
+    if (setRoute) {
+      setRoute(`/project/${slug}`);
+    } else {
+      window.history.pushState({}, '', `/project/${slug}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <section className="relative py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-paper border-t border-line overflow-hidden">
       <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-9 h-9 rounded-full bg-paper border border-line flex items-center justify-center">
-              <Layers className="w-4 h-4 text-jelly-deep" />
+              <Sparkles className="w-4 h-4 text-jelly-deep" />
             </div>
             <span className="text-jelly-deep text-xs font-semibold tracking-widest uppercase font-mono">
-              Process Transparency
+              Craft & Execution
             </span>
           </div>
           <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight font-normal mb-4">
             The Work, Up Close.
           </h2>
           <p className="text-muted text-base md:text-lg font-light leading-relaxed">
-            From storyboard to final frame, clay render to cinematic shot, brand brief to luxury universe — we obsess over the craft at every stage.
+            From cinematic AI video commercials to photorealistic 3D CGI and bespoke brand identities — every deliverable crafted with agency-tier polish and startup velocity.
           </p>
           <div className="flex items-center gap-2 mt-4 text-xs text-muted font-mono">
-            <ArrowLeftRight className="w-3.5 h-3.5" />
-            <span>Drag on process cards · Tap brand cards to browse</span>
+            <ArrowRight className="w-3.5 h-3.5 text-jelly-deep" />
+            <span>Click any project to explore the full case study</span>
           </div>
         </div>
 
+        {/* 3-Column Showcase Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {cards.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl border border-line flex flex-col justify-between p-6 shadow-sm hover:shadow-xl hover:border-jelly-mid/40 transition-all duration-500"
+              onClick={() => handleCardClick(item.slug)}
+              className="group bg-white rounded-3xl border border-line flex flex-col justify-between p-6 shadow-sm hover:shadow-2xl hover:border-jelly-mid/60 transition-all duration-500 cursor-pointer"
             >
               <div className="mb-5">
-                <span className="bg-jelly/15 text-jelly-deep text-[10px] font-bold font-mono uppercase tracking-widest px-3 py-1 rounded-full mb-3 inline-block">
-                  {item.tag}
-                </span>
-                <h3 className="text-xl font-bold font-sans text-ink leading-snug mb-1.5">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="bg-jelly/15 text-jelly-deep text-[10px] font-bold font-mono uppercase tracking-widest px-3 py-1 rounded-full">
+                    {item.tag}
+                  </span>
+                  <span className="text-[11px] font-mono text-muted/70 flex items-center gap-1 group-hover:text-jelly-deep transition-colors">
+                    <span>Explore</span>
+                    <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold font-sans text-ink leading-snug mb-2 group-hover:text-jelly-deep transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-muted text-xs md:text-sm font-light leading-relaxed">
@@ -169,16 +95,36 @@ export default function TransformationReel() {
                 </p>
               </div>
 
-              {item.type === 'slider' ? (
-                <BeforeAfterSlider
-                  before={item.before}
-                  beforeLabel={item.beforeLabel}
-                  after={item.after}
-                  afterLabel={item.afterLabel}
+              {/* Pristine Final Version Image Frame */}
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-line bg-ink select-none shadow-sm">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  draggable={false}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-              ) : (
-                <BrandShowcaseCard images={item.images} />
-              )}
+
+                {/* Subtle gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity pointer-events-none" />
+
+                {/* Top badges */}
+                <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-jelly/90 text-ink text-[10px] font-bold font-mono px-2.5 py-1 rounded-md z-10 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-ink animate-pulse" />
+                  <span>{item.badge}</span>
+                </div>
+
+                {/* Bottom meta caption */}
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-mono z-10 pointer-events-none">
+                  <span className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 text-[10px]">
+                    {item.meta}
+                  </span>
+                  <span className="flex items-center gap-1 text-[11px] font-sans font-semibold text-white/90 group-hover:text-jelly transition-colors">
+                    <span>View Case Study</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
