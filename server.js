@@ -7,11 +7,15 @@
 import http from 'http';
 import { streamText, convertToModelMessages } from 'ai';
 import { createGroq } from '@ai-sdk/groq';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 import sendLeadHandler from './api/send-lead.js';
+import sendOutreachHandler from './api/send-outreach.js';
+import { sendOutreachEmail } from './scripts/send-outreach.mjs';
+import { generatePersonalizedPitch } from './api/outreachEngine.js';
+import { getAllLeads, saveLead, markLeadSent, addSuppression, isSuppressed } from './api/outreachStore.js';
 import { generateFallbackReply, extractLeadInfo, createFallbackStreamResponse, wrapStreamWithFallback } from './api/fallbackAgent.js';
 
 const PORT = 3001;
@@ -227,6 +231,7 @@ const server = http.createServer(async (req, res) => {
       const body = await readBody(req);
       const mockReq = {
         method: req.method,
+        headers: req.headers,
         body: body
       };
       const mockRes = {
@@ -247,6 +252,293 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // ── POST /api/send-outreach or /api/outreach/send ──────────────────────
+  if ((url.pathname === '/api/send-outreach' || url.pathname === '/api/outreach/send') && req.method === 'POST') {
+    try {
+      const body = await readBody(req);
+      const mockReq = {
+        method: req.method,
+        headers: req.headers,
+        body: body
+      };
+      const mockRes = {
+        status(code) {
+          res.writeHead(code, { 'Content-Type': 'application/json' });
+          return this;
+        },
+        json(data) {
+          res.end(JSON.stringify(data));
+          return this;
+        }
+      };
+      await sendOutreachHandler(mockReq, mockRes);
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/outreach/analyze ─────────────────────────────────────────
+  if (url.pathname === '/api/outreach/analyze' && req.method === 'POST') {
+    try {
+      const body = await readBody(req);
+      const { email, companyName, websiteUrl, country, leadType, customAngle } = body;
+
+      if (!email) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Email address is required' }));
+        return;
+      }
+
+      // Check suppression / duplicate
+      const suppressionStatus = isSuppressed(email);
+
+      // Generate pitch
+      const pitchResult = await generatePersonalizedPitch({
+        email,
+        companyName,
+        websiteUrl,
+        country,
+        leadType,
+        customAngle
+      });
+
+      // Save as draft in persistent store
+      const savedRecord = saveLead({
+        email,
+        companyName: pitchResult.company,
+        websiteUrl: websiteUrl || pitchResult.domain,
+        country: pitchResult.country,
+        leadType: pitchResult.detectedType,
+        researchSummary: `Targeted for: ${pitchResult.recommendedService}. Anchor: ${pitchResult.portfolioAnchor}`,
+        confidenceLevel: pitchResult.confidenceLevel,
+        sources: pitchResult.sources,
+        recommendedService: pitchResult.recommendedService,
+        portfolioAnchor: pitchResult.portfolioAnchor,
+        subject: pitchResult.subject,
+        body: pitchResult.body,
+        status: suppressionStatus.suppressed ? 'suppressed' : 'draft'
+      });
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: true,
+        lead: savedRecord,
+        pitch: pitchResult,
+        suppressionStatus
+      }));
+    } catch (e) {
+      console.error('[Outreach Analyze Error]:', e);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── GET /api/outreach/prospects ───────────────────────────────────────
+  if (url.pathname === '/api/outreach/prospects' && req.method === 'GET') {
+    try {
+      const prospectsPath = join(__dirname, 'data', 'prospects-database.json');
+      const data = existsSync(prospectsPath) ? JSON.parse(readFileSync(prospectsPath, 'utf-8')) : [];
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, count: data.length, prospects: data }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/outreach/batch-generate ──────────────────────────────────
+  if (url.pathname === '/api/outreach/batch-generate' && req.method === 'POST') {
+    try {
+      const body = await readBody(req);
+      const { prospects = [] } = body;
+
+      if (!Array.isArray(prospects) || prospects.length === 0) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Array of prospects is required' }));
+        return;
+      }
+
+      const drafts = [];
+      for (const p of prospects) {
+        if (!p.email) continue;
+        const suppressionCheck = isSuppressed(p.email);
+        const pitchResult = await generatePersonalizedPitch({
+          email: p.email,
+          companyName: p.company || p.companyName,
+          websiteUrl: p.website || p.websiteUrl,
+          country: p.country,
+          leadType: p.segment?.toLowerCase().includes('agency') ? 'Agency' : 'Direct Brand',
+          customAngle: p.pitchAngle
+        });
+
+        const savedRecord = saveLead({
+          email: p.email,
+          companyName: pitchResult.company,
+          websiteUrl: p.website || pitchResult.domain,
+          country: pitchResult.country,
+          leadType: pitchResult.detectedType,
+          researchSummary: `Targeted for: ${pitchResult.recommendedService}. Anchor: ${pitchResult.portfolioAnchor}`,
+          confidenceLevel: pitchResult.confidenceLevel,
+          sources: pitchResult.sources,
+          recommendedService: pitchResult.recommendedService,
+          portfolioAnchor: pitchResult.portfolioAnchor,
+          subject: pitchResult.subject,
+          body: pitchResult.body,
+          status: suppressionCheck.suppressed ? 'suppressed' : 'draft'
+        });
+
+        drafts.push({
+          leadId: savedRecord.id,
+          to: p.email,
+          company: pitchResult.company,
+          country: pitchResult.country,
+          recommendedService: pitchResult.recommendedService,
+          portfolioAnchor: pitchResult.portfolioAnchor,
+          subject: pitchResult.subject,
+          body: pitchResult.body,
+          suppressed: suppressionCheck.suppressed,
+          suppressionReason: suppressionCheck.reason
+        });
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, count: drafts.length, drafts }));
+    } catch (e) {
+      console.error('[Batch Generate Error]:', e);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/outreach/batch-send ──────────────────────────────────────
+  if (url.pathname === '/api/outreach/batch-send' && req.method === 'POST') {
+    try {
+      const adminSecret = process.env.ADMIN_SECRET_KEY || 'jellycut_outreach_secret_2026';
+      const authHeader = req.headers.authorization || req.headers['x-admin-token'] || '';
+      const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+
+      if (!token || token !== adminSecret) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Unauthorized: Valid admin secret required' }));
+        return;
+      }
+
+      const body = await readBody(req);
+      const { items = [], delaySeconds = 5, isSimulation = false } = body;
+
+      if (!Array.isArray(items) || items.length === 0) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Array of items is required' }));
+        return;
+      }
+
+      const results = [];
+      const delayMs = isSimulation ? 300 : Math.max(delaySeconds, 15) * 1000;
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const { to, name, subject, body: emailBody, leadId } = item;
+
+        // Skip if suppressed
+        const suppressionCheck = isSuppressed(to);
+        if (suppressionCheck.suppressed && !isSimulation) {
+          results.push({
+            to,
+            status: 'skipped',
+            reason: `Suppressed: ${suppressionCheck.reason}`
+          });
+          continue;
+        }
+
+        try {
+          if (isSimulation) {
+            results.push({
+              to,
+              status: 'simulated_ok',
+              messageId: `sim_${Date.now()}_${i}`
+            });
+          } else {
+            const sendResult = await sendOutreachEmail({
+              to,
+              name,
+              subject,
+              body: emailBody
+            });
+            if (leadId) markLeadSent(leadId, sendResult.messageId);
+            results.push({
+              to,
+              status: 'sent',
+              messageId: sendResult.messageId
+            });
+          }
+        } catch (err) {
+          results.push({
+            to,
+            status: 'failed',
+            error: err.message
+          });
+        }
+
+        // Delay between emails if not last item
+        if (i < items.length - 1) {
+          await new Promise(r => setTimeout(r, delayMs));
+        }
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: true,
+        total: items.length,
+        sent: results.filter(r => r.status === 'sent' || r.status === 'simulated_ok').length,
+        skipped: results.filter(r => r.status === 'skipped').length,
+        failed: results.filter(r => r.status === 'failed').length,
+        results
+      }));
+    } catch (e) {
+      console.error('[Batch Send Error]:', e);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── GET /api/outreach/leads ───────────────────────────────────────────
+  if (url.pathname === '/api/outreach/leads' && req.method === 'GET') {
+    try {
+      const leads = getAllLeads();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, count: leads.length, leads }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/outreach/suppress ───────────────────────────────────────
+  if (url.pathname === '/api/outreach/suppress' && req.method === 'POST') {
+    try {
+      const body = await readBody(req);
+      if (!body.email) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Email is required' }));
+        return;
+      }
+      const result = addSuppression(body.email, body.reason || 'manual_admin');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, ...result }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
   // 404 for anything else
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ error: 'Not found' }));
@@ -254,6 +546,6 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n🚀 Jellycut API server running at http://localhost:${PORT}`);
-  console.log('   Handles: /api/chat  /api/send-lead');
+  console.log('   Handles: /api/chat  /api/send-lead  /api/send-outreach');
   console.log('   Run Vite in a separate terminal: npm run dev\n');
 });

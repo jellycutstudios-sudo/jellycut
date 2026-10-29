@@ -10,6 +10,8 @@ import Home from './pages/Home';
 const Works = lazy(() => import('./pages/Works'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Agencies = lazy(() => import('./pages/Agencies'));
+const AdminOutreach = lazy(() => import('./pages/AdminOutreach'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostDetail = lazy(() => import('./pages/BlogPostDetail'));
@@ -71,6 +73,7 @@ function App() {
         p.slug === slug || 
         (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||
         (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
+        (p.slug === 'feesync-website' && (slug === 'feesync' || slug === 'feesync-fintech-identity' || slug === 'feesync-saas' || slug === 'feesync-app')) ||
         (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
       );
       if (project) {
@@ -80,6 +83,9 @@ function App() {
     } else if (mainRoute === '/about') {
       title = 'About Jellycut Studios — AI Creative Studio from Kerala, India';
       description = 'Jellycut Studios combines generative AI speed with human creative direction. Built in Kerala, India to deliver agency-quality creative for US, UK & global brands at startup-friendly prices.';
+    } else if (mainRoute === '/agencies' || mainRoute === '/white-label') {
+      title = 'Agency Partnerships & White-Label Creative Production | Jellycut Studios';
+      description = 'Your creative production partner, behind the scenes. Websites, web apps, branding, and AI-powered advertising for marketing and creative agencies.';
     } else if (mainRoute === '/contact') {
       title = 'Start a Project — 48-Hour Creative Brief | Jellycut Studios';
       description = 'Start your project with Jellycut Studios in 15 minutes. No calls required. Submit your brief online and get your first draft within 48–72 hours. AI video ads, brand identity, web apps.';
@@ -123,6 +129,7 @@ function App() {
         p.slug === slug || 
         (p.slug === 'showaiter-plus-halwa-branding' && (slug === 'showaiter' || slug === 'showaiter-plus' || slug === 'showaiter-halwa' || slug === 'showaiter-branding')) ||
         (p.slug === 'asty-construction-branding' && (slug === 'asty' || slug === 'asty-construction' || slug === 'asty-constructions' || slug === 'asty-branding')) ||
+        (p.slug === 'feesync-website' && (slug === 'feesync' || slug === 'feesync-fintech-identity' || slug === 'feesync-saas' || slug === 'feesync-app')) ||
         (p.slug === 'skylight-travel-website' && (slug === 'skylight-tourism' || slug === 'skylight-tourism-website' || slug === 'skylight-travel'))
       );
       if (project) {
@@ -156,6 +163,12 @@ function App() {
     switch (mainRoute) {
       case '/about':
         return <About />;
+      case '/agencies':
+      case '/white-label':
+        return <Agencies setIsModalOpen={setIsModalOpen} setRoute={handleNavigate} />;
+      case '/admin/outreach':
+      case '/outreach':
+        return <AdminOutreach />;
       case '/contact':
         return <Contact />;
       case '/':

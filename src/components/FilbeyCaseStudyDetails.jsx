@@ -1,4 +1,5 @@
 import { Layers, Film, Sliders, Sparkles, ArrowRight, Cpu, Zap, Eye } from 'lucide-react';
+import CaseStudySummaryCard from './CaseStudySummaryCard';
 
 const techStack = [
   { phase: 'Concept', tool: 'Midjourney v6', desc: 'Visual ideation and styleframe generation for the "Midnight & Ember" palette.' },
@@ -33,6 +34,27 @@ export default function FilbeyCaseStudyDetails({ project, onZoomIndex, setIsModa
 
   return (
     <div className="space-y-16 border-t border-line pt-12">
+
+      {/* ── Production Brief & Audit Summary Card ── */}
+      <CaseStudySummaryCard 
+        badge="AI Video Ad Production • Verified Case Study"
+        problem="Filbey needed a high-impact, scroll-stopping 15–20s social video campaign to break through commoditized fast-food advertising without spending $80k+ on traditional high-speed studio motion control rigs."
+        role="End-to-end commercial production: Strategic angle ideation, hook scripting, neural physics video synthesis, 8K texture upscaling, custom phonk/foley sound engineering, and multi-format master cut."
+        aiVsHuman={[
+          { label: 'Generative AI', detail: 'Midjourney v6 styleframes, Runway Gen-3 & Kling AI sauce/crunch physics simulation.' },
+          { label: 'Human Direction', detail: 'Scene framing, speed ramping, shot composition, and dynamic pacing structure.' },
+          { label: 'Human Post & Grade', detail: 'Adobe Premiere & After Effects color timing, typography, and master exports.' },
+          { label: 'Sound Engineering', detail: 'Bespoke high-tempo phonk track mix, crunch foley audio design, and voiceover polish.' }
+        ]}
+        deliverables={[
+          '15-Second Master Ad (9:16 Vertical for Meta & TikTok)',
+          '16:9 Landscape & 1:1 Square cuts for multi-platform deployment',
+          '3 Hook Test variations with varied opening visual hooks',
+          'Complete 10-frame production storyboard and asset package'
+        ]}
+        qualityVerification="Every frame was processed through Magnific & Topaz neural models to preserve crispy breading textures and oil specular highlights without generative artifacts or blur."
+        outcome="Delivered a broadcast-caliber commercial delivered in 48 hours that outperformed prior static creatives in viewer retention and social engagement."
+      />
 
       {/* ── Section 01: The Brief ───────────────────────────────────────── */}
       <div className="space-y-6">

@@ -3,13 +3,13 @@ import { Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
 const cards = [
   {
     id: 1,
-    title: "Dior Chessboard CGI",
-    description: "Fully lit, cinematic CGI visualization showcasing refractive luxury materials and dramatic studio chiaroscuro.",
+    title: "Luxury Fragrance CGI (Spec Concept)",
+    description: "Fully lit, cinematic CGI visualization showcasing refractive luxury materials, dramatic chiaroscuro, and macro detail. Speculative portfolio study.",
     tag: "3D Animation",
-    badge: "Final CGI Master",
+    badge: "Unofficial Spec Concept",
     image: "/dior_chessboard_final.webp",
     slug: "dior-chessboard-concept",
-    meta: "Photorealistic 3D · 4K Master",
+    meta: "Speculative 3D · 4K Master",
   },
   {
     id: 2,

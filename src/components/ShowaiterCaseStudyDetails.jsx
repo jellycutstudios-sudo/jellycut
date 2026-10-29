@@ -8,6 +8,7 @@ import {
   Gift,
   CheckCircle2
 } from 'lucide-react';
+import CaseStudySummaryCard from './CaseStudySummaryCard';
 
 export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
   if (!project) return null;
@@ -128,6 +129,22 @@ export default function ShowaiterCaseStudyDetails({ project, onZoomIndex, setIsM
 
   return (
     <div className="space-y-20 pt-2 pb-16">
+
+      {/* ── Production Brief & Audit Summary Card ── */}
+      <CaseStudySummaryCard 
+        badge="Brand Identity System • Verified Case Study"
+        problem="A celebrated 100-year Bahraini halwa producer needed to evolve beyond heritage souq packaging to capture modern GCC luxury gifting and high-end hospitality without losing cultural authenticity."
+        role="Complete brand identity overhaul: Bilingual Arabic/Latin typographic logo mark, signature color architecture, 6 bespoke packaging structural mockups, flagship boutique interior concepts, and executive brand manual."
+        deliverables={[
+          'Bilingual Primary & Secondary Brandmark System (Arabic Kufic + Latin Serif)',
+          'Complete Packaging Suite (Rigid tasting box, preserve jar, gift bags, ceramic serving bowl)',
+          'Retail Architecture Concepts (Boutique vitrines, halo-lit signage, walnut counter)',
+          'Executive Stationery & Hospitality Collateral Suite',
+          'Comprehensive Figma Brand Guidelines Manual'
+        ]}
+        qualityVerification="Validated across daylight, warm majlis lighting, foil stamping contrast tolerances, and rigorous bilingual font pairing legibility."
+        outcome="Successfully repositioned as a premier luxury confectionery and gifting brand in Bahrain, dramatically modernizing retail presence while honoring historic heritage."
+      />
       
       {/* ── Section 1: Overview & The Challenge / Solution ── */}
       <section className="space-y-8">

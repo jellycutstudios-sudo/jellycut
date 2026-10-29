@@ -5,7 +5,7 @@ import { projects } from '../data/projects';
 
 const ease = [0.16, 1, 0.3, 1];
 
-const categories = ['All', 'AI Video Ads', 'Websites', 'Vibe-Coded Apps'];
+const categories = ['All', 'AI Video Ads', 'Branding', 'Websites', 'Web Apps'];
 
 export default function Works({ setRoute }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -27,7 +27,7 @@ export default function Works({ setRoute }) {
             Selected Works // Proof in the pixels.
           </h1>
           <p className="mt-5 text-muted text-sm md:text-base font-light leading-relaxed max-w-xl">
-            A showcase of scroll-stopping video ads, pristine brand identities, cinematic websites, and vibe-coded applications. Built fast, refined by human design.
+            A showcase of scroll-stopping video ads, pristine brand identities, cinematic websites, and web applications. Built fast, refined by human craft.
           </p>
         </div>
 

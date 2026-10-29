@@ -32,11 +32,11 @@ const services = [
   },
   { 
     id: 'app', 
-    label: 'Web App / Tool', 
+    label: 'Web App Development', 
     basePrice: 1099,
     scopes: [
-      { id: 'mvp', label: 'Core Interactive MVP', price: 1099, delivery: '1-2 Weeks' },
-      { id: 'scale', label: 'Full Custom Application', price: 1999, delivery: '2-3 Weeks' },
+      { id: 'mvp', label: 'Interactive MVP / Starter Prototype', price: 1099, delivery: '1-2 Weeks' },
+      { id: 'scale', label: 'Full Production Web App (Quoted on Spec)', price: 1999, delivery: '2-4 Weeks' },
     ]
   }
 ];
@@ -152,8 +152,8 @@ export default function PriceEstimator({ setIsModalOpen }) {
         {/* Trust Badges */}
         <div className="grid grid-cols-3 gap-2 pt-2 border-t border-line/40 text-center">
           <div className="bg-white border border-line/60 rounded-lg py-2 px-1">
-            <div className="text-[10px] font-bold text-ink">Free Revisions</div>
-            <div className="text-[9px] text-muted font-light">Until satisfied</div>
+            <div className="text-[10px] font-bold text-ink">1 Revision Included</div>
+            <div className="text-[9px] text-muted font-light">Milestone sign-off</div>
           </div>
           <div className="bg-white border border-line/60 rounded-lg py-2 px-1">
             <div className="text-[10px] font-bold text-ink">Zero Lock-In</div>

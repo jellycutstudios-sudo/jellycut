@@ -50,6 +50,7 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
   const menuItems = [
     { label: 'Home', path: '/' },
     { label: 'Works', path: '/works' },
+    { label: 'For Agencies', path: '/agencies' },
     { label: 'Blog', path: '/blog' },
     { label: 'Editor', path: '/editor' },
     { label: 'About Us', path: '/about' },
@@ -116,6 +117,12 @@ export default function Header({ currentRoute, setRoute, setIsModalOpen }) {
               className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/works' ? 'text-jelly-deep font-semibold' : ''}`}
             >
               Works
+            </button>
+            <button 
+              onClick={() => handleNavClick('/agencies')} 
+              className={`px-3 py-1 hover:text-jelly-deep transition-colors cursor-pointer ${currentRoute === '/agencies' ? 'text-jelly-deep font-semibold' : ''}`}
+            >
+              For Agencies
             </button>
             <button 
               onClick={() => handleNavClick('/blog')} 

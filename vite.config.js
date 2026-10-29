@@ -10,10 +10,11 @@ export default defineConfig({
     dedupe: ['react', 'react-dom']
   },
   server: {
+    allowedHosts: true,
     proxy: {
       // Forward all /api/* requests to the local dev API server
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://127.0.0.1:3001',
         changeOrigin: true,
       }
     }

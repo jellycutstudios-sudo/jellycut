@@ -11,6 +11,7 @@ import {
   Star,
   CheckCircle2
 } from 'lucide-react';
+import CaseStudySummaryCard from './CaseStudySummaryCard';
 
 const packagesList = [
   {
@@ -86,6 +87,22 @@ export default function SkylightCaseStudyDetails({ project, onZoomIndex, setIsMo
 
   return (
     <div className="space-y-16 border-t border-line pt-10 font-sans text-ink">
+
+      {/* ── Production Brief & Audit Summary Card ── */}
+      <CaseStudySummaryCard 
+        badge="Website Development • Verified Case Study"
+        problem="UAE-based agency operated on manual walk-in inquiries with an outdated web presence, causing friction and high drop-offs for expatriates and tourists seeking curated holiday packages and visa services."
+        role="Complete brand elevation and responsive web engineering: Rebranded from Highsky to Skylight, engineered luxury travel UI, implemented dynamic itinerary filters, real-time UAE timezone sync, and direct WhatsApp booking flows."
+        deliverables={[
+          'Complete Responsive Website & Itinerary Platform',
+          'Interactive Holiday Package Catalogue with Regional Filtering',
+          'Fast-Track Visa Services Calculator & Requirements Matrix',
+          'Live UAE Clock Sync in Mobile Drawer for International Travelers',
+          'Direct WhatsApp Deep-Link Consultation Flow'
+        ]}
+        qualityVerification="Tested for sub-second page loads, 100% mobile touch accessibility, responsive layout shifts, and cross-browser Core Web Vitals optimization."
+        outcome="Transformed customer acquisition from manual walk-ins to seamless digital inbound leads, establishing instant luxury authority across UAE residents and international tourists."
+      />
 
       {/* ── 1. Brand Heritage & The Rebrand ── */}
       <div className="space-y-6">

@@ -213,7 +213,7 @@ export default function Home({ setIsModalOpen, setRoute, isMobile }) {
                 </div>
                 <div className="md:col-span-5 md:text-right">
                   <p className="text-sm md:text-sm text-white/90 max-w-xs md:ml-auto font-normal leading-relaxed font-sans">
-                    We work async across time zones, deliver in 48–72 hours, and communicate in plain English. No agency bloat. No retainer traps.
+                    We work async across time zones, deliver rapid 48–72h creative drafts, and communicate in plain English. No agency bloat. No retainer traps.
                   </p>
                 </div>
               </div>

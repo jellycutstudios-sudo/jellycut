@@ -1,10 +1,27 @@
 import { Layers, TrendingUp, Sparkles, ArrowRight, Eye, Zap, ShieldCheck } from 'lucide-react';
+import CaseStudySummaryCard from './CaseStudySummaryCard';
 
 export default function FeeSyncCaseStudyDetails({ project, onZoomIndex, setIsModalOpen }) {
   if (!project) return null;
 
   return (
     <div className="space-y-12 border-t border-line pt-10">
+
+      {/* ── Production Brief & Audit Summary Card ── */}
+      <CaseStudySummaryCard 
+        badge="Web Application Development • Verified Case Study"
+        problem="Small businesses, academies, and residential communities struggled with fragmented spreadsheets, forgotten payment deadlines, and high default rates from manual payment chasing."
+        role="Web application product design & frontend engineering: Designed the recurring payment scheduling engine, community setup wizard, customer payment portals, and live collection analytics dashboard."
+        deliverables={[
+          'Complete Web Application Dashboard & Management UI',
+          'Multi-Tenant Community Creation Wizard',
+          'Automated Weekly & Monthly Recurring Billing Engine',
+          'Instant Client Payment Links & Status Tracking Views',
+          'High-Conversion Marketing Website at feesync.com'
+        ]}
+        qualityVerification="Tested for sub-second dashboard rendering, cross-device payment checkout responsiveness, accessible data tables, and input state validation."
+        outcome="Automated recurring collections for community managers, driving 90%+ on-time payment conversion while eliminating manual spreadsheet reconciliation."
+      />
       
       {/* Section 1: The Objective */}
       <div className="space-y-6">

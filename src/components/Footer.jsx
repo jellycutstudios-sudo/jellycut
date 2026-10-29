@@ -13,8 +13,11 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
           <div className="flex items-center gap-3">
             <img src="/logo.svg" alt="Jellycut Studios" width="120" height="20" className="h-5 w-auto object-contain" />
           </div>
-          <div className="text-muted text-xs font-light text-center font-sans tracking-wide">
-            Creative AI for brands that want to grow.
+          <div className="flex items-center gap-5 text-muted text-xs font-mono">
+            <a href="/works" className="hover:text-jelly-deep transition-colors">Works</a>
+            <a href="/agencies" className="hover:text-jelly-deep transition-colors">For Agencies</a>
+            <a href="/about" className="hover:text-jelly-deep transition-colors">About</a>
+            <a href="/contact" className="hover:text-jelly-deep transition-colors">Contact</a>
           </div>
           <div className="text-muted/65 text-[11px] font-mono">
             &copy; {new Date().getFullYear()} Jellycut Studios. Kerala,&nbsp;India.
@@ -98,8 +101,11 @@ export default function Footer({ setIsModalOpen, hideCTA }) {
         <div className="flex items-center gap-3">
           <img src="/logo.svg" alt="Jellycut Studios" width="120" height="20" className="h-5 w-auto object-contain brightness-0 invert" />
         </div>
-        <div className="text-white/60 text-xs font-light text-center font-sans tracking-wide">
-          Creative AI for brands that want to grow.
+        <div className="flex items-center gap-5 text-white/70 text-xs font-mono">
+          <a href="/works" className="hover:text-jelly transition-colors">Works</a>
+          <a href="/agencies" className="hover:text-jelly transition-colors">For Agencies</a>
+          <a href="/about" className="hover:text-jelly transition-colors">About</a>
+          <a href="/contact" className="hover:text-jelly transition-colors">Contact</a>
         </div>
         <div className="text-white/40 text-[11px] font-mono">
           &copy; {new Date().getFullYear()} Jellycut Studios. Kerala,&nbsp;India.
